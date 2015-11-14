@@ -25,18 +25,26 @@ var Home = React.createClass({
     }
 });
 
-var Page1 = React.createClass({
+var Poll = React.createClass({
   render: function() {
     return (
-      <h1>Page1</h1>
+      <h1>Poll</h1>
     );
   }
 });
 
-var Page2 = React.createClass({
+var Candidates = React.createClass({
   render: function() {
     return (
-      <h1>Page2</h1>
+      <h1>Candidates</h1>
+    );
+  }
+});
+
+var Issues = React.createClass({
+  render: function() {
+    return (
+      <h1>Issues</h1>
     );
   }
 });
@@ -52,8 +60,9 @@ var Error = React.createClass({
 var routes = (
   <Router>
     <Route path="/" component={App}>
-      <Route path="page1" component={Page1}/>
-      <Route path="page2" component={Page2}/>
+      <Route path="poll" component={Poll}/>
+      <Route path="candidates" component={Candidates}/>
+      <Route path="issues" component={Issues}/>
       <Route path="*" component={Error}/>
     </Route>
   </Router>

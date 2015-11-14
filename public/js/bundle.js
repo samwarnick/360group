@@ -78,18 +78,26 @@
 	    }
 	});
 	
-	var Page1 = React.createClass({displayName: "Page1",
+	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Page1")
+	      React.createElement("h1", null, "Poll")
 	    );
 	  }
 	});
 	
-	var Page2 = React.createClass({displayName: "Page2",
+	var Candidates = React.createClass({displayName: "Candidates",
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Page2")
+	      React.createElement("h1", null, "Candidates")
+	    );
+	  }
+	});
+	
+	var Issues = React.createClass({displayName: "Issues",
+	  render: function() {
+	    return (
+	      React.createElement("h1", null, "Issues")
 	    );
 	  }
 	});
@@ -105,8 +113,9 @@
 	var routes = (
 	  React.createElement(Router, null, 
 	    React.createElement(Route, {path: "/", component: App}, 
-	      React.createElement(Route, {path: "page1", component: Page1}), 
-	      React.createElement(Route, {path: "page2", component: Page2}), 
+	      React.createElement(Route, {path: "poll", component: Poll}), 
+	      React.createElement(Route, {path: "candidates", component: Candidates}), 
+	      React.createElement(Route, {path: "issues", component: Issues}), 
 	      React.createElement(Route, {path: "*", component: Error})
 	    )
 	  )
@@ -24437,9 +24446,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	var Router = __webpack_require__(160).Router;
 	var Link = __webpack_require__(160).Link;
-	var Route = __webpack_require__(160).Route;
 	
 	var NavBar = React.createClass({displayName: "NavBar",
 	  render: function() {
@@ -24453,13 +24460,16 @@
 	              React.createElement("span", {className: "icon-bar"}), 
 	              React.createElement("span", {className: "icon-bar"})
 	            ), 
-	            React.createElement("a", {className: "navbar-brand", href: "#"}, "Politihack")
+	            React.createElement("a", {className: "navbar-brand", href: "#"}, 
+	              React.createElement("img", {alt: "SwyftVote", src: "/img/swyftvote_logo_color.png", height: "100%"})
+	            )
 	          ), 
 	
 	          React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
 	            React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-	              React.createElement("li", null, React.createElement(Link, {to: "/page1"}, "Page 1")), 
-	              React.createElement("li", null, React.createElement(Link, {to: "/page2"}, "Page 2"))
+	              React.createElement("li", null, React.createElement(Link, {to: "/poll"}, "Poll")), 
+	              React.createElement("li", null, React.createElement(Link, {to: "/candidates"}, "Candidates")), 
+	              React.createElement("li", null, React.createElement(Link, {to: "/issues"}, "Issues"))
 	            )
 	          )
 	        )

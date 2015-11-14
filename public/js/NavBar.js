@@ -1,7 +1,5 @@
 var React  = require('react');
-var Router = require('react-router').Router;
 var Link = require('react-router').Link;
-var Route = require('react-router').Route;
 
 var NavBar = React.createClass({
   render: function() {
@@ -15,13 +13,16 @@ var NavBar = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">Politihack</a>
+            <a className="navbar-brand" href="#">
+              <img alt="SwyftVote" src="/img/swyftvote_logo_color.png" height="100%"/>
+            </a>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/page1">Page 1</Link></li>
-              <li><Link to="/page2">Page 2</Link></li>
+              <li><Link to="/poll">Poll</Link></li>
+              <li><Link to="/candidates">Candidates</Link></li>
+              <li><Link to="/issues">Issues</Link></li>
             </ul>
           </div>
         </div>
