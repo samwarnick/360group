@@ -1,5 +1,4 @@
-# 360group
-Project for CS 360 at BYU
+![logo](https://github.com/samwarnick/360group/blob/master/public/img/swyftvote_logo_color.png)
 
 # **REMEMBER TO USE BRANCHES**
 
