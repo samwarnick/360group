@@ -87,6 +87,18 @@
 	});
 	
 	var Candidates = React.createClass({displayName: "Candidates",
+	  getInitialState: function() {
+	    return {
+	      candidate: ''
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/candidates', function(result) {
+	      console.log(result);
+	    }.bind(this));
+	  },
+	
 	  render: function() {
 	    return (
 	      React.createElement("h1", null, "Candidates")

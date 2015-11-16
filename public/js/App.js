@@ -34,6 +34,18 @@ var Poll = React.createClass({
 });
 
 var Candidates = React.createClass({
+  getInitialState: function() {
+    return {
+      candidate: ''
+    };
+  },
+
+  componentDidMount: function() {
+    $.get('/api/candidates', function(result) {
+      console.log(result);
+    }.bind(this));
+  },
+
   render: function() {
     return (
       <h1>Candidates</h1>
