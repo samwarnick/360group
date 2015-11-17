@@ -5,6 +5,7 @@ var Router = require('react-router').Router;
 var Link = require('react-router').Link;
 var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
+var Candidates = require('./Candidates');
 
 var App = React.createClass({
   render: function() {
@@ -29,26 +30,6 @@ var Poll = React.createClass({
   render: function() {
     return (
       <h1>Poll</h1>
-    );
-  }
-});
-
-var Candidates = React.createClass({
-  getInitialState: function() {
-    return {
-      candidate: ''
-    };
-  },
-
-  componentDidMount: function() {
-    $.get('/api/candidates', function(result) {
-      console.log(result);
-    }.bind(this));
-  },
-
-  render: function() {
-    return (
-      <h1>Candidates</h1>
     );
   }
 });
