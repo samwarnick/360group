@@ -58,6 +58,7 @@
 	var Link = __webpack_require__(160).Link;
 	var Route = __webpack_require__(160).Route;
 	var NavBar = __webpack_require__(210);
+	var Candidates = __webpack_require__(211);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -82,26 +83,6 @@
 	  render: function() {
 	    return (
 	      React.createElement("h1", null, "Poll")
-	    );
-	  }
-	});
-	
-	var Candidates = React.createClass({displayName: "Candidates",
-	  getInitialState: function() {
-	    return {
-	      candidate: ''
-	    };
-	  },
-	
-	  componentDidMount: function() {
-	    $.get('/api/candidates', function(result) {
-	      console.log(result);
-	    }.bind(this));
-	  },
-	
-	  render: function() {
-	    return (
-	      React.createElement("h1", null, "Candidates")
 	    );
 	  }
 	});
@@ -24491,6 +24472,59 @@
 	});
 	
 	module.exports = NavBar;
+
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var Candidates = React.createClass({displayName: "Candidates",
+	  getInitialState: function() {
+	    return {
+	      candidates: []
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    // console.log('mounting');
+	    $.get('/api/candidates', function(result) {
+	      // console.log('getting');
+	      this.setState({candidates: result});
+	      // console.log(this.state.candidates);
+	    }.bind(this));
+	  },
+	
+	  render: function() {
+	    // console.log('rendering');
+	    var candidatesList = this.state.candidates.map(function(candidate) {
+	      return (
+	        React.createElement(Candidate, {key: candidate._id, name: candidate.name})
+	      );
+	    }.bind(this));
+	
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("h1", null, "Candidates"), 
+	        React.createElement("ul", null, 
+	          candidatesList
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var Candidate = React.createClass({displayName: "Candidate",
+	  render: function() {
+	    return (
+	      React.createElement("h2", null, this.props.name)
+	    );
+	  }
+	});
+	
+	module.exports = Candidates;
 
 
 /***/ }
