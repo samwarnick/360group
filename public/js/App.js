@@ -6,6 +6,7 @@ var Link = require('react-router').Link;
 var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
 var Candidates = require('./Candidates');
+var Issues = require('./Issues');
 
 var App = React.createClass({
   render: function() {
@@ -31,14 +32,6 @@ var Poll = React.createClass({
     return (
       <h1>Poll</h1>
       
-    );
-  }
-});
-
-var Issues = React.createClass({
-  render: function() {
-    return (
-      <h1>Issues</h1>
     );
   }
 });

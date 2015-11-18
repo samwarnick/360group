@@ -8,9 +8,12 @@ router.get('/candidates', function(req, res) {
       res.sendStatus('403');
       return;
     }
-    console.log(candidates);
     res.send(candidates);
   });
+});
+
+router.get('/candidates/:id', function(req, res) {
+
 });
 
 module.exports = router;
