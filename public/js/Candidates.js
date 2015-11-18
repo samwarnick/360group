@@ -9,16 +9,15 @@ var Candidates = React.createClass({
   },
 
   componentDidMount: function() {
-    // console.log('mounting');
     $.get('/api/candidates', function(result) {
-      // console.log('getting');
       this.setState({candidates: result});
-      // console.log(this.state.candidates);
     }.bind(this));
+
+    $("#rightLinks").find("li").removeClass("active");
+    $("#candidatesLink").addClass("active");
   },
 
   render: function() {
-    // console.log('rendering');
     var candidatesList = this.state.candidates.map(function(candidate) {
       return (
         <Candidate key={candidate._id} name={candidate.name} />

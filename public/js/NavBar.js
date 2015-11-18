@@ -4,6 +4,8 @@ var Link = require('react-router').Link;
 var NavBar = React.createClass({
   render: function() {
     return (
+      // var active = this.props.active ? 'active' : '';
+
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -19,10 +21,10 @@ var NavBar = React.createClass({
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/poll">Poll</Link></li>
-              <li><Link to="/candidates">Candidates</Link></li>
-              <li><Link to="/issues">Issues</Link></li>
+            <ul id="rightLinks" className="nav navbar-nav navbar-right">
+              <li id="pollLink"><Link to="/poll">Poll</Link></li>
+              <li id="candidatesLink"><Link to="/candidates">Candidates</Link></li>
+              <li id="issuesLink"><Link to="/issues">Issues</Link></li>
             </ul>
           </div>
         </div>
