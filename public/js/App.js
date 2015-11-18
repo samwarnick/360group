@@ -30,6 +30,7 @@ var Poll = React.createClass({
   render: function() {
     return (
       <h1>Poll</h1>
+      
     );
   }
 });
