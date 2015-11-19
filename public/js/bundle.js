@@ -59,6 +59,7 @@
 	var Route = __webpack_require__(160).Route;
 	var NavBar = __webpack_require__(211);
 	var Candidates = __webpack_require__(212);
+	var Poll = __webpack_require__(214);
 	var Issues = __webpack_require__(213);
 	
 	var App = React.createClass({displayName: "App",
@@ -80,13 +81,7 @@
 	    }
 	});
 	
-	var Poll = React.createClass({displayName: "Poll",
-	  render: function() {
-	    return (
-	      React.createElement("h1", null, "Poll")
-	    );
-	  }
-	});
+	
 	
 	var Error = React.createClass({displayName: "Error",
 	  render: function() {
@@ -95,6 +90,10 @@
 	    );
 	  }
 	});
+	
+	
+	
+	
 	
 	var routes = (
 	  React.createElement(Router, null, 
@@ -24563,10 +24562,6 @@
 	      this.setState({candidates: result});
 	    }.bind(this));
 	
-	    $.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2', function(result) {
-	      console.log(result);
-	    });
-	
 	    $("#rightLinks").find("li").removeClass("active");
 	    $("#candidatesLink").addClass("active");
 	  },
@@ -24619,6 +24614,138 @@
 	});
 	
 	module.exports = Issues;
+
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var Poll = React.createClass({displayName: "Poll",
+	  render: function() {
+	    return (
+	      React.createElement("div", null, 
+	      React.createElement(Quiz, null)
+	      )
+	
+	    );
+	  }
+	});
+	
+	var Quiz = React.createClass({displayName: "Quiz",
+	
+	    getInitialState: function() {
+	    return {
+	      statements: []
+	    };
+	  },
+	    componentDidMount: function() {
+	    $.get('/api/statements', function(result) {
+	      this.setState({statements: result});
+	    }.bind(this));
+	
+	    $("#rightLinks").find("li").removeClass("active");
+	    $("#PollLink").addClass("active");
+	},
+	    render: function() {
+	        var statementsList = this.state.statements.map(function(statement) {
+	      return (
+	        React.createElement(Statement, {key: statement._id, statement: statement.statement})
+	      );
+	    }.bind(this));
+	      return (
+	        React.createElement("div", null, 
+	            React.createElement("div", {id: "section1"}, 
+	                React.createElement("div", {className: "container", id: "quiz"}, 
+	                    React.createElement("div", {className: "row"}, 
+	                        React.createElement("div", {className: "col-md-6"}, 
+	                        React.createElement("div", {id: "question"}, "How much do you agree with the following statments?"), 
+	                            React.createElement("form", {className: "quiz"}, 
+	
+	                            statementsList, 
+	
+	                                React.createElement("button", {type: "button", className: "btn btn-primary", onclick: "next()"}, "SUBMIT")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "col-md-6"}
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	      );
+	    }
+	});
+	
+	var Statement = React.createClass({displayName: "Statement",
+	  render: function() {
+	    return (
+	
+	      React.createElement("div", null, 
+	      React.createElement("div", {id: "the statement goes here"}, this.props.statement), 
+	      React.createElement("ul", {className: "answers"}, 
+	          React.createElement("li", null, 
+	              React.createElement("label", {for: "choice1", className: "label_radio"}, 
+	                  React.createElement("input", {type: "radio", name: "answer", value: "1"}, 
+	                      React.createElement("div", {id: "choice1"}, 
+	                          "Strongly Agree"
+	                      )
+	                     )
+	              )
+	          ), 
+	          React.createElement("li", null, 
+	              React.createElement("label", {for: "choice2", className: "label_radio"}, 
+	                  React.createElement("input", {type: "radio", name: "answer", value: "2"}, 
+	                      React.createElement("div", {id: "choice2"}, 
+	                          "Agree"
+	                      )
+	                      )
+	              )
+	          ), 
+	          React.createElement("li", null, 
+	              React.createElement("label", {for: "choice3", className: "label_radio"}, 
+	                  React.createElement("input", {type: "radio", name: "answer", value: "3"}, 
+	                      React.createElement("div", {id: "choice3"}, 
+	                          "Indifferent"
+	                      )
+	                      )
+	              )
+	          ), 
+	          React.createElement("li", null, 
+	              React.createElement("label", {for: "choice4", className: "label_radio"}, 
+	                  React.createElement("input", {type: "radio", name: "answer", value: "4"}, 
+	                      React.createElement("div", {id: "choice4"}, 
+	                          "Disagree"
+	                      )
+	                      )
+	              )
+	          ), 
+	          React.createElement("li", null, 
+	              React.createElement("label", {for: "choice5", className: "label_radio"}, 
+	                  React.createElement("input", {type: "radio", name: "answer", value: "5"}, 
+	                      React.createElement("div", {id: "choice5"}, 
+	                          "Strongly Disagree"
+	                      )
+	                      )
+	              )
+	          ), 
+	          React.createElement("li", null, 
+	          React.createElement("label", {for: "choice6", className: "label_radio"}, 
+	              React.createElement("input", {type: "radio", name: "answer", value: "0"}, 
+	                  React.createElement("div", {id: "choice6"}, 
+	                      "Do Not Know"
+	                  )
+	                  )
+	              )
+	          )
+	      ))
+	    );
+	  }
+	});
+	
+	module.exports = Poll;
 
 
 /***/ }
