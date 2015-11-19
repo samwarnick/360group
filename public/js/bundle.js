@@ -59,25 +59,32 @@
 	var Route = __webpack_require__(160).Route;
 	var NavBar = __webpack_require__(211);
 	var Candidates = __webpack_require__(212);
-	var Issues = __webpack_require__(213);
+	var CandidateProfile = __webpack_require__(213);
+	var Issues = __webpack_require__(214);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement(NavBar, null), 
-	        this.props.children || React.createElement(Home, null)
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	          this.props.children || React.createElement(Home, null)
+	        )
 	      )
 	    );
 	  }
 	});
 	
 	var Home = React.createClass({displayName: "Home",
-	    render: function() {
-	      return (
-	        React.createElement("h1", null, "Home")
-	      );
-	    }
+	  componentDidMount: function() {
+	    $("#rightLinks").find("li").removeClass("active");
+	  },
+	
+	  render: function() {
+	    return (
+	      React.createElement("h1", null, "Home")
+	    );
+	  }
 	});
 	
 	var Poll = React.createClass({displayName: "Poll",
@@ -101,6 +108,7 @@
 	    React.createElement(Route, {path: "/", component: App}, 
 	      React.createElement(Route, {path: "poll", component: Poll}), 
 	      React.createElement(Route, {path: "candidates", component: Candidates}), 
+	      React.createElement(Route, {path: "candidates/:id", component: CandidateProfile}), 
 	      React.createElement(Route, {path: "issues", component: Issues}), 
 	      React.createElement(Route, {path: "*", component: Error})
 	    )
@@ -24554,45 +24562,65 @@
 	var Candidates = React.createClass({displayName: "Candidates",
 	  getInitialState: function() {
 	    return {
-	      candidates: []
+	      democrats: [],
+	      republicans: []
 	    };
 	  },
 	
 	  componentDidMount: function() {
-	    $.get('/api/candidates', function(result) {
-	      this.setState({candidates: result});
+	    $.get('/api/candidates/party/democrat', function(result) {
+	      this.setState({democrats: result});
 	    }.bind(this));
-	
-	    $.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2', function(result) {
-	      console.log(result);
-	    });
+	    $.get('/api/candidates/party/republican', function(result) {
+	      this.setState({republicans: result});
+	    }.bind(this));
 	
 	    $("#rightLinks").find("li").removeClass("active");
 	    $("#candidatesLink").addClass("active");
 	  },
 	
 	  render: function() {
-	    var candidatesList = this.state.candidates.map(function(candidate) {
+	    var democratList = this.state.democrats.map(function(candidate) {
 	      return (
-	        React.createElement(Candidate, {key: candidate._id, name: candidate.name})
+	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name})
+	      );
+	    }.bind(this));
+	
+	    var republicanList = this.state.republicans.map(function(candidate) {
+	      return (
+	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name})
 	      );
 	    }.bind(this));
 	
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement("h1", null, "Candidates"), 
-	        React.createElement("ul", null, 
-	          candidatesList
+	        React.createElement("h1", {className: "text-center"}, "Candidates"), 
+	        React.createElement("div", {className: "row"}, 
+	          React.createElement(CandidateList, {list: democratList, party: "Democrats"}), 
+	          React.createElement(CandidateList, {list: republicanList, party: "Republicans"})
 	        )
 	      )
 	    );
 	  }
 	});
 	
+	var CandidateList = React.createClass({displayName: "CandidateList",
+	  render: function() {
+	    return (
+	      React.createElement("div", {className: "col-md-6 " + this.props.party.toLowerCase()}, 
+	        React.createElement("h2", {className: "text-center"}, this.props.party), 
+	        React.createElement("ul", null, 
+	          this.props.list
+	        )
+	      )
+	    )
+	  }
+	});
+	
 	var Candidate = React.createClass({displayName: "Candidate",
 	  render: function() {
 	    return (
-	      React.createElement("h2", null, this.props.name)
+	      React.createElement("h2", null, React.createElement(Link, {to: "/candidates/"+ this.props.id}, this.props.name))
 	    );
 	  }
 	});
@@ -24602,6 +24630,43 @@
 
 /***/ },
 /* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var CandidateProfile = React.createClass({displayName: "CandidateProfile",
+	  getInitialState: function() {
+	    return {
+	      candidate: {}
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    var c_id = this.props.params.id;
+	    $.get('/api/candidates/id/' + c_id, function(result) {
+	      this.setState({candidate: result});
+	    }.bind(this));
+	
+	    $("#rightLinks").find("li").removeClass("active");
+	    $("#candidatesLink").addClass("active");
+	  },
+	
+	  render: function() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("h1", null, this.state.candidate.name), 
+	        React.createElement("h2", null, this.state.candidate.bio)
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = CandidateProfile;
+
+
+/***/ },
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
