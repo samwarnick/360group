@@ -24582,13 +24582,13 @@
 	  render: function() {
 	    var democratList = this.state.democrats.map(function(candidate) {
 	      return (
-	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name})
+	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name, image: candidate.image, poll: candidate.poll})
 	      );
 	    }.bind(this));
 	
 	    var republicanList = this.state.republicans.map(function(candidate) {
 	      return (
-	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name})
+	        React.createElement(Candidate, {key: candidate._id, id: candidate._id, name: candidate.name, image: candidate.image, poll: candidate.poll})
 	      );
 	    }.bind(this));
 	
@@ -24608,8 +24608,9 @@
 	  render: function() {
 	    return (
 	      React.createElement("div", {className: "col-md-6 " + this.props.party.toLowerCase()}, 
+	        React.createElement("img", {className: "party-image center-block", src: "img/parties/" + this.props.party.toLowerCase() + ".png"}), 
 	        React.createElement("h2", {className: "text-center"}, this.props.party), 
-	        React.createElement("ul", null, 
+	        React.createElement("ul", {className: "candidates-list"}, 
 	          this.props.list
 	        )
 	      )
@@ -24620,7 +24621,19 @@
 	var Candidate = React.createClass({displayName: "Candidate",
 	  render: function() {
 	    return (
-	      React.createElement("h2", null, React.createElement(Link, {to: "/candidates/"+ this.props.id}, this.props.name))
+	      React.createElement(Link, {className: "candidate-link", to: "/candidates/"+ this.props.id}, 
+	        React.createElement("li", null, 
+	          React.createElement("h2", null, 
+	            React.createElement("img", {className: "candidate-list-image", src: "img/candidates/" + this.props.image}), 
+	            React.createElement("span", {className: "candidate-name"}, 
+	              this.props.name
+	            ), 
+	            React.createElement("p", {className: "candidate-poll"}, 
+	              this.props.poll, "%"
+	            )
+	          )
+	        )
+	      )
 	    );
 	  }
 	});

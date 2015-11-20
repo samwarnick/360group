@@ -3,7 +3,10 @@ var router = express.Router();
 var Candidate = require('../models/Candidates.js');
 
 router.get('/candidates/party/:party', function(req, res) {
-  Candidate.find({party: req.params.party}, {name: 1, party: 1}, function(err, candidates) {
+  Candidate.find({party: req.params.party},
+    {name: 1, party: 1, image: 1, poll: 1},
+    {sort:{image: 1}},
+    function(err, candidates) {
     if (err) {
       res.sendStatus('403');
       return;

@@ -24,13 +24,13 @@ var Candidates = React.createClass({
   render: function() {
     var democratList = this.state.democrats.map(function(candidate) {
       return (
-        <Candidate key={candidate._id} id={candidate._id} name={candidate.name} />
+        <Candidate key={candidate._id} id={candidate._id} name={candidate.name} image={candidate.image} poll={candidate.poll}/>
       );
     }.bind(this));
 
     var republicanList = this.state.republicans.map(function(candidate) {
       return (
-        <Candidate key={candidate._id} id={candidate._id} name={candidate.name} />
+        <Candidate key={candidate._id} id={candidate._id} name={candidate.name} image={candidate.image} poll={candidate.poll}/>
       );
     }.bind(this));
 
@@ -50,8 +50,9 @@ var CandidateList = React.createClass({
   render: function() {
     return (
       <div className={"col-md-6 " + this.props.party.toLowerCase()}>
+        <img className="party-image center-block" src={"img/parties/" + this.props.party.toLowerCase() + ".png"}></img>
         <h2 className="text-center">{this.props.party}</h2>
-        <ul>
+        <ul className="candidates-list">
           {this.props.list}
         </ul>
       </div>
@@ -62,7 +63,19 @@ var CandidateList = React.createClass({
 var Candidate = React.createClass({
   render: function() {
     return (
-      <h2><Link to={"/candidates/"+ this.props.id} >{this.props.name}</Link></h2>
+      <Link className="candidate-link" to={"/candidates/"+ this.props.id}>
+        <li>
+          <h2>
+            <img className="candidate-list-image" src={"img/candidates/" + this.props.image}></img>
+            <span className="candidate-name">
+              {this.props.name}
+            </span>
+            <p className="candidate-poll">
+              {this.props.poll}%
+            </p>
+          </h2>
+        </li>
+      </Link>
     );
   }
 });
