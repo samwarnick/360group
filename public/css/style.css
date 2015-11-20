@@ -7,6 +7,24 @@ Palette
 #2770E5 -- blue
 */
 
+@media (max-width: 767px) {
+  .democrats .candidate-list-image {
+    border-color: #2770E5;
+  }
+
+  .republicans .candidate-list-image {
+    border-color: #E52727;
+  }
+
+  .candidate-link h2 {
+    font-size: 1.5em;
+  }
+
+  .candidate-poll {
+    visibility: hidden;
+  }
+}
+
 body {
   /*background-color: #FCFDFF;*/
 }
