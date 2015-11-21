@@ -59,8 +59,9 @@
 	var Route = __webpack_require__(160).Route;
 	var NavBar = __webpack_require__(211);
 	var Candidates = __webpack_require__(212);
-	var Poll = __webpack_require__(214);
-	var Issues = __webpack_require__(213);
+	var Poll = __webpack_require__(213);
+	var Demographics = __webpack_require__(214);
+	var Issues = __webpack_require__(215);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -99,6 +100,7 @@
 	  React.createElement(Router, null, 
 	    React.createElement(Route, {path: "/", component: App}, 
 	      React.createElement(Route, {path: "poll", component: Poll}), 
+	      React.createElement(Route, {path: "demographics", component: Demographics}), 
 	      React.createElement(Route, {path: "candidates", component: Candidates}), 
 	      React.createElement(Route, {path: "issues", component: Issues}), 
 	      React.createElement(Route, {path: "*", component: Error})
@@ -24600,28 +24602,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	
-	var Issues = React.createClass({displayName: "Issues",
-	  componentDidMount: function() {
-	    $("#rightLinks").find("li").removeClass("active");
-	    $("#issuesLink").addClass("active");
-	  },
-	  render: function() {
-	    return (
-	      React.createElement("h1", null, "Issues")
-	    );
-	  }
-	});
-	
-	module.exports = Issues;
-
-
-/***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
+	var Demographics = __webpack_require__(214);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24643,7 +24625,7 @@
 	  },
 	    componentDidMount: function() {
 	    $.get('/api/statements', function(result) {
-	      this.setState({statements: result});
+		this.setState({statements: result});
 	    }.bind(this));
 	
 	    $("#rightLinks").find("li").removeClass("active");
@@ -24651,10 +24633,10 @@
 	},
 	    render: function() {
 	        var statementsList = this.state.statements.map(function(statement) {
-	      return (
-	        React.createElement(Statement, {key: statement._id, statement: statement.statement})
-	      );
-	    }.bind(this));
+		    return (
+			    React.createElement(Statement, {key: statement._id, statement: statement.statement})
+		    );
+	    	}.bind(this));
 	      return (
 	        React.createElement("div", null, 
 	            React.createElement("div", {id: "section1"}, 
@@ -24663,10 +24645,9 @@
 	                        React.createElement("div", {className: "col-md-6"}, 
 	                        React.createElement("div", {id: "question"}, "How much do you agree with the following statments?"), 
 	                            React.createElement("form", {className: "quiz"}, 
+	                            	statementsList, 
 	
-	                            statementsList, 
-	
-	                                React.createElement("button", {type: "button", className: "btn btn-primary", onclick: "next()"}, "SUBMIT")
+	                                React.createElement("button", {type: "button", className: "btn btn-primary", onclick: "next()"}, React.createElement(Link, {to: "/demographics"}, "SUBMIT"))
 	                            )
 	                        ), 
 	                        React.createElement("div", {className: "col-md-6"}
@@ -24746,6 +24727,50 @@
 	});
 	
 	module.exports = Poll;
+
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var Demographics = React.createClass({displayName: "Demographics",
+	    render: function() {
+		return(
+			React.createElement("div", null, 
+			React.createElement("p", null, "This will show demographic info")
+			)
+		);
+	    }
+	});
+	
+	//var Chart = React.createClass({
+	//});
+	
+	module.exports = Demographics;
+
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	
+	var Issues = React.createClass({displayName: "Issues",
+	  componentDidMount: function() {
+	    $("#rightLinks").find("li").removeClass("active");
+	    $("#issuesLink").addClass("active");
+	  },
+	  render: function() {
+	    return (
+	      React.createElement("h1", null, "Issues")
+	    );
+	  }
+	});
+	
+	module.exports = Issues;
 
 
 /***/ }

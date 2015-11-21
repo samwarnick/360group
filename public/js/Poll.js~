@@ -34,6 +34,9 @@ var Quiz = React.createClass({
 		    <Statement key={statement._id} statement={statement.statement} />
 	    );
     	}.bind(this));
+	var divStyle = {
+	    color: 'white'
+	};
       return (
         <div>
             <div id="section1">
@@ -44,7 +47,7 @@ var Quiz = React.createClass({
                             <form className="quiz">
                             	{statementsList}
 
-                                <button type="button" className="btn btn-primary" onclick="next()"><Link to="/demographics">SUBMIT</Link></button>
+                                <button type="button" className="btn btn-primary" onclick="next()"><Link style={divStyle} to="/demographics">SUBMIT</Link></button>
                             </form>
                         </div>
                         <div className="col-md-6">
