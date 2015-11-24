@@ -61,62 +61,40 @@ var Statement = React.createClass({
   render: function() {
     return (
 
-      <div>
+      <div className="quiz" >
       <div id="the statement goes here">{this.props.statement}</div>
       <ul className="answers">
           <li>
-              <label for="choice1" className="label_radio">
-                  <input type="radio" name="answer" value="1">
-                      <div id="choice1">
-                          Strongly Agree
-                      </div>
+
+                  <input id="radiobutton1" type="radio" name={this.props.statement} value="1">
+                      <label className="StronglyAgree" for="radiobutton1">Strongly Agree</label>
                      </input>
-              </label>
+
           </li>
           <li>
-              <label for="choice2" className="label_radio">
-                  <input type="radio" name="answer" value="2">
-                      <div id="choice2">
-                          Agree
-                      </div>
-                      </input>
-              </label>
+              <input id="radiobutton2" type="radio" name={this.props.statement} value="1">
+                  <label for="radiobutton2"><span><span></span></span>Agree</label>
+                 </input>
           </li>
           <li>
-              <label for="choice3" className="label_radio">
-                  <input type="radio" name="answer" value="3">
-                      <div id="choice3">
-                          Indifferent
-                      </div>
-                      </input>
-              </label>
+              <input id="radiobutton3" type="radio" name={this.props.statement} value="1">
+                  <label for="radiobutton3">Indifferent</label>
+                 </input>
           </li>
           <li>
-              <label for="choice4" className="label_radio">
-                  <input type="radio" name="answer" value="4">
-                      <div id="choice4">
-                          Disagree
-                      </div>
-                      </input>
-              </label>
+              <input id="radiobutton4" type="radio" name={this.props.statement} value="1">
+                  <label for="radiobutton4">Disagree</label>
+                 </input>
           </li>
           <li>
-              <label for="choice5" className="label_radio">
-                  <input type="radio" name="answer" value="5">
-                      <div id="choice5">
-                          Strongly Disagree
-                      </div>
-                      </input>
-              </label>
+              <input id="radiobutton5" type="radio" name={this.props.statement} value="1">
+                  <label for="radiobutton5">Strongly Disagree</label>
+                 </input>
           </li>
           <li>
-          <label for="choice6" className="label_radio">
-              <input type="radio" name="answer" value="0">
-                  <div id="choice6">
-                      Do Not Know
-                  </div>
-                  </input>
-              </label>
+              <input id="radiobutton6" type="radio" name={this.props.statement} value="1">
+                  <label for="radiobutton6">Do Not Know</label>
+                 </input>
           </li>
       </ul></div>
     );
