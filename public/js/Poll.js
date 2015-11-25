@@ -15,6 +15,7 @@ var Poll = React.createClass({
 
 var Quiz = React.createClass({
     handleClick: function(event) {
+        console.log(this.props.statementsList);
     //get all the states from the questions.
     //send them off with an API call
   },
@@ -84,24 +85,22 @@ this.setState({active: 0});
       <div id="the statement goes here"><h2>{this.props.statement}</h2></div>
       <ul className="nav nav-pills nav-justified">
           <li>
-
-                  <a data-toggle="pill" onClick={this.handleClick1}>Strongly Agree</a>
-
+                <a data-toggle="pill" onClick={this.handleClick1}>Strongly Agree</a>
           </li>
           <li>
                 <a data-toggle="pill" onClick={this.handleClick2}>Agree</a>
           </li>
           <li>
-              <a data-toggle="pill" onClick={this.handleClick3}>Indifferent</a>
+                <a data-toggle="pill" onClick={this.handleClick3}>Indifferent</a>
           </li>
           <li>
-              <a data-toggle="pill" onClick={this.handleClick4}>Disagree</a>
+                <a data-toggle="pill" onClick={this.handleClick4}>Disagree</a>
           </li>
           <li>
-              <a data-toggle="pill" onClick={this.handleClick5}>Strongly Disagree</a>
+                <a data-toggle="pill" onClick={this.handleClick5}>Strongly Disagree</a>
           </li>
           <li>
-              <a data-toggle="pill" onClick={this.handleClick6}>Do Not Know</a>
+                <a data-toggle="pill" onClick={this.handleClick6}>Do Not Know</a>
           </li>
       </ul></div>
     );

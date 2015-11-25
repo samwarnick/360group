@@ -24618,6 +24618,7 @@
 	
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
+	        console.log(this.props.statementsList);
 	    //get all the states from the questions.
 	    //send them off with an API call
 	  },
@@ -24687,24 +24688,22 @@
 	      React.createElement("div", {id: "the statement goes here"}, React.createElement("h2", null, this.props.statement)), 
 	      React.createElement("ul", {className: "nav nav-pills nav-justified"}, 
 	          React.createElement("li", null, 
-	
-	                  React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick1}, "Strongly Agree")
-	
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick1}, "Strongly Agree")
 	          ), 
 	          React.createElement("li", null, 
 	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick2}, "Agree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick3}, "Indifferent")
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick3}, "Indifferent")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick4}, "Disagree")
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick4}, "Disagree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick5}, "Strongly Disagree")
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick5}, "Strongly Disagree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick6}, "Do Not Know")
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick6}, "Do Not Know")
 	          )
 	      ))
 	    );
