@@ -14,7 +14,10 @@ var Poll = React.createClass({
 });
 
 var Quiz = React.createClass({
-
+    handleClick: function(event) {
+    //get all the states from the questions.
+    //send them off with an API call
+  },
     getInitialState: function() {
     return {
       statements: []
@@ -39,13 +42,11 @@ var Quiz = React.createClass({
             <div id="section1">
                 <div className="container" id="quiz">
                     <div className="row">
-                        <div className="col-md-6">
-                        <div id="question" >How much do you agree with the following statments?</div>
-                            <form className="quiz">
+                        <div className="col-md-8">
+                        <div id="question" ><h1>How much do you agree with the following statments?</h1></div>
                             	{statementsList}
 
-                                <button type="button" className="btn btn-primary" onclick="next()"><Link to="/demographics">SUBMIT</Link></button>
-                            </form>
+                                <button type="button" className="btn btn-primary" onClick={this.handleClick}>SUBMIT</button>
                         </div>
                         <div className="col-md-6">
                         </div>
@@ -58,43 +59,49 @@ var Quiz = React.createClass({
 });
 
 var Statement = React.createClass({
+    handleClick1: function(event) {
+    this.setState({active: 1});
+  },
+  handleClick2: function(event) {
+  this.setState({active: 2});
+},
+handleClick3: function(event) {
+this.setState({active: 3});
+},
+handleClick4: function(event) {
+this.setState({active: 4});
+},
+handleClick5: function(event) {
+this.setState({active: 5});
+},
+handleClick0: function(event) {
+this.setState({active: 0});
+},
   render: function() {
     return (
 
-      <div className="quiz" >
-      <div id="the statement goes here">{this.props.statement}</div>
-      <ul className="answers">
+      <div className="quiz-item" >
+      <div id="the statement goes here"><h2>{this.props.statement}</h2></div>
+      <ul className="nav nav-pills nav-justified">
           <li>
 
-                  <input id="radiobutton1" type="radio" name={this.props.statement} value="1">
-                      <label className="StronglyAgree" for="radiobutton1">Strongly Agree</label>
-                     </input>
+                  <a data-toggle="pill" onClick={this.handleClick1}>Strongly Agree</a>
 
           </li>
           <li>
-              <input id="radiobutton2" type="radio" name={this.props.statement} value="1">
-                  <label for="radiobutton2"><span><span></span></span>Agree</label>
-                 </input>
+                <a data-toggle="pill" onClick={this.handleClick2}>Agree</a>
           </li>
           <li>
-              <input id="radiobutton3" type="radio" name={this.props.statement} value="1">
-                  <label for="radiobutton3">Indifferent</label>
-                 </input>
+              <a data-toggle="pill" onClick={this.handleClick3}>Indifferent</a>
           </li>
           <li>
-              <input id="radiobutton4" type="radio" name={this.props.statement} value="1">
-                  <label for="radiobutton4">Disagree</label>
-                 </input>
+              <a data-toggle="pill" onClick={this.handleClick4}>Disagree</a>
           </li>
           <li>
-              <input id="radiobutton5" type="radio" name={this.props.statement} value="1">
-                  <label for="radiobutton5">Strongly Disagree</label>
-                 </input>
+              <a data-toggle="pill" onClick={this.handleClick5}>Strongly Disagree</a>
           </li>
           <li>
-              <input id="radiobutton6" type="radio" name={this.props.statement} value="1">
-                  <label for="radiobutton6">Do Not Know</label>
-                 </input>
+              <a data-toggle="pill" onClick={this.handleClick6}>Do Not Know</a>
           </li>
       </ul></div>
     );

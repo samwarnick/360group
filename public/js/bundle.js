@@ -24617,7 +24617,10 @@
 	});
 	
 	var Quiz = React.createClass({displayName: "Quiz",
-	
+	    handleClick: function(event) {
+	    //get all the states from the questions.
+	    //send them off with an API call
+	  },
 	    getInitialState: function() {
 	    return {
 	      statements: []
@@ -24642,13 +24645,11 @@
 	            React.createElement("div", {id: "section1"}, 
 	                React.createElement("div", {className: "container", id: "quiz"}, 
 	                    React.createElement("div", {className: "row"}, 
-	                        React.createElement("div", {className: "col-md-6"}, 
-	                        React.createElement("div", {id: "question"}, "How much do you agree with the following statments?"), 
-	                            React.createElement("form", {className: "quiz"}, 
+	                        React.createElement("div", {className: "col-md-8"}, 
+	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	statementsList, 
 	
-	                                React.createElement("button", {type: "button", className: "btn btn-primary", onclick: "next()"}, React.createElement(Link, {to: "/demographics"}, "SUBMIT"))
-	                            )
+	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick}, "SUBMIT")
 	                        ), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
@@ -24661,43 +24662,49 @@
 	});
 	
 	var Statement = React.createClass({displayName: "Statement",
+	    handleClick1: function(event) {
+	    this.setState({active: 1});
+	  },
+	  handleClick2: function(event) {
+	  this.setState({active: 2});
+	},
+	handleClick3: function(event) {
+	this.setState({active: 3});
+	},
+	handleClick4: function(event) {
+	this.setState({active: 4});
+	},
+	handleClick5: function(event) {
+	this.setState({active: 5});
+	},
+	handleClick0: function(event) {
+	this.setState({active: 0});
+	},
 	  render: function() {
 	    return (
 	
-	      React.createElement("div", {className: "quiz"}, 
-	      React.createElement("div", {id: "the statement goes here"}, this.props.statement), 
-	      React.createElement("ul", {className: "answers"}, 
+	      React.createElement("div", {className: "quiz-item"}, 
+	      React.createElement("div", {id: "the statement goes here"}, React.createElement("h2", null, this.props.statement)), 
+	      React.createElement("ul", {className: "nav nav-pills nav-justified"}, 
 	          React.createElement("li", null, 
 	
-	                  React.createElement("input", {id: "radiobutton1", type: "radio", name: this.props.statement, value: "1"}, 
-	                      React.createElement("label", {className: "StronglyAgree", for: "radiobutton1"}, "Strongly Agree")
-	                     )
+	                  React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick1}, "Strongly Agree")
 	
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("input", {id: "radiobutton2", type: "radio", name: this.props.statement, value: "1"}, 
-	                  React.createElement("label", {for: "radiobutton2"}, React.createElement("span", null, React.createElement("span", null)), "Agree")
-	                 )
+	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick2}, "Agree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("input", {id: "radiobutton3", type: "radio", name: this.props.statement, value: "1"}, 
-	                  React.createElement("label", {for: "radiobutton3"}, "Indifferent")
-	                 )
+	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick3}, "Indifferent")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("input", {id: "radiobutton4", type: "radio", name: this.props.statement, value: "1"}, 
-	                  React.createElement("label", {for: "radiobutton4"}, "Disagree")
-	                 )
+	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick4}, "Disagree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("input", {id: "radiobutton5", type: "radio", name: this.props.statement, value: "1"}, 
-	                  React.createElement("label", {for: "radiobutton5"}, "Strongly Disagree")
-	                 )
+	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick5}, "Strongly Disagree")
 	          ), 
 	          React.createElement("li", null, 
-	              React.createElement("input", {id: "radiobutton6", type: "radio", name: this.props.statement, value: "1"}, 
-	                  React.createElement("label", {for: "radiobutton6"}, "Do Not Know")
-	                 )
+	              React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick6}, "Do Not Know")
 	          )
 	      ))
 	    );
