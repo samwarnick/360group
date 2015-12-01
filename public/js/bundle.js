@@ -24618,29 +24618,36 @@
 	
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
-	        console.log(this.props.statementsList);
+	        for (var key2 in this.state.liststatements){
+	            console.log(this.state.liststatements[key2].type().getState());
+	        }
+	
 	    //get all the states from the questions.
 	    //send them off with an API call
 	  },
 	    getInitialState: function() {
 	    return {
-	      statements: []
+	      statements: [],
+	      liststatements: []
 	    };
 	  },
 	    componentDidMount: function() {
 	    $.get('/api/statements', function(result) {
-		this.setState({statements: result});
+		this.setState({statements: result,
+	        liststatements: result.map(function(statement) {
+		    return (
+			    React.createElement(Statement, {key: statement._id, statement: statement.statement})
+		    );
+	    	}.bind(this))
+	    });
 	    }.bind(this));
+	
 	
 	    $("#rightLinks").find("li").removeClass("active");
 	    $("#PollLink").addClass("active");
 	},
 	    render: function() {
-	        var statementsList = this.state.statements.map(function(statement) {
-		    return (
-			    React.createElement(Statement, {key: statement._id, statement: statement.statement})
-		    );
-	    	}.bind(this));
+	
 	      return (
 	        React.createElement("div", null, 
 	            React.createElement("div", {id: "section1"}, 
@@ -24648,7 +24655,7 @@
 	                    React.createElement("div", {className: "row"}, 
 	                        React.createElement("div", {className: "col-md-8"}, 
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
-	                            	statementsList, 
+	                            	this.state.liststatements, 
 	
 	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick}, "SUBMIT")
 	                        ), 
@@ -24663,23 +24670,36 @@
 	});
 	
 	var Statement = React.createClass({displayName: "Statement",
+	    getDefaultProps: function() {
+	    return {
+	      choice: 0
+	  };
+	  },
+	    getInitialState: function() {
+	        this.props.choice = 0;
+	        return {choice: 0};
+	    },
 	    handleClick1: function(event) {
-	    this.setState({active: 1});
+	    this.props.choice = 1;
 	  },
 	  handleClick2: function(event) {
-	  this.setState({active: 2});
+	  this.props.choice = 2;
 	},
 	handleClick3: function(event) {
-	this.setState({active: 3});
+	this.props.choice = 3;
 	},
 	handleClick4: function(event) {
-	this.setState({active: 4});
+	this.props.choice = 4;
 	},
 	handleClick5: function(event) {
-	this.setState({active: 5});
+	this.props.choice = 5;
+	console.log(this.props.choice);
 	},
 	handleClick0: function(event) {
-	this.setState({active: 0});
+	this.props.choice = 6;
+	},
+	getState: function(){
+	    return this.state.choice;
 	},
 	  render: function() {
 	    return (
