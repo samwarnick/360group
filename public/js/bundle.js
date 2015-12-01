@@ -60,8 +60,8 @@
 	var NavBar = __webpack_require__(211);
 	var Candidates = __webpack_require__(212);
 	var Poll = __webpack_require__(213);
-	var Demographics = __webpack_require__(215);
-	var Issues = __webpack_require__(214);
+	var Demographics = __webpack_require__(214);
+	var Issues = __webpack_require__(215);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -24603,7 +24603,7 @@
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var Demographics = __webpack_require__(215);
+	var Demographics = __webpack_require__(214);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24618,16 +24618,18 @@
 	
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
-	        for (var key2 in this.state.liststatements){
-	            console.log(this.state.liststatements[key2].type().getState());
-	        }
 	
-	    //get all the states from the questions.
+	    // $.post('/api/pollresults')
 	    //send them off with an API call
 	  },
+	    answerSelected: function(statement, answer) {
+	        this.state.stateansPairs.statement = answer;
+	        console.log(statement, answer);
+	    },
 	    getInitialState: function() {
 	    return {
 	      statements: [],
+	      stateansPairs: {},
 	      liststatements: []
 	    };
 	  },
@@ -24636,7 +24638,7 @@
 		this.setState({statements: result,
 	        liststatements: result.map(function(statement) {
 		    return (
-			    React.createElement(Statement, {key: statement._id, statement: statement.statement})
+			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.statement})
 		    );
 	    	}.bind(this))
 	    });
@@ -24657,8 +24659,24 @@
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	this.state.liststatements, 
 	
-	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick}, "SUBMIT")
+	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
+		                React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+		                     React.createElement("div", {className: "modal-dialog"}, 
+		                          React.createElement("div", {className: "modal-content"}, 
+		                               React.createElement("div", {className: "modal-header"}, 
+	                                           React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                                           React.createElement("h4", {className: "modal-title"}, "Modal Header")
+		                               ), 
+		                               React.createElement("div", {className: "modal-body"}, 
+	                                           React.createElement(Demographics, null)
+		                               ), 
+		                               React.createElement("div", {className: "modal-footer"}, 
+	                                           React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
+		                               )
+		                         )
+		                     )
+		                ), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
@@ -24672,7 +24690,8 @@
 	var Statement = React.createClass({displayName: "Statement",
 	    getDefaultProps: function() {
 	    return {
-	      choice: 0
+	      choice: 0,
+	      answers: ["Strongly Agree","Agree", "Indifferent", "Disagree", "Strongly Disagree", "Don't Know" ]
 	  };
 	  },
 	    getInitialState: function() {
@@ -24681,22 +24700,26 @@
 	    },
 	    handleClick1: function(event) {
 	    this.props.choice = 1;
+	    this.props.onAnswer(this.props.statement, 1);
 	  },
 	  handleClick2: function(event) {
-	  this.props.choice = 2;
+	  this.props.onAnswer(this.props.statement, 2);
 	},
 	handleClick3: function(event) {
-	this.props.choice = 3;
+	this.props.onAnswer(this.props.statement, 3);
 	},
 	handleClick4: function(event) {
-	this.props.choice = 4;
+	this.props.onAnswer(this.props.statement, 4);
 	},
 	handleClick5: function(event) {
-	this.props.choice = 5;
-	console.log(this.props.choice);
+	this.props.onAnswer(this.props.statement, 5);
 	},
 	handleClick0: function(event) {
-	this.props.choice = 6;
+	this.props.onAnswer(this.props.statement, 0);
+	},
+	handleClick: function(index, event) {
+	    this.setState({answer: index});
+	    //call this.props.onAnswer(statement, answer);
 	},
 	getState: function(){
 	    return this.state.choice;
@@ -24737,27 +24760,6 @@
 /* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	
-	var Issues = React.createClass({displayName: "Issues",
-	  componentDidMount: function() {
-	    $("#rightLinks").find("li").removeClass("active");
-	    $("#issuesLink").addClass("active");
-	  },
-	  render: function() {
-	    return (
-	      React.createElement("h1", null, "Issues")
-	    );
-	  }
-	});
-	
-	module.exports = Issues;
-
-
-/***/ },
-/* 215 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/** @jsx React.DOM */var React = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	
@@ -24775,6 +24777,27 @@
 	//});
 	
 	module.exports = Demographics;
+
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	
+	var Issues = React.createClass({displayName: "Issues",
+	  componentDidMount: function() {
+	    $("#rightLinks").find("li").removeClass("active");
+	    $("#issuesLink").addClass("active");
+	  },
+	  render: function() {
+	    return (
+	      React.createElement("h1", null, "Issues")
+	    );
+	  }
+	});
+	
+	module.exports = Issues;
 
 
 /***/ }

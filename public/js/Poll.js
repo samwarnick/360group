@@ -15,16 +15,18 @@ var Poll = React.createClass({
 
 var Quiz = React.createClass({
     handleClick: function(event) {
-        for (var key2 in this.state.liststatements){
-            console.log(this.state.liststatements[key2].type().getState());
-        }
 
-    //get all the states from the questions.
+    // $.post('/api/pollresults')
     //send them off with an API call
   },
+    answerSelected: function(statement, answer) {
+        this.state.stateansPairs.statement = answer;
+        console.log(statement, answer);
+    },
     getInitialState: function() {
     return {
       statements: [],
+      stateansPairs: {},
       liststatements: []
     };
   },
@@ -33,7 +35,7 @@ var Quiz = React.createClass({
 	this.setState({statements: result,
         liststatements: result.map(function(statement) {
 	    return (
-		    <Statement key={statement._id} statement={statement.statement} />
+		    <Statement onAnswer={this.answerSelected} key={statement._id} statement={statement.statement} />
 	    );
     	}.bind(this))
     });
@@ -85,7 +87,8 @@ var Quiz = React.createClass({
 var Statement = React.createClass({
     getDefaultProps: function() {
     return {
-      choice: 0
+      choice: 0,
+      answers: ["Strongly Agree","Agree", "Indifferent", "Disagree", "Strongly Disagree", "Don't Know" ]
   };
   },
     getInitialState: function() {
@@ -94,22 +97,26 @@ var Statement = React.createClass({
     },
     handleClick1: function(event) {
     this.props.choice = 1;
+    this.props.onAnswer(this.props.statement, 1);
   },
   handleClick2: function(event) {
-  this.props.choice = 2;
+  this.props.onAnswer(this.props.statement, 2);
 },
 handleClick3: function(event) {
-this.props.choice = 3;
+this.props.onAnswer(this.props.statement, 3);
 },
 handleClick4: function(event) {
-this.props.choice = 4;
+this.props.onAnswer(this.props.statement, 4);
 },
 handleClick5: function(event) {
-this.props.choice = 5;
-console.log(this.props.choice);
+this.props.onAnswer(this.props.statement, 5);
 },
 handleClick0: function(event) {
-this.props.choice = 6;
+this.props.onAnswer(this.props.statement, 0);
+},
+handleClick: function(index, event) {
+    this.setState({answer: index});
+    //call this.props.onAnswer(statement, answer);
 },
 getState: function(){
     return this.state.choice;
