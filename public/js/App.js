@@ -7,6 +7,8 @@ var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
 var Candidates = require('./Candidates');
 var Issues = require('./Issues');
+var Register = require('./Register');
+var Login = require('./Login');
 
 var App = React.createClass({
   render: function() {
@@ -49,6 +51,8 @@ var routes = (
       <Route path="poll" component={Poll}/>
       <Route path="candidates" component={Candidates}/>
       <Route path="issues" component={Issues}/>
+      <Route path="register" component={Register}/>
+      <Route path="login" component={Login}/>
       <Route path="*" component={Error}/>
     </Route>
   </Router>

@@ -8,7 +8,7 @@ var candidateSchema = new Schema({
   social: {
     facebook: String,
     twitter: String,
-    instagram: String,
+    instagram: String
   }
 });
 
