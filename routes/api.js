@@ -109,18 +109,18 @@ router.get('/statements', function(req, res) {
   });
 });
 
-router.post('/pollresults', function(req, res) {
-    for (statement in req) {
-        Statement.find({statement.statement}, function(err, statementFromDB) {
-            if (err) {
-              console.log(statements);
-              res.sendStatus('403');
-              return;
-            }
-            //update the database with the stuff
-            
-        })
-    }
-})
+// router.post('/pollresults', function(req, res) {
+//     for (statement in req) {
+//         Statement.find({statement.statement}, function(err, statementFromDB) {
+//             if (err) {
+//               console.log(statements);
+//               res.sendStatus('403');
+//               return;
+//             }
+//             //update the database with the stuff
+//
+//         })
+//     }
+// })
 
 module.exports = router;
