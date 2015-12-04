@@ -105,7 +105,6 @@ router.get('/candidates/id/:id', function(req, res) {
   });
 });
 
-<<<<<<< HEAD
 router.get('/candidates/:id', function(req, res) {
 
 });
@@ -136,6 +135,4 @@ router.get('/statements', function(req, res) {
 //     }
 // })
 
-=======
->>>>>>> master
 module.exports = router;
