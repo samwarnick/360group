@@ -2,220 +2,207 @@
   "name": "Hillary Clinton",
   "party": "democrat",
   "position": "FORMER SECRETARY OF STATE",
-  "bio": "",
+  "bio": "Hillary Diane Rodham Clinton (born October 26, 1947) is an American politician who served as the 67th United States Secretary of State under President Barack Obama from 2009 to 2013. She is the wife of the 42nd President of the United States Bill Clinton, and was First Lady of the United States during his tenure from 1993 to 2001. Clinton subsequently served as a United States Senator from New York from 2001 to 2009, and is a candidate for President of the United States in the 2016 presidential election.",
   "image": "clinton.jpg",
   "poll": 55.4,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "hillaryclinton",
+    "twitter": "HillaryClinton",
+    "tid": "667779323294691328",
+    "instagram": "hillaryclinton"
   }
 }
 {
   "name": "Martin O'Malley",
   "party": "democrat",
   "position": "FORMER MARYLAND GOVERNOR",
-  "bio": "",
+  "bio": "Martin Joseph O'Malley (born January 18, 1963) is an American politician who was the 61st Governor of Maryland from 2007 to 2015. Prior to being elected as Governor, he served as the Mayor of Baltimore from 1999 to 2007 and was a Baltimore City Councilor from 1991 to 1999.",
   "image": "omalley.jpg",
   "poll": 3.6,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "MartinOMalley",
+    "twitter": "MartinOMalley",
+    "instagram": "martinomalley"
   }
 }
 {
   "name": "Bernie Sanders",
   "party": "democrat",
   "position": "UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Bernard \"Bernie\" Sanders (born September 8, 1941) is an American politician and the junior United States Senator from Vermont. A Democrat as of 2015, he had been the longest-serving independent in U.S. Congressional history. Sanders has been the ranking minority member on the Senate Budget Committee since January 2015. He is a candidate for President of the United States in the 2016 U.S. presidential election.",
   "image": "sanders.jpg",
   "poll": 32.0,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "berniesanders",
+    "twitter": "BernieSanders",
+    "instagram": "berniesanders"
   }
 }
 {
   "name": "Jeb Bush",
   "party": "republican",
   "position": "FORMER FLORIDA GOVERNOR",
-  "bio": "",
+  "bio": "John Ellis \"Jeb\" Bush (born February 11, 1953) is an American businessman and politician who served as the 43rd Governor of Florida from 1999 to 2007. He is currently a candidate for President of the United States in the 2016 U.S. presidential election.",
   "image": "bush.jpg",
   "poll": 5.4,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "jebbush",
+    "twitter": "JebBush",
+    "instagram": "jebbush"
   }
 }
 {
   "name": "Ben Carson",
   "party": "republican",
   "position": "RETIRED NEUROSURGEON",
-  "bio": "",
+  "bio": "Benjamin Solomon \"Ben\" Carson, Sr. (born September 18, 1951) is a retired American neurosurgeon who is a candidate for the Republican nomination for President of the United States in the 2016 election. Born in Detroit, Michigan and a graduate of Yale University and the University of Michigan Medical School, Carson has authored numerous books on his medical career and political stances, and was the subject of a television drama film in 2009.",
   "image": "carson.jpg",
   "poll": 21.8,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "realbencarson",
+    "twitter": "RealBenCarson",
+    "instagram": "realbencarson"
   }
 }
 {
   "name": "Chris Christie",
   "party": "republican",
   "position": "NEW JERSEY GOVERNOR",
-  "bio": "",
+  "bio": "Christopher James \"Chris\" Christie (born September 6, 1962) is the 55th Governor of New Jersey. He has been governor since January 2010 and was re-elected in a landslide to a second term in 2013.",
   "image" : "christie.jpg",
   "poll" : 2.8,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "govchristie",
+    "twitter": "ChrisChristie",
+    "instagram": "chrischristie"
   }
 }
 {
   "name": "Ted Cruz",
   "party": "republican",
   "position": "UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Rafael Edward \"Ted\" Cruz (born December 22, 1970) is an American politician and the junior U.S. Senator from Texas. Born in Canada, Cruz was elected to the U.S. Senate in 2012 and is the first Hispanic American to serve as a U.S. senator representing Texas. He is the chairman of the subcommittee on the Oversight, Agency Action, Federal Rights and Federal Courts, U.S. Senate Judiciary Committee. He is also the chairman of the United States Senate Commerce Subcommittee on Space, Science and Competitiveness, U.S. Senate Commerce Committee.",
   "image": "cruz.jpg",
   "poll": 11.0,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "tedcruzpage",
+    "twitter": "tedcruz",
+    "instagram": "cruzforpresident"
   }
 }
 {
   "name": "Carly Fiorina",
   "party": "republican",
   "position": "FORMER BUSINESS EXECUTIVE",
-  "bio": "",
+  "bio": "Carly Fiorina (born Cara Carleton Sneed; September 6, 1954) is a former businesswoman and CEO, an American Republican politician, and candidate for president in the 2016 United States presidential election. Fiorina currently chairs the non-profit philanthropic organization Good360.",
   "image": "fiorina.jpg",
   "poll": 3.2,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
-  }
-}
-{
-  "name": "Jim Gilmore",
-  "party": "republican",
-  "position": "FORMER VIRGINIA GOVERNOR",
-  "bio": "",
-  "image": "gilmore.jpg",
-  "poll": 0.0,
-  "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "CarlyFiorina",
+    "twitter": "CarlyFiorina",
+    "instagram": "carlyfiorina2016"
   }
 }
 {
   "name": "Lindsey Graham",
   "party": "republican",
   "position": "UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Lindsey Olin Graham (born July 9, 1955) is an American politician and member of the Republican Party, who has served as a United States Senator from South Carolina since 2003, and has been the senior Senator from South Carolina since 2005.",
   "image": "graham.jpg",
   "poll": 0.4,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "LindseyGrahamSC",
+    "twitter": "GrahamBlog",
+    "instagram": "lindseygrahamsc"
   }
 }
 {
   "name": "Mike Huckabee",
   "party": "republican",
   "position": "FORMER ARKANSAS GOVERNOR",
-  "bio": "",
+  "bio": "Michael Dale \"Mike\" Huckabee (born August 24, 1955) is an American politician, Christian minister, author, and commentator who served as the 44th Governor of Arkansas from 1996 to 2007. He is a candidate for U.S. president in the 2016 election and was a candidate in the 2008 United States Republican presidential primaries. He won the 2008 Iowa Republican caucuses and finished second in delegate count and third in both popular vote and number of states won, behind nominee John McCain and Mitt Romney.",
   "image": "huckabee.jpg",
   "poll": 3.0,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "mikehuckabee",
+    "twitter": "GovMikeHuckabee",
+    "instagram": "govmikehuckabee"
   }
 }
 {
   "name": "John Kasich",
   "party": "republican",
   "position": "OHIO GOVERNOR",
-  "bio": "",
+  "bio": "John Richard Kasich (born May 13, 1952) is an American politician and the 69th and current Governor of Ohio, elected to the office in 2010 and reelected in the 2014 election. On July 21, 2015, he announced his candidacy for the Republican nomination for president in 2016.",
   "image": "kasich.jpg",
   "poll": 3.4,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "JohnKasich",
+    "twitter": "JohnKasich",
+    "instagram": "johnkasich"
   }
 }
 {
   "name": "George Pataki",
   "party": "republican",
   "position": "FORMER NEW YORK GOVERNOR",
-  "bio": "",
+  "bio": "George Elmer Pataki (born June 24, 1945) is an American lawyer and politician who served as the 53rd Governor of New York (1995–2006). A member of the Republican Party, Pataki was a lawyer who was elected Mayor of his home town of Peekskill, later going on to be elected to State Assembly, then State Senate. In 1994, he ran for Governor against three-term incumbent Mario Cuomo, defeating him by over a three-point margin as part of the Republican Revolution of 1994. Pataki, succeeding a three-term Governor, would himself be elected to three consecutive terms, and was one of only three Republican governors of New York elected since 1923, the others being Thomas Dewey and Nelson Rockefeller.",
   "image": "pataki.jpg",
   "poll": 0.6,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "GovGeorgePataki",
+    "twitter": "GovernorPataki",
+    "instagram": "governorpataki"
   }
 }
 {
   "name": "Rand Paul",
   "party": "republican",
   "position": "UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Randal Howard \"Rand\" Paul (born January 7, 1963) is an American politician and physician. Since 2011, Paul has served in the United States Senate as a member of the Republican Party representing Kentucky. He is the son of former U.S. Representative Ron Paul of Texas.",
   "image": "paul.jpg",
   "poll": 3.2,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "RandPaul",
+    "twitter": "RandPaul"
   }
 }
 {
   "name": "Marco Rubio",
   "party": "republican",
   "position": "UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Marco Antonio Rubio (born May 28, 1971) is the junior United States Senator from the state of Florida, serving since January 2011, and is a candidate for United States President in the 2016 election. He previously served as Speaker of the Florida House of Representatives.",
   "image": "rubio.jpg",
   "poll": 12.4,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "MarcoRubio",
+    "twitter": "marcorubio",
+    "instagram": "marcorubiofla"
   }
 }
 {
   "name": "Rick Santorum",
   "party": "republican",
   "position": "FORMER UNITED STATES SENATOR",
-  "bio": "",
+  "bio": "Richard John \"Rick\" Santorum (born May 10, 1958) is an American attorney and Republican Party politician. He served as a United States Senator representing Pennsylvania (1995–2007) and was the Senate's third-ranking Republican (2001–07). He ran as a candidate for the 2012 Republican Party presidential nomination, finishing second to the eventual Republican nominee Mitt Romney.",
   "image": "santorum.jpg",
   "poll": 0.6,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "RickSantorum",
+    "twitter": "RickSantorum",
+    "instagram": "ricksantorum"
   }
 }
 {
   "name": "Donald Trump",
   "party": "republican",
   "position": "REAL ESTATE MOGUL",
-  "bio": "",
+  "bio": "Donald John Trump (born June 14, 1946) is an American real estate developer, television personality, business author, and candidate for President of the United States in the 2016 presidential election. He is the chairman and president of The Trump Organization, and the founder of Trump Entertainment Resorts. Trump's career, branding efforts, lifestyle and outspoken manner helped make him a celebrity, a status amplified by the success of his NBC reality show, The Apprentice.",
   "image": "trump.jpg",
   "poll": 24.6,
   "social": {
-    "facebook": "",
-    "twitter": "",
-    "instagram": ""
+    "facebook": "DonaldTrump",
+    "twitter": "realDonaldTrump",
+    "instagram": "realdonaldtrump"
   }
 }
