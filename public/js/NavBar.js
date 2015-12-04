@@ -25,6 +25,8 @@ var NavBar = React.createClass({
               <li id="pollLink"><Link to="/poll">Poll</Link></li>
               <li id="candidatesLink"><Link to="/candidates">Candidates</Link></li>
               <li id="issuesLink"><Link to="/issues">Issues</Link></li>
+              <li id="registerLink"><Link to="/register">Register</Link></li>
+              <li id="loginLink"><Link to="/login">Login</Link></li>
             </ul>
           </div>
         </div>

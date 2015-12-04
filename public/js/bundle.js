@@ -59,8 +59,14 @@
 	var Route = __webpack_require__(160).Route;
 	var NavBar = __webpack_require__(211);
 	var Candidates = __webpack_require__(212);
+<<<<<<< HEAD
 	var CandidateProfile = __webpack_require__(213);
 	var Issues = __webpack_require__(214);
+=======
+	var Issues = __webpack_require__(213);
+	var Register = __webpack_require__(214);
+	var Login = __webpack_require__(215);
+>>>>>>> master
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -110,6 +116,8 @@
 	      React.createElement(Route, {path: "candidates", component: Candidates}), 
 	      React.createElement(Route, {path: "candidates/:id", component: CandidateProfile}), 
 	      React.createElement(Route, {path: "issues", component: Issues}), 
+	      React.createElement(Route, {path: "register", component: Register}), 
+	      React.createElement(Route, {path: "login", component: Login}), 
 	      React.createElement(Route, {path: "*", component: Error})
 	    )
 	  )
@@ -168,6 +176,7 @@
 	});
 	
 	React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
+	React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 	
 	module.exports = React;
 
@@ -10518,6 +10527,7 @@
 	    multiple: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    muted: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    name: null,
+	    nonce: MUST_USE_ATTRIBUTE,
 	    noValidate: HAS_BOOLEAN_VALUE,
 	    open: HAS_BOOLEAN_VALUE,
 	    optimum: null,
@@ -10529,6 +10539,7 @@
 	    readOnly: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    rel: null,
 	    required: HAS_BOOLEAN_VALUE,
+	    reversed: HAS_BOOLEAN_VALUE,
 	    role: MUST_USE_ATTRIBUTE,
 	    rows: MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
 	    rowSpan: null,
@@ -18731,7 +18742,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.2';
+	module.exports = '0.14.3';
 
 /***/ },
 /* 148 */
@@ -24540,7 +24551,9 @@
 	            React.createElement("ul", {id: "rightLinks", className: "nav navbar-nav navbar-right"}, 
 	              React.createElement("li", {id: "pollLink"}, React.createElement(Link, {to: "/poll"}, "Poll")), 
 	              React.createElement("li", {id: "candidatesLink"}, React.createElement(Link, {to: "/candidates"}, "Candidates")), 
-	              React.createElement("li", {id: "issuesLink"}, React.createElement(Link, {to: "/issues"}, "Issues"))
+	              React.createElement("li", {id: "issuesLink"}, React.createElement(Link, {to: "/issues"}, "Issues")), 
+	              React.createElement("li", {id: "registerLink"}, React.createElement(Link, {to: "/register"}, "Register")), 
+	              React.createElement("li", {id: "loginLink"}, React.createElement(Link, {to: "/login"}, "Login"))
 	            )
 	          )
 	        )
@@ -24735,6 +24748,352 @@
 	});
 	
 	module.exports = Issues;
+
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	// Register page, shows the registration form and redirects to the list if login is successful
+	var Register = React.createClass({displayName: "Register",
+	    // context so the component can access the router
+	    contextTypes: {
+	        router: React.PropTypes.func
+	    },
+	
+	    // initial state
+	    getInitialState: function() {
+	        return {
+	            // there was an error registering
+	            error: false
+	        };
+	    },
+	
+	    // handle regiser button submit
+	    register: function(event) {
+	        // prevent default browser submit
+	        event.preventDefault();
+	        // get data from form
+	        var username = this.refs.username.getDOMNode().value;
+	        var password = this.refs.password.getDOMNode().value;
+	        var sex = this.refs.sex.getDOMNode().value;
+	        var age = this.refs.age.getDOMNode().value;
+	        var race = this.refs.race.getDOMNode().value;
+	        var state = this.refs.state.getDOMNode().value;
+	        if (!username || !password) {
+	            return;
+	        }
+	        // register via the API
+	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
+	            // register callback
+	            if (!loggedIn)
+	                return this.setState({
+	                    error: true
+	                });
+	            this.context.router.replaceWith('/list');
+	        }.bind(this));
+	    },
+	
+	    // show the registration form
+	    render: function() {
+	        return (
+	            React.createElement("div", null, 
+	            React.createElement("h2", null, "Register"), 
+	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
+	            React.createElement("p", null, "Please choose a username *"), 
+	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please choose a password *"), 
+	            React.createElement("input", {type: "password", placeholder: "dem4life", ref: "password"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your sex"), 
+	            React.createElement("input", {list: "sexes", name: "sex"}, 
+	                React.createElement("datalist", {id: "sexes"}, 
+	                    React.createElement("option", {value: "Male"}), 
+	                    React.createElement("option", {value: "Female"})
+	                )
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your race"), 
+	            React.createElement("input", {list: "races", name: "race"}, 
+	                React.createElement("datalist", {id: "races"}, 
+	                    React.createElement("option", {value: "Caucasion"}), 
+	                    React.createElement("option", {value: "Black"}), 
+	                    React.createElement("option", {value: "Latino"}), 
+	                    React.createElement("option", {value: "Asian"}), 
+	                    React.createElement("option", {value: "Other"})
+	                )
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please enter your age"), 
+	            React.createElement("input", {type: "age", placeholder: "68", ref: "age"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your state"), 
+	            React.createElement("input", {list: "states", name: "state"}, 
+	                React.createElement("datalist", {id: "states"}, 
+	                    React.createElement("option", {value: "AL"}), 
+	                    React.createElement("option", {value: "AK"}), 
+	                    React.createElement("option", {value: "AZ"}), 
+	                    React.createElement("option", {value: "AR"}), 
+	                    React.createElement("option", {value: "CA"}), 
+	                    React.createElement("option", {value: "CO"}), 
+	                    React.createElement("option", {value: "CT"}), 
+	                    React.createElement("option", {value: "DE"}), 
+	                    React.createElement("option", {value: "FL"}), 
+	                    React.createElement("option", {value: "GA"}), 
+	                    React.createElement("option", {value: "HI"}), 
+	                    React.createElement("option", {value: "ID"}), 
+	                    React.createElement("option", {value: "IL"}), 
+	                    React.createElement("option", {value: "IN"}), 
+	                    React.createElement("option", {value: "IA"}), 
+	                    React.createElement("option", {value: "KS"}), 
+	                    React.createElement("option", {value: "KY"}), 
+	                    React.createElement("option", {value: "LA"}), 
+	                    React.createElement("option", {value: "ME"}), 
+	                    React.createElement("option", {value: "MD"}), 
+	                    React.createElement("option", {value: "MA"}), 
+	                    React.createElement("option", {value: "MI"}), 
+	                    React.createElement("option", {value: "MN"}), 
+	                    React.createElement("option", {value: "MS"}), 
+	                    React.createElement("option", {value: "MO"}), 
+	                    React.createElement("option", {value: "MT"}), 
+	                    React.createElement("option", {value: "NE"}), 
+	                    React.createElement("option", {value: "NV"}), 
+	                    React.createElement("option", {value: "NH"}), 
+	                    React.createElement("option", {value: "NJ"}), 
+	                    React.createElement("option", {value: "NM"}), 
+	                    React.createElement("option", {value: "NY"}), 
+	                    React.createElement("option", {value: "NC"}), 
+	                    React.createElement("option", {value: "ND"}), 
+	                    React.createElement("option", {value: "OH"}), 
+	                    React.createElement("option", {value: "OK"}), 
+	                    React.createElement("option", {value: "OR"}), 
+	                    React.createElement("option", {value: "PA"}), 
+	                    React.createElement("option", {value: "RI"}), 
+	                    React.createElement("option", {value: "SC"}), 
+	                    React.createElement("option", {value: "SD"}), 
+	                    React.createElement("option", {value: "TN"}), 
+	                    React.createElement("option", {value: "TX"}), 
+	                    React.createElement("option", {value: "UT"}), 
+	                    React.createElement("option", {value: "VT"}), 
+	                    React.createElement("option", {value: "VA"}), 
+	                    React.createElement("option", {value: "WA"}), 
+	                    React.createElement("option", {value: "WV"}), 
+	                    React.createElement("option", {value: "WI"}), 
+	                    React.createElement("option", {value: "WY"})
+	                )
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {className: "btn", type: "submit", value: "Register"}), 
+	            this.state.error ? (
+	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
+	                ) : null
+	            )
+	            )
+	            );
+	    }
+	});
+	
+	// authentication object
+	var auth = {
+	    register: function(username, password, sex, race, age, state, cb) {
+	        // submit request to server, call the callback when complete
+	        var url = "/api/users/register";
+	        $.ajax({
+	            url: url,
+	            dataType: 'json',
+	            type: 'POST',
+	            data: {
+	                username: username,
+	                password: password,
+	                sex: sex,
+	                race: race,
+	                age: age,
+	                state: state
+	            },
+	            // on success, store a login token
+	            success: function(res) {
+	                localStorage.token = res.token;
+	                localStorage.name = res.name;
+	                if (cb)
+	                    cb(true);
+	                this.onChange(true);
+	            }.bind(this),
+	            error: function(xhr, status, err) {
+	                // if there is an error, remove any login token
+	                delete localStorage.token;
+	                if (cb)
+	                    cb(false);
+	                this.onChange(false);
+	            }.bind(this)
+	        });
+	    },
+	    // get the token from local storage
+	    getToken: function() {
+	        return localStorage.token;
+	    },
+	    // get the name from local storage
+	    getName: function() {
+	        return localStorage.name;
+	    },
+	    // logout the user, call the callback when complete
+	    logout: function(cb) {
+	        delete localStorage.token;
+	        if (cb) cb();
+	        this.onChange(false);
+	    },
+	    // check if user is logged in
+	    loggedIn: function() {
+	        return !!localStorage.token;
+	    },
+	    // default onChange function
+	    onChange: function() {},
+	};
+	
+	module.exports = Register;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var Login = React.createClass({displayName: "Login",
+	
+	    // initial state
+	    getInitialState: function() {
+	        return {
+	            // there was an error on logging in
+	            error: false
+	        };
+	
+	    },
+	
+	    // handle login button submit
+	    login: function(event) {
+	        // prevent default browser submit
+	        event.preventDefault();
+	        // get data from form
+	        var username = this.refs.username.getDOMNode().value;
+	        var password = this.refs.password.getDOMNode().value;
+	        if (!username || !password) {
+	            return;
+	        }
+	        // login via API
+	        auth.login(username, password, function(loggedIn) {
+	            // login callback
+	            if (!loggedIn)
+	                return this.setState({
+	                    error: true
+	                });
+	            this.context.router.transitionTo('/list');
+	        }.bind(this));
+	    },
+	
+	    // show the login form
+	    render: function() {
+	        return (
+	            React.createElement("div", null, 
+	            React.createElement("h2", null, "Login"), 
+	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
+	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {type: "password", placeholder: "Password", ref: "password"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"}), 
+	            this.state.error ? (
+	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
+	                ) : null
+	            )
+	            )
+	            );
+	    }
+	});
+	
+	// authentication object
+	var auth = {
+	    // login the user
+	    login: function(username, password, cb) {
+	        // submit login request to server, call callback when complete
+	        cb = arguments[arguments.length - 1];
+	        // check if token in local storage
+	        if (localStorage.token) {
+	            if (cb)
+	                cb(true);
+	            this.onChange(true);
+	            return;
+	        }
+	
+	        // submit request to server
+	        var url = "/api/users/login";
+	        $.ajax({
+	            url: url,
+	            dataType: 'json',
+	            type: 'POST',
+	            data: {
+	                username: username,
+	                password: password
+	            },
+	            success: function(res) {
+	                // on success, store a login token
+	                localStorage.token = res.token;
+	                localStorage.name = res.name;
+	                if (cb)
+	                    cb(true);
+	                this.onChange(true);
+	            }.bind(this),
+	            error: function(xhr, status, err) {
+	                // if there is an error, remove any login token
+	                delete localStorage.token;
+	                if (cb)
+	                    cb(false);
+	                this.onChange(false);
+	            }.bind(this)
+	        });
+	    },
+	    // get the token from local storage
+	    getToken: function() {
+	        return localStorage.token;
+	    },
+	    // get the name from local storage
+	    getName: function() {
+	        return localStorage.name;
+	    },
+	    // logout the user, call the callback when complete
+	    logout: function(cb) {
+	        delete localStorage.token;
+	        if (cb) cb();
+	        this.onChange(false);
+	    },
+	    // check if user is logged in
+	    loggedIn: function() {
+	        return !!localStorage.token;
+	    },
+	    // default onChange function
+	    onChange: function() {},
+	};
+	
+	module.exports = Login;
+	
+	
 
 
 /***/ }
