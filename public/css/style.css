@@ -132,13 +132,8 @@ a:hover {
   padding-left: 8px;
 }
 
-<<<<<<< HEAD
-a {
-  color: #000;
-=======
 .candidate-list-image {
   height: 80px;
   border: solid 4px #DADCE5;
   border-radius: 40px;
->>>>>>> master
 }
