@@ -81,19 +81,27 @@ app.put('/api/items/:statment_id', function (req,res) {
       });
   });
 
-//get candidates
-router.get('/candidates', function(req, res) {
-  Candidate.find({}, function(err, candidates) {
+router.get('/candidates/party/:party', function(req, res) {
+  Candidate.find({party: req.params.party},
+    {name: 1, party: 1, image: 1, poll: 1},
+    {sort:{image: 1}},
+    function(err, candidates) {
+      if (err) {
+        res.sendStatus('403');
+        return;
+      }
+      res.send(candidates);
+      });
+});
+
+router.get('/candidates/id/:id', function(req, res) {
+  Candidate.findById(req.params.id, function(err, candidate) {
     if (err) {
       res.sendStatus('403');
       return;
     }
-    res.send(candidates);
+    res.send(candidate);
   });
-});
-
-router.get('/candidates/:id', function(req, res) {
-
 });
 
 module.exports = router;

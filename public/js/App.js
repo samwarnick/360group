@@ -6,6 +6,7 @@ var Link = require('react-router').Link;
 var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
 var Candidates = require('./Candidates');
+var CandidateProfile = require('./CandidateProfile');
 var Issues = require('./Issues');
 var Register = require('./Register');
 var Login = require('./Login');
@@ -15,18 +16,24 @@ var App = React.createClass({
     return (
       <div>
         <NavBar />
-        {this.props.children || <Home />}
+        <div className="col-md-8 col-md-offset-2">
+          {this.props.children || <Home />}
+        </div>
       </div>
     );
   }
 });
 
 var Home = React.createClass({
-    render: function() {
-      return (
-        <h1>Home</h1>
-      );
-    }
+  componentDidMount: function() {
+    $("#rightLinks").find("li").removeClass("active");
+  },
+
+  render: function() {
+    return (
+      <h1>Home</h1>
+    );
+  }
 });
 
 var Poll = React.createClass({
@@ -50,6 +57,7 @@ var routes = (
     <Route path="/" component={App}>
       <Route path="poll" component={Poll}/>
       <Route path="candidates" component={Candidates}/>
+      <Route path="candidates/:id" component={CandidateProfile}/>
       <Route path="issues" component={Issues}/>
       <Route path="register" component={Register}/>
       <Route path="login" component={Login}/>
