@@ -1,0 +1,17 @@
+var React = require('react');
+var Link = require('react-router').Link;
+
+var Demographics = React.createClass({
+    render: function() {
+	return(
+		<div>
+		<Chart />
+		</div>
+	);
+    }
+});
+
+var Chart = React.createClass({
+    
+		
+

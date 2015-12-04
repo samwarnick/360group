@@ -3,6 +3,7 @@ var app = require('./express')
 var User = require('../models/user.js');
 var router = express.Router();
 var Candidate = require('../models/Candidates.js');
+var Statement = require('../models/Statements.js');
 
 // setup body parser
 var bodyParser = require('body-parser');
@@ -103,5 +104,35 @@ router.get('/candidates/id/:id', function(req, res) {
     res.send(candidate);
   });
 });
+
+router.get('/candidates/:id', function(req, res) {
+
+});
+
+
+router.get('/statements', function(req, res) {
+  Statement.find({}, function(err, statements) {
+    if (err) {
+      console.log(statements);
+      res.sendStatus('403');
+      return;
+    }
+    res.send(statements);
+  });
+});
+
+// router.post('/pollresults', function(req, res) {
+//     for (statement in req) {
+//         Statement.find({statement.statement}, function(err, statementFromDB) {
+//             if (err) {
+//               console.log(statements);
+//               res.sendStatus('403');
+//               return;
+//             }
+//             //update the database with the stuff
+//
+//         })
+//     }
+// })
 
 module.exports = router;

@@ -7,35 +7,25 @@ var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
 var Candidates = require('./Candidates');
 var Poll = require('./Poll');
-var Demographics = require('./Demographics');
-var CandidateProfile = require('./CandidateProfile');
 var Issues = require('./Issues');
-var Register = require('./Register');
-var Login = require('./Login');
 
 var App = React.createClass({
   render: function() {
     return (
       <div>
         <NavBar />
-        <div className="col-md-8 col-md-offset-2">
-          {this.props.children || <Home />}
-        </div>
+        {this.props.children || <Home />}
       </div>
     );
   }
 });
 
 var Home = React.createClass({
-  componentDidMount: function() {
-    $("#rightLinks").find("li").removeClass("active");
-  },
-
-  render: function() {
-    return (
-      <h1>Home</h1>
-    );
-  }
+    render: function() {
+      return (
+        <h1>Home</h1>
+      );
+    }
 });
 
 
@@ -56,12 +46,8 @@ var routes = (
   <Router>
     <Route path="/" component={App}>
       <Route path="poll" component={Poll}/>
-      <Route path="demographics" component={Demographics}/>
       <Route path="candidates" component={Candidates}/>
-      <Route path="candidates/:id" component={CandidateProfile}/>
       <Route path="issues" component={Issues}/>
-      <Route path="register" component={Register}/>
-      <Route path="login" component={Login}/>
       <Route path="*" component={Error}/>
     </Route>
   </Router>
