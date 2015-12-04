@@ -6,12 +6,9 @@ var Link = require('react-router').Link;
 var Route = require('react-router').Route;
 var NavBar = require('./NavBar');
 var Candidates = require('./Candidates');
-<<<<<<< HEAD
 var Poll = require('./Poll');
 var Demographics = require('./Demographics');
-=======
 var CandidateProfile = require('./CandidateProfile');
->>>>>>> master
 var Issues = require('./Issues');
 var Register = require('./Register');
 var Login = require('./Login');
