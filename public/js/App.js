@@ -9,6 +9,8 @@ var Candidates = require('./Candidates');
 var Poll = require('./Poll');
 var Demographics = require('./Demographics');
 var Issues = require('./Issues');
+var Register = require('./Register');
+var Login = require('./Login');
 
 var App = React.createClass({
   render: function() {
@@ -50,6 +52,8 @@ var routes = (
       <Route path="demographics" component={Demographics}/>
       <Route path="candidates" component={Candidates}/>
       <Route path="issues" component={Issues}/>
+      <Route path="register" component={Register}/>
+      <Route path="login" component={Login}/>
       <Route path="*" component={Error}/>
     </Route>
   </Router>
