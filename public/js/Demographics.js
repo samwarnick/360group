@@ -13,7 +13,7 @@ var Demographics = React.createClass({
                 type: 'pie'
             },
             title: {
-                text: 'Browser market shares January, 2015 to May, 2015'
+                text: 'Your matches'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -55,15 +55,10 @@ var Demographics = React.createClass({
 	
 	return(
 		<div>
-		    <p>This will show the candidate that you match</p>
 		    <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
 	        </div>
 	);
     }
 });
-console.log("component mounted");
-
-//var Chart = React.createClass({
-//});
 
 module.exports = Demographics;
