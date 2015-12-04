@@ -15,12 +15,13 @@ var Poll = React.createClass({
 
 var Quiz = React.createClass({
     handleClick: function(event) {
-
+        console.log(this.state.stateansPairs);
     // $.post('/api/pollresults')
     //send them off with an API call
   },
     answerSelected: function(statement, answer) {
-        this.state.stateansPairs.statement = answer;
+        var newkey = statement;
+        this.state.stateansPairs[newkey] = answer;
         console.log(statement, answer);
     },
     getInitialState: function() {
@@ -88,63 +89,31 @@ var Statement = React.createClass({
     getDefaultProps: function() {
     return {
       choice: 0,
-      answers: ["Strongly Agree","Agree", "Indifferent", "Disagree", "Strongly Disagree", "Don't Know" ]
-  };
+    };
   },
     getInitialState: function() {
         this.props.choice = 0;
         return {choice: 0};
     },
-    handleClick1: function(event) {
-    this.props.choice = 1;
-    this.props.onAnswer(this.props.statement, 1);
-  },
-  handleClick2: function(event) {
-  this.props.onAnswer(this.props.statement, 2);
-},
-handleClick3: function(event) {
-this.props.onAnswer(this.props.statement, 3);
-},
-handleClick4: function(event) {
-this.props.onAnswer(this.props.statement, 4);
-},
-handleClick5: function(event) {
-this.props.onAnswer(this.props.statement, 5);
-},
-handleClick0: function(event) {
-this.props.onAnswer(this.props.statement, 0);
-},
 handleClick: function(index, event) {
-    this.setState({answer: index});
-    //call this.props.onAnswer(statement, answer);
+    this.props.onAnswer(this.props.statement, index);
 },
 getState: function(){
     return this.state.choice;
 },
   render: function() {
+     var answers = [{label: "Strongly Agree", value: 1 },{label: "Agree", value: 2}, {label: "Indifferent", value: 3}, {label: "Disagree", value: 4}, {label: "Strongly Disagree", value: 5}, {label: "Don't Know", value: 0} ];
     return (
-
       <div className="quiz-item" >
       <div id="the statement goes here"><h2>{this.props.statement}</h2></div>
       <ul className="nav nav-pills nav-justified">
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick1}>Strongly Agree</a>
-          </li>
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick2}>Agree</a>
-          </li>
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick3}>Indifferent</a>
-          </li>
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick4}>Disagree</a>
-          </li>
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick5}>Strongly Disagree</a>
-          </li>
-          <li>
-                <a data-toggle="pill" onClick={this.handleClick6}>Do Not Know</a>
-          </li>
+      {answers.map((pillabel)=> {
+          return (
+              <li>
+                    <a data-toggle="pill" onClick={this.handleClick.bind(this, pillabel.value)}>{pillabel.label}</a>
+              </li>
+          )
+      })}
       </ul></div>
     );
   }

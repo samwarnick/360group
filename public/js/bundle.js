@@ -24618,12 +24618,13 @@
 	
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
-	
+	        console.log(this.state.stateansPairs);
 	    // $.post('/api/pollresults')
 	    //send them off with an API call
 	  },
 	    answerSelected: function(statement, answer) {
-	        this.state.stateansPairs.statement = answer;
+	        var newkey = statement;
+	        this.state.stateansPairs[newkey] = answer;
 	        console.log(statement, answer);
 	    },
 	    getInitialState: function() {
@@ -24691,63 +24692,31 @@
 	    getDefaultProps: function() {
 	    return {
 	      choice: 0,
-	      answers: ["Strongly Agree","Agree", "Indifferent", "Disagree", "Strongly Disagree", "Don't Know" ]
-	  };
+	    };
 	  },
 	    getInitialState: function() {
 	        this.props.choice = 0;
 	        return {choice: 0};
 	    },
-	    handleClick1: function(event) {
-	    this.props.choice = 1;
-	    this.props.onAnswer(this.props.statement, 1);
-	  },
-	  handleClick2: function(event) {
-	  this.props.onAnswer(this.props.statement, 2);
-	},
-	handleClick3: function(event) {
-	this.props.onAnswer(this.props.statement, 3);
-	},
-	handleClick4: function(event) {
-	this.props.onAnswer(this.props.statement, 4);
-	},
-	handleClick5: function(event) {
-	this.props.onAnswer(this.props.statement, 5);
-	},
-	handleClick0: function(event) {
-	this.props.onAnswer(this.props.statement, 0);
-	},
 	handleClick: function(index, event) {
-	    this.setState({answer: index});
-	    //call this.props.onAnswer(statement, answer);
+	    this.props.onAnswer(this.props.statement, index);
 	},
 	getState: function(){
 	    return this.state.choice;
 	},
 	  render: function() {
+	     var answers = [{label: "Strongly Agree", value: 1 },{label: "Agree", value: 2}, {label: "Indifferent", value: 3}, {label: "Disagree", value: 4}, {label: "Strongly Disagree", value: 5}, {label: "Don't Know", value: 0} ];
 	    return (
-	
 	      React.createElement("div", {className: "quiz-item"}, 
 	      React.createElement("div", {id: "the statement goes here"}, React.createElement("h2", null, this.props.statement)), 
 	      React.createElement("ul", {className: "nav nav-pills nav-justified"}, 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick1}, "Strongly Agree")
-	          ), 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick2}, "Agree")
-	          ), 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick3}, "Indifferent")
-	          ), 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick4}, "Disagree")
-	          ), 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick5}, "Strongly Disagree")
-	          ), 
-	          React.createElement("li", null, 
-	                React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick6}, "Do Not Know")
+	      answers.map(function(pillabel) {
+	          return (
+	              React.createElement("li", null, 
+	                    React.createElement("a", {"data-toggle": "pill", onClick: this.handleClick.bind(this, pillabel.value)}, pillabel.label)
+	              )
 	          )
+	      }.bind(this))
 	      ))
 	    );
 	  }
