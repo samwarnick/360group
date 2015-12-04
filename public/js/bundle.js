@@ -24662,22 +24662,7 @@
 	
 	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
-		                React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
-		                     React.createElement("div", {className: "modal-dialog"}, 
-		                          React.createElement("div", {className: "modal-content"}, 
-		                               React.createElement("div", {className: "modal-header"}, 
-	                                           React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                                           React.createElement("h4", {className: "modal-title"}, "Modal Header")
-		                               ), 
-		                               React.createElement("div", {className: "modal-body"}, 
-	                                           React.createElement(Demographics, null)
-		                               ), 
-		                               React.createElement("div", {className: "modal-footer"}, 
-	                                           React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
-		                               )
-		                         )
-		                     )
-		                ), 
+		                React.createElement(Modal, null), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
@@ -24722,6 +24707,29 @@
 	  }
 	});
 	
+	var Modal = React.createClass({displayName: "Modal",
+	    render: function() {
+		return (
+		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+			React.createElement("div", {className: "modal-dialog"}, 
+			    React.createElement("div", {className: "modal-content"}, 
+		                React.createElement("div", {className: "modal-header"}, 
+	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                            React.createElement("h4", {className: "modal-title"}, "Your Result!")
+		                ), 
+		                React.createElement("div", {className: "modal-body"}, 
+	                            React.createElement(Demographics, null)
+		                ), 
+		                React.createElement("div", {className: "modal-footer"}, 
+	                            React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
+		                )
+		            )
+		        )
+			)
+		);
+	    }
+	});
+	
 	module.exports = Poll;
 
 
@@ -24731,16 +24739,68 @@
 
 	/** @jsx React.DOM */var React = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
+	var Highcharts = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"highcharts\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var ReactHighcharts = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-highcharts/dist/bundle/highcharts\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var Demographics = React.createClass({displayName: "Demographics",
 	    render: function() {
+		var config = {
+		    chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false,
+	                type: 'pie'
+	            },
+	            title: {
+	                text: 'Browser market shares January, 2015 to May, 2015'
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	            },
+	            plotOptions: {
+	                pie: {
+	                    allowPointSelect: true,
+	                    cursor: 'pointer',
+	                    dataLabels: {
+	                        enabled: false
+	                    },
+	                    showInLegend: true
+	                }
+	            },
+	            series: [{
+	                name: 'Brands',
+	                colorByPoint: true,
+	                data: [{
+	                    name: 'Him',
+	                    y: 56.33
+	                }, {
+	                    name: 'Her',
+	                    y: 24.03,
+	                }, {
+	                    name: 'Me',
+	                    y: 10.38
+	                }, {
+	                    name: 'You',
+	                    y: 4.77
+	                }, {
+	                    name: 'It',
+	                    y: 0.91
+	                }, {
+	                    name: 'Trump',
+	                    y: 0.2
+	                }]
+	            }]
+		};
+		
 		return(
 			React.createElement("div", null, 
-			React.createElement("p", null, "This will show demographic info")
-			)
+			    React.createElement("p", null, "This will show the candidate that you match"), 
+			    React.createElement(ReactHighcharts, {config: config, ref: "chart"})
+		        )
 		);
 	    }
 	});
+	console.log("component mounted");
 	
 	//var Chart = React.createClass({
 	//});
