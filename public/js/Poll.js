@@ -16,7 +16,21 @@ var Poll = React.createClass({
 var Quiz = React.createClass({
     handleClick: function(event) {
         console.log(this.state.stateansPairs);
-    // $.post('/api/pollresults')
+        var demographicslist = {
+            age: 4,
+            gender: "Female",
+            race: "Black",
+            state: "UT",
+        }
+        var request = {age: 4,
+        gender: "Female",
+        race: "Black",
+        state: "UT",
+        };
+        for (key in this.state.stateansPairs) {
+            request[key] = this.state.stateansPairs[key];
+        }
+        $.post('/api/pollresults',request);
     //send them off with an API call
   },
     answerSelected: function(statement, answer) {
