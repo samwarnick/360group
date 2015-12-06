@@ -1,0 +1,10 @@
+var React = require('react');
+var Link - require('react-router').Link;
+
+var Result = React.createClass({
+    render: function() {
+	return;
+    }
+});
+
+module.exports = Result;
