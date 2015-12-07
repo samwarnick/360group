@@ -18,14 +18,14 @@ var Quiz = React.createClass({
     handleClick: function(event) {
         console.log(this.state.stateansPairs);
         var demographicslist = {
-            age: 4,
-            gender: "Female",
-            race: "Black",
+            age: 54,
+            gender: "Male",
+            race: "White",
             state: "UT",
         }
-        var request = {age: 4,
-        gender: "Female",
-        race: "Black",
+        var request = {age: 54,
+        gender: "Male",
+        race: "White",
         state: "UT",
         };
         for (key in this.state.stateansPairs) {

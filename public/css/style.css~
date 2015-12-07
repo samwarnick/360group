@@ -149,7 +149,7 @@ a:hover {
 		vertical-align: middle;
 		content: " ";
 		height: 75%;
-	}
+}
 }
 
 

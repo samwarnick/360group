@@ -61,10 +61,10 @@
 	var Candidates = __webpack_require__(212);
 	var Poll = __webpack_require__(213);
 	var Demographics = __webpack_require__(214);
-	var CandidateProfile = __webpack_require__(255);
-	var Issues = __webpack_require__(256);
-	var Register = __webpack_require__(257);
-	var Login = __webpack_require__(258);
+	var CandidateProfile = __webpack_require__(256);
+	var Issues = __webpack_require__(257);
+	var Register = __webpack_require__(258);
+	var Login = __webpack_require__(259);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -24655,6 +24655,7 @@
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	var Demographics = __webpack_require__(214);
+	var Result = __webpack_require__(255);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24671,14 +24672,14 @@
 	    handleClick: function(event) {
 	        console.log(this.state.stateansPairs);
 	        var demographicslist = {
-	            age: 4,
-	            gender: "Female",
-	            race: "Black",
+	            age: 54,
+	            gender: "Male",
+	            race: "White",
 	            state: "UT",
 	        }
-	        var request = {age: 4,
-	        gender: "Female",
-	        race: "Black",
+	        var request = {age: 54,
+	        gender: "Male",
+	        race: "White",
 	        state: "UT",
 	        };
 	        for (key in this.state.stateansPairs) {
@@ -24727,7 +24728,7 @@
 	
 	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
-		                React.createElement(Modal, null), 
+		                React.createElement(Result, null), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
@@ -24772,29 +24773,6 @@
 	  }
 	});
 	
-	var Modal = React.createClass({displayName: "Modal",
-	    render: function() {
-		return (
-		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
-			React.createElement("div", {className: "modal-dialog"}, 
-			    React.createElement("div", {className: "modal-content"}, 
-		                React.createElement("div", {className: "modal-header"}, 
-	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                            React.createElement("h4", {className: "modal-title"}, "Your Result!")
-		                ), 
-		                React.createElement("div", {className: "modal-body"}, 
-	                            React.createElement(Demographics, null)
-		                ), 
-		                React.createElement("div", {className: "modal-footer"}, 
-	                            React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
-		                )
-		            )
-		        )
-			)
-		);
-	    }
-	});
-	
 	module.exports = Poll;
 
 
@@ -24808,67 +24786,109 @@
 	var ReactHighcharts = __webpack_require__(254);
 	
 	var Demographics = React.createClass({displayName: "Demographics",
-	    render: function() {
-		var config = {
-		    chart: {
-	                plotBackgroundColor: null,
-	                plotBorderWidth: null,
-	                plotShadow: false,
-	                type: 'pie'
-	            },
-	            title: {
-	                text: 'Browser market shares January, 2015 to May, 2015'
-	            },
-	            tooltip: {
-	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	            },
-	            plotOptions: {
-	                pie: {
-	                    allowPointSelect: true,
-	                    cursor: 'pointer',
-	                    dataLabels: {
-	                        enabled: false
-	                    },
-	                    showInLegend: true
-	                }
-	            },
-	            series: [{
-	                name: 'Brands',
-	                colorByPoint: true,
-	                data: [{
-	                    name: 'Him',
-	                    y: 56.33
-	                }, {
-	                    name: 'Her',
-	                    y: 24.03,
-	                }, {
-	                    name: 'Me',
-	                    y: 10.38
-	                }, {
-	                    name: 'You',
-	                    y: 4.77
-	                }, {
-	                    name: 'It',
-	                    y: 0.91
-	                }, {
-	                    name: 'Trump',
-	                    y: 0.2
-	                }]
-	            }]
-		};
-		
-		return(
-			React.createElement("div", null, 
-			    React.createElement("p", null, "This will show the candidate that you match"), 
-			    React.createElement(ReactHighcharts, {config: config, ref: "chart"})
-		        )
-		);
-	    }
-	});
-	console.log("component mounted");
+		getInitialState: function() {
+			return {
+				statements: [],
+				config: {
+				  chart: {
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false,
+						type: 'pie'
+					},
+			    title: {
+			      text: 'Your matches'
+			    },
+			    tooltip: {
+			      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    plotOptions: {
+			      pie: {
+			        allowPointSelect: true,
+			        cursor: 'pointer',
+			        dataLabels: {
+			          enabled: false
+			        },
+			        showInLegend: true
+			      }
+			    },
+			    series: [{
+			      name: 'Percent Match',
+			    	colorByPoint: true,
+			    	data: [
+							{
+								name: 'Him',
+								y: 56.33
+							}, {
+								name: 'Her',
+								y: 24.03,
+							}, {
+								name: 'Me',
+								y: 10.38
+							}, {
+								name: 'You',
+								y: 4.77
+							}, {
+								name: 'It',
+								y: 0.91
+							}, {
+								name: 'Trump',
+								y: 0.2
+							}
+						]
+					}]
+				}
+			};
+		},
+	    
+	  componentDidMount: function() {
+			$.get('/api/statements', function(result) {
+		    this.setState({statements: result});
+			}.bind(this));
 	
-	//var Chart = React.createClass({
-	//});
+		
+	  },
+	    
+	  render: function() {
+			console.log('Demographics state: ');
+			console.log(this.state.statements);
+		
+			return(
+				React.createElement("div", null, 
+					React.createElement("ul", {className: "nav nav-pills"}, 
+					  React.createElement("li", {role: "presentation", className: "active"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Matches");}.bind(this)}, "Matches")), 
+					  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Age");}.bind(this)}, "Age")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
+					), 			
+					React.createElement(ReactHighcharts, {className: "chart", config: this.state.config, ref: "chart"})
+				)
+			);
+		},
+		
+		handleClick: function(x, type) {
+			console.log('clicked');
+			console.log(type);
+			var conf = this.state.config;
+			if (type == "Matces") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Age") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Gender") {
+				conf["title"]["text"] = "Answers by gender";
+			}
+			else if (type == "Race") {
+				conf["title"]["text"] = "Answers by race";
+			}
+			else if (type == "State") {
+				conf["title"]["text"] = "Answers by state";
+			}
+			this.setState({config: conf});
+		}
+	});
 	
 	module.exports = Demographics;
 
@@ -44832,7 +44852,7 @@
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports.location = "phantom/bin/phantomjs"
-	module.exports.platform = "darwin"
+	module.exports.platform = "linux"
 	module.exports.arch = "x64"
 
 
@@ -44863,6 +44883,63 @@
 
 /***/ },
 /* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var Demographics = __webpack_require__(214);
+	
+	var Result = React.createClass({displayName: "Result",
+	    getInitialState: function() {
+		return {
+		    id: '5661c3a2aee7bcb5ff5809e2',
+		    candidate: {}
+		};
+	    },
+	
+	    componentDidMount: function() {
+		var c_id = this.state.id;
+		$.get('/api/candidates/id/' + c_id, function(result) {
+		    this.setState({candidate: result});
+		}.bind(this));
+	    },
+	    closeModal: function() {
+		jQuery.noConflict();
+		$('#myModal').modal('hide');
+	    },
+	    
+	    render: function() {
+		return (
+		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+			React.createElement("div", {className: "modal-dialog"}, 
+			    React.createElement("div", {className: "modal-content"}, 
+		                React.createElement("div", {className: "modal-header"}, 
+	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
+		                ), 
+		                React.createElement("div", {className: "modal-body"}, 
+	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
+		                ), 
+		                React.createElement("div", {className: "modal-footer"}, 
+			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
+			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
+			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
+			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
+		                )
+		            )
+		        )
+		    )
+		);
+	    }
+	});
+	
+	module.exports = Result;
+
+
+/***/ },
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -44937,7 +45014,7 @@
 
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -44958,7 +45035,7 @@
 
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -45175,7 +45252,7 @@
 	module.exports = Register;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);

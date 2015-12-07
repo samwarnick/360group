@@ -39,7 +39,7 @@ var Result = React.createClass({
 		<p style={{"text-align": "left"}}>You are not currently logged in. Please log in or create an account to continue.</p>
 		            <Link className="btn btn-primary" onClick={this.closeModal} to={"/register"}>Create Account</Link>
 		<Link className="btn btn-primary" onClick={this.closeModal} to={"/login"}>Log In</Link>
-		<Link onClick={this.closeModal} to={"/demographics"}>Or continue as guest</Link>
+		<Link className="skip-log-in" onClick={this.closeModal} to={"/demographics"}>Or continue as guest</Link>
 	                </div>
 	            </div>
 	        </div>

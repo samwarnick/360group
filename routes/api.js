@@ -122,6 +122,7 @@ router.get('/statements', function(req, res) {
 });
 
 router.post('/pollresults', function(req, res) {
+    console.log(req);
     var age = req.body.age;
     var gender = req.body.gender;
     var race = req.body.race;
