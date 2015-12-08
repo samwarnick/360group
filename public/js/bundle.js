@@ -61,10 +61,10 @@
 	var Candidates = __webpack_require__(212);
 	var Poll = __webpack_require__(213);
 	var Demographics = __webpack_require__(214);
-	var CandidateProfile = __webpack_require__(256);
-	var Issues = __webpack_require__(257);
-	var Register = __webpack_require__(258);
-	var Login = __webpack_require__(259);
+	var CandidateProfile = __webpack_require__(255);
+	var Issues = __webpack_require__(256);
+	var Register = __webpack_require__(257);
+	var Login = __webpack_require__(258);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
@@ -24655,7 +24655,7 @@
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	var Demographics = __webpack_require__(214);
-	var Result = __webpack_require__(255);
+	var Result = __webpack_require__(259);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24705,7 +24705,7 @@
 		this.setState({statements: result,
 	        liststatements: result.map(function(statement) {
 		    return (
-			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.statement})
+			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.quote})
 		    );
 	    	}.bind(this))
 	    });
@@ -24713,7 +24713,7 @@
 	
 	
 	    $("#rightLinks").find("li").removeClass("active");
-	    $("#PollLink").addClass("active");
+	    $("#pollLink").addClass("active");
 	},
 	    render: function() {
 	
@@ -44852,7 +44852,7 @@
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports.location = "phantom/bin/phantomjs"
-	module.exports.platform = "linux"
+	module.exports.platform = "darwin"
 	module.exports.arch = "x64"
 
 
@@ -44883,63 +44883,6 @@
 
 /***/ },
 /* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React = __webpack_require__(2);
-	var Link = __webpack_require__(160).Link;
-	var Demographics = __webpack_require__(214);
-	
-	var Result = React.createClass({displayName: "Result",
-	    getInitialState: function() {
-		return {
-		    id: '5661c3a2aee7bcb5ff5809e2',
-		    candidate: {}
-		};
-	    },
-	
-	    componentDidMount: function() {
-		var c_id = this.state.id;
-		$.get('/api/candidates/id/' + c_id, function(result) {
-		    this.setState({candidate: result});
-		}.bind(this));
-	    },
-	    closeModal: function() {
-		jQuery.noConflict();
-		$('#myModal').modal('hide');
-	    },
-	    
-	    render: function() {
-		return (
-		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
-			React.createElement("div", {className: "modal-dialog"}, 
-			    React.createElement("div", {className: "modal-content"}, 
-		                React.createElement("div", {className: "modal-header"}, 
-	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
-		                ), 
-		                React.createElement("div", {className: "modal-body"}, 
-	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
-		                ), 
-		                React.createElement("div", {className: "modal-footer"}, 
-			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
-			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
-			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
-			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
-		                )
-		            )
-		        )
-		    )
-		);
-	    }
-	});
-	
-	module.exports = Result;
-
-
-/***/ },
-/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -45014,7 +44957,7 @@
 
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -45035,7 +44978,7 @@
 
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -45054,6 +44997,10 @@
 	            // there was an error registering
 	            error: false
 	        };
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#registerLink").addClass("active");
 	    },
 	
 	    // handle regiser button submit
@@ -45251,8 +45198,9 @@
 	
 	module.exports = Register;
 
+
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -45288,6 +45236,10 @@
 	                });
 	            this.context.router.transitionTo('/list');
 	        }.bind(this));
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#loginLink").addClass("active");
 	    },
 	
 	    // show the login form
@@ -45376,8 +45328,63 @@
 	};
 	
 	module.exports = Login;
+
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var Demographics = __webpack_require__(214);
 	
+	var Result = React.createClass({displayName: "Result",
+	    getInitialState: function() {
+		return {
+		    id: '5661c3a2aee7bcb5ff5809e2',
+		    candidate: {}
+		};
+	    },
 	
+	    componentDidMount: function() {
+		var c_id = this.state.id;
+		$.get('/api/candidates/id/' + c_id, function(result) {
+		    this.setState({candidate: result});
+		}.bind(this));
+	    },
+	    closeModal: function() {
+		jQuery.noConflict();
+		$('#myModal').modal('hide');
+	    },
+	    
+	    render: function() {
+		return (
+		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+			React.createElement("div", {className: "modal-dialog"}, 
+			    React.createElement("div", {className: "modal-content"}, 
+		                React.createElement("div", {className: "modal-header"}, 
+	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
+		                ), 
+		                React.createElement("div", {className: "modal-body"}, 
+	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
+		                ), 
+		                React.createElement("div", {className: "modal-footer"}, 
+			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
+			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
+			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
+			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
+		                )
+		            )
+		        )
+		    )
+		);
+	    }
+	});
+	
+	module.exports = Result;
 
 
 /***/ }

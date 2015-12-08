@@ -51,7 +51,7 @@ var Quiz = React.createClass({
 	this.setState({statements: result,
         liststatements: result.map(function(statement) {
 	    return (
-		    <Statement onAnswer={this.answerSelected} key={statement._id} statement={statement.statement} />
+		    <Statement onAnswer={this.answerSelected} key={statement._id} statement={statement.quote} />
 	    );
     	}.bind(this))
     });
@@ -59,7 +59,7 @@ var Quiz = React.createClass({
 
 
     $("#rightLinks").find("li").removeClass("active");
-    $("#PollLink").addClass("active");
+    $("#pollLink").addClass("active");
 },
     render: function() {
 

@@ -3,7 +3,7 @@ var app = require('./express')
 var User = require('../models/user.js');
 var router = express.Router();
 var Candidate = require('../models/Candidates.js');
-var Statement = require('../models/Statements.js');
+var Statement = require('../models/Statement.js');
 
 // setup body parser
 var bodyParser = require('body-parser');
@@ -137,7 +137,7 @@ router.post('/pollresults', function(req, res) {
     console.log(statementansPairs);
     for (key in statementansPairs) {
         (function(statekey) {
-            Statement.find({"statement": statekey}, function(err, statementFromDB) {
+            Statement.find({"quote": statekey}, function(err, statementFromDB) {
                 if (err) {
                   console.log(statements);
                   res.sendStatus('403');
@@ -153,8 +153,8 @@ router.post('/pollresults', function(req, res) {
                     "state": state
                 };
                 userDemo["answer"] = answer;
-                firststatement.demographics.push(userDemo);
-                Statement.update({"statement": statekey}, {$set: {"demographics": firststatement.demographics}}, function(err, newstatement) {
+                firststatement.raw.push(userDemo);
+                Statement.update({"quote": statekey}, {$set: {"raw": firststatement.raw}}, function(err, newstatement) {
                     if (err) {
                       console.log(statements);
                       res.sendStatus('403');
