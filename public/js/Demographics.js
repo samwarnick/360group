@@ -60,25 +60,23 @@ var Demographics = React.createClass({
 	},
     
   componentDidMount: function() {
-		$.get('/api/statements', function(result) {
-	    this.setState({statements: result});
-		}.bind(this));
-
+	$.get('/api/statements', function(result) {
+		this.setState({statements: result});
+	}.bind(this));
+	
+	
 	
   },
     
   render: function() {
-		console.log('Demographics state: ');
-		console.log(this.state.statements);
-	
 		return(
 			<div>
 				<ul className="nav nav-pills">
 				  <li role="presentation" className="active"><a data-toggle="tab" onClick={() => this.handleClick(this,"Matches")}>Matches</a></li>
 				  <li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"Age")}>Age</a></li>
-		  		<li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"Gender")}>Gender</a></li>
-		  		<li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"Race")}>Race</a></li>
-		  		<li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"State")}>State</a></li>
+		  		  <li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"Gender")}>Gender</a></li>
+		  		  <li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"Race")}>Race</a></li>
+		  		  <li role="presentation"><a data-toggle="tab" onClick={() => this.handleClick(this,"State")}>State</a></li>
 				</ul>			
 				<ReactHighcharts className="chart" config={this.state.config} ref="chart"></ReactHighcharts>
 			</div>
@@ -86,11 +84,9 @@ var Demographics = React.createClass({
 	},
 	
 	handleClick: function(x, type) {
-		console.log('clicked');
-		console.log(type);
 		var conf = this.state.config;
-		if (type == "Matces") {
-			conf["title"]["text"] = "Answers by age";
+		if (type == "Matches") {
+			conf["title"]["text"] = "Your Matches";
 		}
 		else if (type == "Age") {
 			conf["title"]["text"] = "Answers by age";

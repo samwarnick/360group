@@ -24669,25 +24669,6 @@
 	});
 	
 	var Quiz = React.createClass({displayName: "Quiz",
-	    handleClick: function(event) {
-	        console.log(this.state.stateansPairs);
-	        var demographicslist = {
-	            age: 54,
-	            gender: "Male",
-	            race: "White",
-	            state: "UT",
-	        }
-	        var request = {age: 54,
-	        gender: "Male",
-	        race: "White",
-	        state: "UT",
-	        };
-	        for (key in this.state.stateansPairs) {
-	            request[key] = this.state.stateansPairs[key];
-	        }
-	        $.post('/api/pollresults',request);
-	    //send them off with an API call
-	  },
 	    answerSelected: function(statement, answer) {
 	        var newkey = statement;
 	        this.state.stateansPairs[newkey] = answer;
@@ -24726,9 +24707,9 @@
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	this.state.liststatements, 
 	
-	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
+	                                React.createElement("button", {type: "button", className: "btn btn-primary", "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
-		                React.createElement(Result, null), 
+		                      React.createElement(Result, {answers: this.state.stateansPairs}), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
@@ -24842,25 +24823,23 @@
 		},
 	    
 	  componentDidMount: function() {
-			$.get('/api/statements', function(result) {
-		    this.setState({statements: result});
-			}.bind(this));
-	
+		$.get('/api/statements', function(result) {
+			this.setState({statements: result});
+		}.bind(this));
+		
+		
 		
 	  },
 	    
 	  render: function() {
-			console.log('Demographics state: ');
-			console.log(this.state.statements);
-		
 			return(
 				React.createElement("div", null, 
 					React.createElement("ul", {className: "nav nav-pills"}, 
 					  React.createElement("li", {role: "presentation", className: "active"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Matches");}.bind(this)}, "Matches")), 
 					  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Age");}.bind(this)}, "Age")), 
-			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
-			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
-			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
+			  		  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
+			  		  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
+			  		  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
 					), 			
 					React.createElement(ReactHighcharts, {className: "chart", config: this.state.config, ref: "chart"})
 				)
@@ -24868,11 +24847,9 @@
 		},
 		
 		handleClick: function(x, type) {
-			console.log('clicked');
-			console.log(type);
 			var conf = this.state.config;
-			if (type == "Matces") {
-				conf["title"]["text"] = "Answers by age";
+			if (type == "Matches") {
+				conf["title"]["text"] = "Your Matches";
 			}
 			else if (type == "Age") {
 				conf["title"]["text"] = "Answers by age";
@@ -44888,6 +44865,7 @@
 	/** @jsx React.DOM */var React = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	var Demographics = __webpack_require__(214);
+	var Login = __webpack_require__(259);
 	
 	var Result = React.createClass({displayName: "Result",
 	    getInitialState: function() {
@@ -44915,18 +44893,10 @@
 			    React.createElement("div", {className: "modal-content"}, 
 		                React.createElement("div", {className: "modal-header"}, 
 	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
+	                            React.createElement("h4", {className: "text-center"}, "Please Enter Your Demographic Information")
 		                ), 
 		                React.createElement("div", {className: "modal-body"}, 
-	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
-		                ), 
-		                React.createElement("div", {className: "modal-footer"}, 
-			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
-			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
-			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
-			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
+		                React.createElement(Register, {answers: this.props.answers})
 		                )
 		            )
 		        )
@@ -44934,6 +44904,204 @@
 		);
 	    }
 	});
+	
+	// Register page, shows the registration form and redirects to the list if login is successful
+	var Register = React.createClass({displayName: "Register",
+	    // context so the component can access the router
+	    contextTypes: {
+	        router: React.PropTypes.func
+	    },
+	
+	    // initial state
+	    getInitialState: function() {
+	        return {
+	            // there was an error registering
+	            error: false
+	        };
+	    },
+	
+	    // handle regiser button submit
+	    register: function(event) {
+	        jQuery.noConflict();
+			$('#myModal').modal('hide');
+	        // prevent default browser submit
+	        //event.preventDefault();
+	
+	        // get data from form
+	        //var username = this.refs.username.getDOMNode().value;
+	        //var password = this.refs.password.getDOMNode().value;
+	        var sex = $('#sexes').val();//this.refs.sex.getDOMNode().value;
+	        var age = $('#age').val();//this.refs.age.getDOMNode().value;
+	        var race = $('#races').val();//this.refs.race.getDOMNode().value;
+	        var state = $('#states').val();//this.refs.state.getDOMNode().value;
+	
+	        var request = {
+	        	age: age,
+	            gender: sex,
+	            race: race,
+	            state: state
+	        };
+	        console.log(request);
+	        for (key in this.props.answers) {
+	            request[key] = this.props.answers[key];
+	        }
+	        $.post('/api/pollresults',request);
+	        // register via the API
+	        //auth.register(username, password, sex, age, race, state, function(loggedIn) {
+	            // register callback
+	        //     if (!loggedIn)
+	        //         return this.setState({
+	        //             error: true
+	        //         });
+	        // }.bind(this));
+	    },
+	
+	    // show the registration form
+	    render: function() {
+	        return (
+	            React.createElement("div", {className: "col-lg-1 col-centered"}, 
+	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
+	            React.createElement("p", null, "Please select your sex"), 
+	            React.createElement("select", {id: "sexes", ref: "sexes"}, 
+	                React.createElement("option", {value: ""}), 
+	                React.createElement("option", {value: "Male"}, "Male"), 
+	                React.createElement("option", {value: "Female"}, "Female")
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your race"), 
+	            React.createElement("select", {id: "races", ref: "races"}, 
+	                React.createElement("option", {value: ""}), 
+	                React.createElement("option", {value: "Caucasion"}, "Caucasion"), 
+	                React.createElement("option", {value: "Black"}, "Black"), 
+	                React.createElement("option", {value: "Latino"}, "Latino"), 
+	                React.createElement("option", {value: "Asian"}, "Asian"), 
+	                React.createElement("option", {value: "Other"}, "Other")
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please enter your age"), 
+	            React.createElement("input", {id: "age", placeholder: "68", ref: "age"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your state"), 
+	            React.createElement("select", {id: "states", ref: "states"}, 
+	                React.createElement("option", {value: ""}), 
+	                React.createElement("option", {value: "AL"}, "AL"), 
+	                React.createElement("option", {value: "AK"}, "AK"), 
+	                React.createElement("option", {value: "AZ"}, "AZ"), 
+	                React.createElement("option", {value: "AR"}, "AR"), 
+	                React.createElement("option", {value: "CA"}, "CA"), 
+	                React.createElement("option", {value: "CO"}, "CO"), 
+	                React.createElement("option", {value: "CT"}, "CT"), 
+	                React.createElement("option", {value: "DE"}, "DE"), 
+	                React.createElement("option", {value: "FL"}, "FL"), 
+	                React.createElement("option", {value: "GA"}, "GA"), 
+	                React.createElement("option", {value: "HI"}, "HI"), 
+	                React.createElement("option", {value: "ID"}, "ID"), 
+	                React.createElement("option", {value: "IL"}, "IL"), 
+	                React.createElement("option", {value: "IN"}, "IN"), 
+	                React.createElement("option", {value: "IA"}, "IA"), 
+	                React.createElement("option", {value: "KS"}, "KS"), 
+	                React.createElement("option", {value: "KY"}, "KY"), 
+	                React.createElement("option", {value: "LA"}, "LA"), 
+	                React.createElement("option", {value: "ME"}, "ME"), 
+	                React.createElement("option", {value: "MD"}, "MD"), 
+	                React.createElement("option", {value: "MA"}, "MA"), 
+	                React.createElement("option", {value: "MI"}, "MI"), 
+	                React.createElement("option", {value: "MN"}, "MN"), 
+	                React.createElement("option", {value: "MS"}, "MS"), 
+	                React.createElement("option", {value: "MO"}, "MO"), 
+	                React.createElement("option", {value: "MT"}, "MT"), 
+	                React.createElement("option", {value: "NE"}, "NE"), 
+	                React.createElement("option", {value: "NV"}, "NV"), 
+	                React.createElement("option", {value: "NH"}, "NH"), 
+	                React.createElement("option", {value: "NJ"}, "NJ"), 
+	                React.createElement("option", {value: "NM"}, "NM"), 
+	                React.createElement("option", {value: "NY"}, "NY"), 
+	                React.createElement("option", {value: "NC"}, "NC"), 
+	                React.createElement("option", {value: "ND"}, "ND"), 
+	                React.createElement("option", {value: "OH"}, "OH"), 
+	                React.createElement("option", {value: "OK"}, "OK"), 
+	                React.createElement("option", {value: "OR"}, "OR"), 
+	                React.createElement("option", {value: "PA"}, "PA"), 
+	                React.createElement("option", {value: "RI"}, "RI"), 
+	                React.createElement("option", {value: "SC"}, "SC"), 
+	                React.createElement("option", {value: "SD"}, "SD"), 
+	                React.createElement("option", {value: "TN"}, "TN"), 
+	                React.createElement("option", {value: "TX"}, "TX"), 
+	                React.createElement("option", {value: "UT"}, "UT"), 
+	                React.createElement("option", {value: "VT"}, "VT"), 
+	                React.createElement("option", {value: "VA"}, "VA"), 
+	                React.createElement("option", {value: "WA"}, "WA"), 
+	                React.createElement("option", {value: "WV"}, "WV"), 
+	                React.createElement("option", {value: "WI"}, "WI"), 
+	                React.createElement("option", {value: "WY"}, "WY")
+	            ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null)
+	            ), 
+			    React.createElement(Link, {className: "btn btn-primary", onClick: this.register, to: "/demographics"}, "Submit")
+	            )
+	            );
+	    }
+	});
+	
+	// authentication object
+	// var auth = {
+	//     register: function(username, password, sex, race, age, state, cb) {
+	//         // submit request to server, call the callback when complete
+	//         var url = "/api/users/register";
+	//         $.ajax({
+	//             url: url,
+	//             dataType: 'json',
+	//             type: 'POST',
+	//             data: {
+	//                 username: username,
+	//                 password: password,
+	//                 sex: sex,
+	//                 race: race,
+	//                 age: age,
+	//                 state: state
+	//             },
+	//             // on success, store a login token
+	//             success: function(res) {
+	//                 localStorage.token = res.token;
+	//                 localStorage.name = res.name;
+	//                 if (cb)
+	//                     cb(true);
+	//                 this.onChange(true);
+	//             }.bind(this),
+	//             error: function(xhr, status, err) {
+	//                 // if there is an error, remove any login token
+	//                 delete localStorage.token;
+	//                 if (cb)
+	//                     cb(false);
+	//                 this.onChange(false);
+	//             }.bind(this)
+	//         });
+	//     },
+	//     // get the token from local storage
+	//     getToken: function() {
+	//         return localStorage.token;
+	//     },
+	//     // get the name from local storage
+	//     getName: function() {
+	//         return localStorage.name;
+	//     },
+	//     // logout the user, call the callback when complete
+	//     logout: function(cb) {
+	//         delete localStorage.token;
+	//         if (cb) cb();
+	//         this.onChange(false);
+	//     },
+	//     // check if user is logged in
+	//     loggedIn: function() {
+	//         return !!localStorage.token;
+	//     },
+	//     // default onChange function
+	//     onChange: function() {},
+	// };
 	
 	module.exports = Result;
 

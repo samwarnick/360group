@@ -15,25 +15,6 @@ var Poll = React.createClass({
 });
 
 var Quiz = React.createClass({
-    handleClick: function(event) {
-        console.log(this.state.stateansPairs);
-        var demographicslist = {
-            age: 54,
-            gender: "Male",
-            race: "White",
-            state: "UT",
-        }
-        var request = {age: 54,
-        gender: "Male",
-        race: "White",
-        state: "UT",
-        };
-        for (key in this.state.stateansPairs) {
-            request[key] = this.state.stateansPairs[key];
-        }
-        $.post('/api/pollresults',request);
-    //send them off with an API call
-  },
     answerSelected: function(statement, answer) {
         var newkey = statement;
         this.state.stateansPairs[newkey] = answer;
@@ -72,9 +53,9 @@ var Quiz = React.createClass({
                         <div id="question" ><h1>How much do you agree with the following statments?</h1></div>
                             	{this.state.liststatements}
 
-                                <button type="button" className="btn btn-primary" onClick={this.handleClick} data-toggle="modal" data-target="#myModal">SUBMIT</button>
+                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">SUBMIT</button>
                         </div>
-	                <Result/>
+	                      <Result answers={this.state.stateansPairs}/>
                         <div className="col-md-6">
                         </div>
                     </div>
