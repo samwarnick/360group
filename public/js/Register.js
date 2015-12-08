@@ -3,10 +3,6 @@ var Link = require('react-router').Link;
 
 // Register page, shows the registration form and redirects to the list if login is successful
 var Register = React.createClass({
-    // context so the component can access the router
-    contextTypes: {
-        router: React.PropTypes.func
-    },
 
     // initial state
     getInitialState: function() {
