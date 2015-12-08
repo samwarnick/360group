@@ -1,5 +1,6 @@
 var React  = require('react');
 var Link = require('react-router').Link;
+var _ = require('underscore');
 
 var CandidateProfile = React.createClass({
   getInitialState: function() {
@@ -18,28 +19,63 @@ var CandidateProfile = React.createClass({
     $("#candidatesLink").addClass("active");
   },
 
+  fbInit: _.once(function fbInit () {
+    if (this.state.candidate.image) {
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '175801862767972',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    }
+  }),
+
+  componentDidUpdate: function() {
+    this.fbInit();
+  },
+
   render: function() {
-    return (
-      <div>
-        <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
-        <h1 className="text-center">{this.state.candidate.name}</h1>
-        <h3 className="text-center">{this.state.candidate.position}</h3>
-        <p>{this.state.candidate.bio}</p>
-        <div className="row">
-          <Facebook />
-          <Twitter />
+    if (this.state.candidate.image) {
+      return (
+        <div>
+          <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
+          <h1 className="text-center">{this.state.candidate.name}</h1>
+          <h3 className="text-center">{this.state.candidate.position}</h3>
+          <div className="row">
+            <p className="col-md-6 text-justify">{this.state.candidate.bio}</p>
+            <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return false;
+    }
+
   }
 });
 
 var Facebook = React.createClass({
   render: function() {
-    var url = "https://www.facebook.com/hillaryclinton";
+    var url = "https://www.facebook.com/" + this.props.facebook;
     return (
-      <div className="col-md-4">
-        <div className="fb-page" data-href={url} data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-show-posts="true"><div className="fb-xfbml-parse-ignore"><blockquote cite={url}><a href={url}>Hillary Clinton</a></blockquote></div></div>
+      <div>
+        <div id="fb-root"></div>
+        <div className="col-md-6">
+          <div className="fb-page" data-tabs="timeline,events,messages" data-href={url} data-small-header="false" data-adapt-container-width="true" data-width="500" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
+            <div className="fb-xfbml-parse-ignore"><blockquote cite={url}>
+              <a href={url}>{this.props.name}</a></blockquote>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
