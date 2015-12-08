@@ -1,6 +1,7 @@
 var React  = require('react');
 var Link = require('react-router').Link;
 var Demographics = require('./Demographics');
+var Result = require('./Result');
 
 var Poll = React.createClass({
   render: function() {
@@ -16,7 +17,21 @@ var Poll = React.createClass({
 var Quiz = React.createClass({
     handleClick: function(event) {
         console.log(this.state.stateansPairs);
-    // $.post('/api/pollresults')
+        var demographicslist = {
+            age: 54,
+            gender: "Male",
+            race: "White",
+            state: "UT",
+        }
+        var request = {age: 54,
+        gender: "Male",
+        race: "White",
+        state: "UT",
+        };
+        for (key in this.state.stateansPairs) {
+            request[key] = this.state.stateansPairs[key];
+        }
+        $.post('/api/pollresults',request);
     //send them off with an API call
   },
     answerSelected: function(statement, answer) {
@@ -36,7 +51,7 @@ var Quiz = React.createClass({
 	this.setState({statements: result,
         liststatements: result.map(function(statement) {
 	    return (
-		    <Statement onAnswer={this.answerSelected} key={statement._id} statement={statement.statement} />
+		    <Statement onAnswer={this.answerSelected} key={statement._id} statement={statement.quote} />
 	    );
     	}.bind(this))
     });
@@ -44,7 +59,7 @@ var Quiz = React.createClass({
 
 
     $("#rightLinks").find("li").removeClass("active");
-    $("#PollLink").addClass("active");
+    $("#pollLink").addClass("active");
 },
     render: function() {
 
@@ -59,7 +74,7 @@ var Quiz = React.createClass({
 
                                 <button type="button" className="btn btn-primary" onClick={this.handleClick} data-toggle="modal" data-target="#myModal">SUBMIT</button>
                         </div>
-	                <Modal/>
+	                <Result/>
                         <div className="col-md-6">
                         </div>
                     </div>
@@ -102,29 +117,6 @@ getState: function(){
       </ul></div>
     );
   }
-});
-
-var Modal = React.createClass({
-    render: function() {
-	return (
-	    <div id="myModal" className="modal fade" role="dialog">
-		<div className="modal-dialog">
-		    <div className="modal-content">
-	                <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal">&times;</button>
-                            <h4 className="modal-title">Your Result!</h4>
-	                </div>
-	                <div className="modal-body">
-                            <Demographics/>
-	                </div>
-	                <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-	                </div>
-	            </div>
-	        </div>
-		</div>
-	);
-    }
 });
 
 module.exports = Poll;

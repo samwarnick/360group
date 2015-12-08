@@ -15,6 +15,10 @@ var Register = React.createClass({
             error: false
         };
     },
+    componentDidMount: function() {
+        $("#rightLinks").find("li").removeClass("active");
+        $("#registerLink").addClass("active");
+    },
 
     // handle regiser button submit
     register: function(event) {

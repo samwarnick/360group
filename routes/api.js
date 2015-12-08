@@ -3,7 +3,7 @@ var app = require('./express')
 var User = require('../models/user.js');
 var router = express.Router();
 var Candidate = require('../models/Candidates.js');
-var Statement = require('../models/Statements.js');
+var Statement = require('../models/Statement.js');
 
 // setup body parser
 var bodyParser = require('body-parser');
@@ -121,18 +121,50 @@ router.get('/statements', function(req, res) {
   });
 });
 
-// router.post('/pollresults', function(req, res) {
-//     for (statement in req) {
-//         Statement.find({statement.statement}, function(err, statementFromDB) {
-//             if (err) {
-//               console.log(statements);
-//               res.sendStatus('403');
-//               return;
-//             }
-//             //update the database with the stuff
-//
-//         })
-//     }
-// })
+router.post('/pollresults', function(req, res) {
+    console.log(req);
+    var age = req.body.age;
+    var gender = req.body.gender;
+    var race = req.body.race;
+    var state = req.body.state;
+    var statementansPairs = {};
+    for (key in req.body) {
+        if (key != 'age' && key != 'gender' && key != 'race' && key != 'state') {
+            console.log(statementansPairs);
+            statementansPairs[key] = req.body[key];
+        }
+    }
+    console.log(statementansPairs);
+    for (key in statementansPairs) {
+        (function(statekey) {
+            Statement.find({"quote": statekey}, function(err, statementFromDB) {
+                if (err) {
+                  console.log(statements);
+                  res.sendStatus('403');
+                  return;
+                }
+                console.log(statekey);
+                var firststatement = statementFromDB[0];
+                var answer = statementansPairs[statekey];
+                var userDemo = {
+                    "age": age,
+                    "gender": gender,
+                    "race": race,
+                    "state": state
+                };
+                userDemo["answer"] = answer;
+                firststatement.raw.push(userDemo);
+                Statement.update({"quote": statekey}, {$set: {"raw": firststatement.raw}}, function(err, newstatement) {
+                    if (err) {
+                      console.log(statements);
+                      res.sendStatus('403');
+                      return;
+                    }
+                });
+            });
+        })(key);
+    }
+    res.sendStatus('200');
+});
 
 module.exports = router;
