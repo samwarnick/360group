@@ -32,6 +32,10 @@ var Login = React.createClass({
             this.context.router.transitionTo('/list');
         }.bind(this));
     },
+    componentDidMount: function() {
+        $("#rightLinks").find("li").removeClass("active");
+        $("#loginLink").addClass("active");
+    },
 
     // show the login form
     render: function() {
@@ -119,5 +123,3 @@ var auth = {
 };
 
 module.exports = Login;
-
-

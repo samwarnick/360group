@@ -33,5 +33,5 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-public/js/bundle.js
-public/js/bundle.js.map
+/public/js/bundle.js
+/public/js/bundle.js.map

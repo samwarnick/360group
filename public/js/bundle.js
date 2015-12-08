@@ -24686,7 +24686,7 @@
 		this.setState({statements: result,
 	        liststatements: result.map(function(statement) {
 		    return (
-			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.statement})
+			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.quote})
 		    );
 	    	}.bind(this))
 	    });
@@ -24694,7 +24694,7 @@
 	
 	
 	    $("#rightLinks").find("li").removeClass("active");
-	    $("#PollLink").addClass("active");
+	    $("#pollLink").addClass("active");
 	},
 	    render: function() {
 	
@@ -45112,6 +45112,7 @@
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
+	var _ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"underscore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var CandidateProfile = React.createClass({displayName: "CandidateProfile",
 	  getInitialState: function() {
@@ -45130,28 +45131,63 @@
 	    $("#candidatesLink").addClass("active");
 	  },
 	
+	  fbInit: _.once(function fbInit () {
+	    if (this.state.candidate.image) {
+	      window.fbAsyncInit = function() {
+	        FB.init({
+	          appId      : '175801862767972',
+	          xfbml      : true,
+	          version    : 'v2.5'
+	        });
+	      };
+	
+	      (function(d, s, id){
+	         var js, fjs = d.getElementsByTagName(s)[0];
+	         if (d.getElementById(id)) {return;}
+	         js = d.createElement(s); js.id = id;
+	         js.src = "//connect.facebook.net/en_US/sdk.js";
+	         fjs.parentNode.insertBefore(js, fjs);
+	       }(document, 'script', 'facebook-jssdk'));
+	    }
+	  }),
+	
+	  componentDidUpdate: function() {
+	    this.fbInit();
+	  },
+	
 	  render: function() {
-	    return (
-	      React.createElement("div", null, 
-	        React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-	        React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-	        React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
-	        React.createElement("p", null, this.state.candidate.bio), 
-	        React.createElement("div", {className: "row"}, 
-	          React.createElement(Facebook, null), 
-	          React.createElement(Twitter, null)
+	    if (this.state.candidate.image) {
+	      return (
+	        React.createElement("div", null, 
+	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
+	          React.createElement("div", {className: "row"}, 
+	            React.createElement("p", {className: "col-md-6 text-justify"}, this.state.candidate.bio), 
+	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	          )
 	        )
-	      )
-	    );
+	      );
+	    } else {
+	      return false;
+	    }
+	
 	  }
 	});
 	
 	var Facebook = React.createClass({displayName: "Facebook",
 	  render: function() {
-	    var url = "https://www.facebook.com/hillaryclinton";
+	    var url = "https://www.facebook.com/" + this.props.facebook;
 	    return (
-	      React.createElement("div", {className: "col-md-4"}, 
-	        React.createElement("div", {className: "fb-page", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, React.createElement("a", {href: url}, "Hillary Clinton"))))
+	      React.createElement("div", null, 
+	        React.createElement("div", {id: "fb-root"}), 
+	        React.createElement("div", {className: "col-md-6"}, 
+	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
+	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
+	              React.createElement("a", {href: url}, this.props.name))
+	            )
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -45222,6 +45258,10 @@
 	            // there was an error registering
 	            error: false
 	        };
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#registerLink").addClass("active");
 	    },
 	
 	    // handle regiser button submit
@@ -45419,6 +45459,7 @@
 	
 	module.exports = Register;
 
+
 /***/ },
 /* 259 */
 /***/ function(module, exports, __webpack_require__) {
@@ -45456,6 +45497,10 @@
 	                });
 	            this.context.router.transitionTo('/list');
 	        }.bind(this));
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#loginLink").addClass("active");
 	    },
 	
 	    // show the login form
@@ -45544,8 +45589,6 @@
 	};
 	
 	module.exports = Login;
-	
-	
 
 
 /***/ }
