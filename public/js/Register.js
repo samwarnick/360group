@@ -27,7 +27,7 @@ var Register = React.createClass({
         var age = this.refs.age.getDOMNode().value;
         var race = this.refs.race.getDOMNode().value;
         var state = this.refs.state.getDOMNode().value;
-        if (!username || !password) {
+        if (!username || !password || !sex || !age || !race || !state) {
             return;
         }
         // register via the API
@@ -58,25 +58,23 @@ var Register = React.createClass({
             <br/>
             <br/>
             <p>Please select your sex</p>
-            <input list="sexes" name="sex">
-                <datalist id="sexes">
-                    <option value="Male"/>
-                    <option value="Female"/>
-                </datalist>
-            </input>
+                <select name="sex" ref = "sex">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
             <br/>
             <br/>
             <br/>
             <p>Please select your race</p>
-            <input list="races" name="race">
-                <datalist id="races">
-                    <option value="Caucasion"/>
-                    <option value="Black"/>
-                    <option value="Latino"/>
-                    <option value="Asian"/>
-                    <option value="Other"/>
-                </datalist>
-            </input>
+                <select name="race" ref = "race">
+                    <option value=""></option>
+                    <option value="Caucasion">Caucasion</option>
+                    <option value="Black">Black</option>
+                    <option value="Latino">Latino</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Other">Other</option>
+                </select>
             <br/>
             <br/>
             <br/>
@@ -86,60 +84,59 @@ var Register = React.createClass({
             <br/>
             <br/>
             <p>Please select your state</p>
-            <input list="states" name="state">
-                <datalist id="states">
-                    <option value="AL"/>
-                    <option value="AK"/>
-                    <option value="AZ"/>
-                    <option value="AR"/>
-                    <option value="CA"/>
-                    <option value="CO"/>
-                    <option value="CT"/>
-                    <option value="DE"/>
-                    <option value="FL"/>
-                    <option value="GA"/>
-                    <option value="HI"/>
-                    <option value="ID"/>
-                    <option value="IL"/>
-                    <option value="IN"/>
-                    <option value="IA"/>
-                    <option value="KS"/>
-                    <option value="KY"/>
-                    <option value="LA"/>
-                    <option value="ME"/>
-                    <option value="MD"/>
-                    <option value="MA"/>
-                    <option value="MI"/>
-                    <option value="MN"/>
-                    <option value="MS"/>
-                    <option value="MO"/>
-                    <option value="MT"/>
-                    <option value="NE"/>
-                    <option value="NV"/>
-                    <option value="NH"/>
-                    <option value="NJ"/>
-                    <option value="NM"/>
-                    <option value="NY"/>
-                    <option value="NC"/>
-                    <option value="ND"/>
-                    <option value="OH"/>
-                    <option value="OK"/>
-                    <option value="OR"/>
-                    <option value="PA"/>
-                    <option value="RI"/>
-                    <option value="SC"/>
-                    <option value="SD"/>
-                    <option value="TN"/>
-                    <option value="TX"/>
-                    <option value="UT"/>
-                    <option value="VT"/>
-                    <option value="VA"/>
-                    <option value="WA"/>
-                    <option value="WV"/>
-                    <option value="WI"/>
-                    <option value="WY"/>
-                </datalist>
-            </input>
+                <select name="state" ref = "state">
+                    <option value=""></option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                </select>
             <br/>
             <br/>
             <br/>
