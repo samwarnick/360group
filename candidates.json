@@ -87,17 +87,6 @@
   "instagram": "carlyfiorina2016"
 }
 {
-  "name": "Lindsey Graham",
-  "party": "republican",
-  "position": "UNITED STATES SENATOR",
-  "bio": "Lindsey Olin Graham (born July 9, 1955) is an American politician and member of the Republican Party, who has served as a United States Senator from South Carolina since 2003, and has been the senior Senator from South Carolina since 2005.",
-  "image": "graham.jpg",
-  "poll": 0.4,
-  "facebook": "LindseyGrahamSC",
-  "twitter": "GrahamBlog",
-  "instagram": "lindseygrahamsc"
-}
-{
   "name": "Mike Huckabee",
   "party": "republican",
   "position": "FORMER ARKANSAS GOVERNOR",
@@ -120,17 +109,6 @@
   "instagram": "johnkasich"
 }
 {
-  "name": "George Pataki",
-  "party": "republican",
-  "position": "FORMER NEW YORK GOVERNOR",
-  "bio": "George Elmer Pataki (born June 24, 1945) is an American lawyer and politician who served as the 53rd Governor of New York (1995–2006). A member of the Republican Party, Pataki was a lawyer who was elected Mayor of his home town of Peekskill, later going on to be elected to State Assembly, then State Senate. In 1994, he ran for Governor against three-term incumbent Mario Cuomo, defeating him by over a three-point margin as part of the Republican Revolution of 1994. Pataki, succeeding a three-term Governor, would himself be elected to three consecutive terms, and was one of only three Republican governors of New York elected since 1923, the others being Thomas Dewey and Nelson Rockefeller.",
-  "image": "pataki.jpg",
-  "poll": 0.6,
-  "facebook": "GovGeorgePataki",
-  "twitter": "GovernorPataki",
-  "instagram": "governorpataki"
-}
-{
   "name": "Rand Paul",
   "party": "republican",
   "position": "UNITED STATES SENATOR",
@@ -150,17 +128,6 @@
   "facebook": "MarcoRubio",
   "twitter": "marcorubio",
   "instagram": "marcorubiofla"
-}
-{
-  "name": "Rick Santorum",
-  "party": "republican",
-  "position": "FORMER UNITED STATES SENATOR",
-  "bio": "Richard John \"Rick\" Santorum (born May 10, 1958) is an American attorney and Republican Party politician. He served as a United States Senator representing Pennsylvania (1995–2007) and was the Senate's third-ranking Republican (2001–07). He ran as a candidate for the 2012 Republican Party presidential nomination, finishing second to the eventual Republican nominee Mitt Romney.",
-  "image": "santorum.jpg",
-  "poll": 0.6,
-  "facebook": "RickSantorum",
-  "twitter": "RickSantorum",
-  "instagram": "ricksantorum"
 }
 {
   "name": "Donald Trump",
