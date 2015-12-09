@@ -53,9 +53,9 @@ var Register = React.createClass({
                 return this.setState({
                     error: true
                 });
+            this.history.pushState(null, '/poll');
         }.bind(this));
 
-        this.history.pushState(null, '/poll');
     },
 
     // show the registration form
