@@ -38,8 +38,6 @@ var Home = React.createClass({
   }
 });
 
-
-
 var Error = React.createClass({
   render: function() {
     return (
@@ -47,10 +45,6 @@ var Error = React.createClass({
     );
   }
 });
-
-
-
-
 
 var routes = (
   <Router>

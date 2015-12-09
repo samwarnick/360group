@@ -105,11 +105,6 @@ router.get('/candidates/id/:id', function(req, res) {
   });
 });
 
-router.get('/candidates/:id', function(req, res) {
-
-});
-
-
 router.get('/statements', function(req, res) {
   Statement.find({}, function(err, statements) {
     if (err) {
@@ -165,6 +160,29 @@ router.post('/pollresults', function(req, res) {
         })(key);
     }
     res.sendStatus('200');
+});
+
+router.get('/issues', function(req, res) {
+  Statement.aggregate([{$group: { _id: { topic: "$topic" }, quotes: { $push: { quote: "$quote"}} } }], function(err, issues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    res.send(issues);
+  });
+});
+
+router.get('/issues/:candidate_id', function(req, res) {
+  console.log("issues route");
+  console.log(req.params.candidate_id);
+  Statement.find({candidate: req.params.candidate_id}, function(err, candidateIssues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    console.log(candidateIssues)
+    res.send(candidateIssues);
+  });
 });
 
 module.exports = router;
