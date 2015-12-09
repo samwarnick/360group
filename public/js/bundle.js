@@ -46159,6 +46159,9 @@
 	        }
 	        this.setState({c_error: false});
 	        // register via the API
+	        if(localStorage){
+	          auth.logout();
+	        };
 	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
 	            // register callback
 	            if (!loggedIn)
@@ -46366,7 +46369,8 @@
 	    getInitialState: function() {
 	        return {
 	            // there was an error on logging in
-	            error: false
+	            error: false,
+	            c_error: false
 	        };
 	
 	    },
@@ -46379,16 +46383,21 @@
 	        var username = this.refs.username.value;
 	        var password = this.refs.password.value;
 	        if (!username || !password) {
-	            return;
+	            return this.setState({
+	                c_error: true
+	            });
 	        }
 	        // login via API
+	        if(localStorage){
+	          auth.logout();
+	        };
 	        auth.login(username, password, function(loggedIn) {
 	            // login callback
 	            if (!loggedIn)
 	                return this.setState({
 	                    error: true
 	                });
-	              this.history.pushState(null, '/poll');
+	            this.history.pushState(null, '/poll');
 	        }.bind(this));
 	
 	    },
@@ -46400,9 +46409,12 @@
 	        return (
 	            React.createElement("div", null, 
 	            React.createElement("h2", null, "Login"), 
-	            this.state.error ? (
-	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
-	                ) : null, 
+	            this.state.c_error ? (
+	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
+	              ) : null, 
+	              this.state.error ? (
+	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
+	              ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
 	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
 	            React.createElement("br", null), 

@@ -43,7 +43,7 @@ router.post('/users/register', function (req, res) {
 });
 
 // login a user
-app.post('/users/login', function (req, res) {
+router.post('/users/login', function (req, res) {
     // find the user with the given username
     User.findOne({username: req.body.username}, function(err,user) {
 	if (err) {
@@ -63,7 +63,7 @@ app.post('/users/login', function (req, res) {
 });
 
 //update statement
-app.post('/items/:statment_id', function (req,res) {
+router.post('/items/:statment_id', function (req,res) {
   // validate the supplied token
       // if the token is valid, then find the requested item
       Statement.findById(req.params.statement_id, function(err,item) {

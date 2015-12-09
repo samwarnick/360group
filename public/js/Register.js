@@ -47,6 +47,9 @@ var Register = React.createClass({
         }
         this.setState({c_error: false});
         // register via the API
+        if(localStorage){
+          auth.logout();
+        };
         auth.register(username, password, sex, age, race, state, function(loggedIn) {
             // register callback
             if (!loggedIn)

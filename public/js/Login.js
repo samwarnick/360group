@@ -19,7 +19,8 @@ var Login = React.createClass({
     getInitialState: function() {
         return {
             // there was an error on logging in
-            error: false
+            error: false,
+            c_error: false
         };
 
     },
@@ -32,16 +33,21 @@ var Login = React.createClass({
         var username = this.refs.username.value;
         var password = this.refs.password.value;
         if (!username || !password) {
-            return;
+            return this.setState({
+                c_error: true
+            });
         }
         // login via API
+        if(localStorage){
+          auth.logout();
+        };
         auth.login(username, password, function(loggedIn) {
             // login callback
             if (!loggedIn)
                 return this.setState({
                     error: true
                 });
-              this.history.pushState(null, '/poll');
+            this.history.pushState(null, '/poll');
         }.bind(this));
 
     },
@@ -53,9 +59,12 @@ var Login = React.createClass({
         return (
             <div>
             <h2>Login</h2>
-            {this.state.error ? (
-                <div className="alert">Invalid username or password.</div>
-                ) : null}
+            {this.state.c_error ? (
+                <div className="alert"><p>All fields are required</p></div>
+              ) : null }
+              {this.state.error ? (
+                  <div className="alert">Invalid username or password</div>
+              ) : null }
             <form className="form-vertical" onSubmit={this.login}>
             <input type="text" placeholder="Username" ref="username" autoFocus={true} />
             <br/>
