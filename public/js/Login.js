@@ -17,8 +17,8 @@ var Login = React.createClass({
         // prevent default browser submit
         event.preventDefault();
         // get data from form
-        var username = this.refs.username.getDOMNode().value;
-        var password = this.refs.password.getDOMNode().value;
+        var username = this.refs.username.value;
+        var password = this.refs.password.value;
         if (!username || !password) {
             return;
         }
@@ -29,8 +29,11 @@ var Login = React.createClass({
                 return this.setState({
                     error: true
                 });
-            this.context.router.transitionTo('/list');
+
         }.bind(this));
+
+        $("#rightLinks").find("li").removeClass("active");
+        $("#candidatesLink").addClass("active");
     },
 
     // show the login form
@@ -38,6 +41,9 @@ var Login = React.createClass({
         return (
             <div>
             <h2>Login</h2>
+            {this.state.error ? (
+                <div className="alert">Invalid username or password.</div>
+                ) : null}
             <form className="form-vertical" onSubmit={this.login}>
             <input type="text" placeholder="Username" ref="username" autoFocus={true} />
             <br/>
@@ -46,9 +52,6 @@ var Login = React.createClass({
             <br/>
             <br/>
             <input className="btn btn-warning" type="submit" value="Login" />
-            {this.state.error ? (
-                <div className="alert">Invalid username or password.</div>
-                ) : null}
             </form>
             </div>
             );
@@ -119,5 +122,3 @@ var auth = {
 };
 
 module.exports = Login;
-
-

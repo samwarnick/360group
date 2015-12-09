@@ -24300,7 +24300,7 @@
 	
 	
 	    $("#rightLinks").find("li").removeClass("active");
-	    $("#PollLink").addClass("active");
+	    $("#pollLink").addClass("active");
 	},
 	    render: function() {
 	
@@ -46113,18 +46113,16 @@
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	
+	
 	// Register page, shows the registration form and redirects to the list if login is successful
 	var Register = React.createClass({displayName: "Register",
-	    // context so the component can access the router
-	    contextTypes: {
-	        router: React.PropTypes.func
-	    },
 	
 	    // initial state
 	    getInitialState: function() {
 	        return {
 	            // there was an error registering
-	            error: false
+	            error: false,
+	            c_error: false
 	        };
 	    },
 	
@@ -46133,15 +46131,19 @@
 	        // prevent default browser submit
 	        event.preventDefault();
 	        // get data from form
-	        var username = this.refs.username.getDOMNode().value;
-	        var password = this.refs.password.getDOMNode().value;
-	        var sex = this.refs.sex.getDOMNode().value;
-	        var age = this.refs.age.getDOMNode().value;
-	        var race = this.refs.race.getDOMNode().value;
-	        var state = this.refs.state.getDOMNode().value;
-	        if (!username || !password || !sex || !age || !race || !state) {
-	            return;
+	        var username = this.refs.username.value;
+	        var password = this.refs.password.value;
+	        var sex = this.refs.sex.value;
+	        var age = this.refs.age.value;
+	        var race = this.refs.race.value;
+	        var state = this.refs.state.value;
+	        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
+	            console.log("field empty");
+	            return this.setState({
+	                c_error: true
+	            });
 	        }
+	        this.setState({c_error: false});
 	        // register via the API
 	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
 	            // register callback
@@ -46149,8 +46151,11 @@
 	                return this.setState({
 	                    error: true
 	                });
-	            this.context.router.replaceWith('/list');
+	
 	        }.bind(this));
+	        
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#candidatesLink").addClass("active");
 	    },
 	
 	    // show the registration form
@@ -46158,6 +46163,12 @@
 	        return (
 	            React.createElement("div", null, 
 	            React.createElement("h2", null, "Register"), 
+	            this.state.c_error ? (
+	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
+	              ) : null, 
+	              this.state.error ? (
+	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
+	              ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
 	            React.createElement("p", null, "Please choose a username *"), 
 	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
@@ -46252,10 +46263,7 @@
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn", type: "submit", value: "Register"}), 
-	            this.state.error ? (
-	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
-	                ) : null
+	            React.createElement("input", {className: "btn", type: "submit", value: "Register"})
 	            )
 	            )
 	            );
@@ -46264,7 +46272,7 @@
 	
 	// authentication object
 	var auth = {
-	    register: function(username, password, sex, race, age, state, cb) {
+	    register: function(username, password, sex, age, race, state, cb) {
 	        // submit request to server, call the callback when complete
 	        var url = "/api/users/register";
 	        $.ajax({
@@ -46344,8 +46352,8 @@
 	        // prevent default browser submit
 	        event.preventDefault();
 	        // get data from form
-	        var username = this.refs.username.getDOMNode().value;
-	        var password = this.refs.password.getDOMNode().value;
+	        var username = this.refs.username.value;
+	        var password = this.refs.password.value;
 	        if (!username || !password) {
 	            return;
 	        }
@@ -46356,8 +46364,11 @@
 	                return this.setState({
 	                    error: true
 	                });
-	            this.context.router.transitionTo('/list');
+	
 	        }.bind(this));
+	
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#candidatesLink").addClass("active");
 	    },
 	
 	    // show the login form
@@ -46365,6 +46376,9 @@
 	        return (
 	            React.createElement("div", null, 
 	            React.createElement("h2", null, "Login"), 
+	            this.state.error ? (
+	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
+	                ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
 	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
 	            React.createElement("br", null), 
@@ -46372,10 +46386,7 @@
 	            React.createElement("input", {type: "password", placeholder: "Password", ref: "password"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"}), 
-	            this.state.error ? (
-	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
-	                ) : null
+	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"})
 	            )
 	            )
 	            );
@@ -46446,8 +46457,6 @@
 	};
 	
 	module.exports = Login;
-	
-	
 
 
 /***/ }

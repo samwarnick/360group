@@ -1,18 +1,16 @@
 var React  = require('react');
 var Link = require('react-router').Link;
 
+
 // Register page, shows the registration form and redirects to the list if login is successful
 var Register = React.createClass({
-    // context so the component can access the router
-    contextTypes: {
-        router: React.PropTypes.func
-    },
 
     // initial state
     getInitialState: function() {
         return {
             // there was an error registering
-            error: false
+            error: false,
+            c_error: false
         };
     },
 
@@ -21,15 +19,19 @@ var Register = React.createClass({
         // prevent default browser submit
         event.preventDefault();
         // get data from form
-        var username = this.refs.username.getDOMNode().value;
-        var password = this.refs.password.getDOMNode().value;
-        var sex = this.refs.sex.getDOMNode().value;
-        var age = this.refs.age.getDOMNode().value;
-        var race = this.refs.race.getDOMNode().value;
-        var state = this.refs.state.getDOMNode().value;
-        if (!username || !password || !sex || !age || !race || !state) {
-            return;
+        var username = this.refs.username.value;
+        var password = this.refs.password.value;
+        var sex = this.refs.sex.value;
+        var age = this.refs.age.value;
+        var race = this.refs.race.value;
+        var state = this.refs.state.value;
+        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
+            console.log("field empty");
+            return this.setState({
+                c_error: true
+            });
         }
+        this.setState({c_error: false});
         // register via the API
         auth.register(username, password, sex, age, race, state, function(loggedIn) {
             // register callback
@@ -37,8 +39,11 @@ var Register = React.createClass({
                 return this.setState({
                     error: true
                 });
-            this.context.router.replaceWith('/list');
+
         }.bind(this));
+        
+        $("#rightLinks").find("li").removeClass("active");
+        $("#candidatesLink").addClass("active");
     },
 
     // show the registration form
@@ -46,6 +51,12 @@ var Register = React.createClass({
         return (
             <div>
             <h2>Register</h2>
+            {this.state.c_error ? (
+                <div className="alert"><p>All fields are required</p></div>
+              ) : null }
+              {this.state.error ? (
+                  <div className="alert">Invalid username or password</div>
+              ) : null }
             <form className="form-vertical" onSubmit={this.register}>
             <p>Please choose a username *</p>
             <input type="text" placeholder="rodham@myserver.com" ref="username"/>
@@ -141,9 +152,6 @@ var Register = React.createClass({
             <br/>
             <br/>
             <input className="btn" type="submit" value="Register" />
-            {this.state.error ? (
-                <div className="alert">Invalid username or password.</div>
-                ) : null }
             </form>
             </div>
             );
@@ -152,7 +160,7 @@ var Register = React.createClass({
 
 // authentication object
 var auth = {
-    register: function(username, password, sex, race, age, state, cb) {
+    register: function(username, password, sex, age, race, state, cb) {
         // submit request to server, call the callback when complete
         var url = "/api/users/register";
         $.ajax({

@@ -44,7 +44,7 @@ var Quiz = React.createClass({
 
 
     $("#rightLinks").find("li").removeClass("active");
-    $("#PollLink").addClass("active");
+    $("#pollLink").addClass("active");
 },
     render: function() {
 
