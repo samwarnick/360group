@@ -65,10 +65,11 @@ var Quiz = React.createClass({
 
       return (
         <div>
+        <div className="col-md-8 col-md-offset-2">
             <div id="section1">
-                <div className="container" id="quiz">
+                <div className="container-fluid" id="quiz">
                     <div className="row">
-                        <div className="col-md-8">
+                        <div >
                         <div id="question" ><h1>How much do you agree with the following statments?</h1></div>
                             	{this.state.liststatements}
 
@@ -79,6 +80,7 @@ var Quiz = React.createClass({
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
       );

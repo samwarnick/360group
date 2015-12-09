@@ -1,0 +1,62 @@
+.intro-header {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.background-image {
+    padding-top: 500px;
+    padding-bottom: 200px;
+    background: url(../img/rep_debate.jpg) no-repeat center center;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    padding-left: 0px;
+    padding-right: 0px;
+    background-size: cover;
+    min-width: 100%
+}
+.intro-message h1 {
+    padding-top: 20px;
+    padding-bottom: 25px;
+    font-family: 'Slabo 13px',sans-serif;
+    text-align: center;
+    color: #dadce5;
+    position: relative;
+    top: -660px;
+    font-size: 25px;
+}
+.intro-message img {
+    max-width: 25%;
+    max-height: 25%;
+}
+.intro-header h3 {
+    font-family: 'Lato',sans-serif;
+    text-align: center;
+    color: #dadce5;
+    position: relative;
+    top: -550px;
+    background-color: rgba(255, 255, 255, 0.2);;
+}
+.phone {
+    max-width: 8%;
+    max-height: 8%;
+}
+.envelope {
+    max-width: 14%;
+    max-height: 14%;
+}
+.button-front {
+    margin:0 auto;
+    position: relative;
+    top: -550px;
+    display:block;
+    background-color: #e52727; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+
+}

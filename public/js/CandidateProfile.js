@@ -47,6 +47,7 @@ var CandidateProfile = React.createClass({
     if (this.state.candidate.image) {
       return (
         <div>
+        <div className="col-md-8 col-md-offset-2">
           <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
           <h1 className="text-center">{this.state.candidate.name}</h1>
           <h3 className="text-center">{this.state.candidate.position}</h3>
@@ -54,6 +55,7 @@ var CandidateProfile = React.createClass({
             <p className="col-md-6 text-justify">{this.state.candidate.bio}</p>
             <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
           </div>
+        </div>
         </div>
       );
     } else {

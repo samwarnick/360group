@@ -48,7 +48,9 @@ var Register = React.createClass({
     // show the registration form
     render: function() {
         return (
+
             <div>
+            <div className="col-md-8 col-md-offset-2">
             <h2>Register</h2>
             <form className="form-vertical" onSubmit={this.register}>
             <p>Please choose a username *</p>
@@ -152,6 +154,7 @@ var Register = React.createClass({
                 <div className="alert">Invalid username or password.</div>
                 ) : null }
             </form>
+            </div>
             </div>
             );
     }

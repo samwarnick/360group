@@ -18,9 +18,7 @@ var App = React.createClass({
     return (
       <div>
         <NavBar />
-        <div className="col-md-8 col-md-offset-2">
           {this.props.children || <Home />}
-        </div>
       </div>
     );
   }
@@ -33,7 +31,41 @@ var Home = React.createClass({
 
   render: function() {
     return (
-      <h1>Home</h1>
+    <div>
+      <div className="intro-header container-fluid">
+        <div className="background-image container-fluid"></div>
+        <div className="col-lg-12">
+            <div className="intro-message" >
+                <h1><img src="img/swyftvote_logo_light.png" ></img></h1>
+            </div>
+            <div className="button-section">
+                <Link className="poll-link" to="poll">
+                    <button type="button" className="button-front text-center" >TAKE THE POLL</button>
+                </Link>
+            </div>
+        </div>
+      </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-12 text-center">
+                    <h2 className="section-heading">Got a Suggestion?</h2>
+                    <hr className="primary">
+                        <p>Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    </hr>
+                </div>
+                <div className="col-md-6 text-center">
+                    <img src="/img/phone.png" className="phone" ></img>
+                    <p>555-555-5555</p>
+                </div>
+                <div className="col-md-6 text-center">
+                    <img src="/img/envelope.png" className="envelope" ></img>
+                    <p>
+                        <a href="mailto:feedback@Swyftvote.com">feedback@Swyftvote.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
     );
   }
 });
