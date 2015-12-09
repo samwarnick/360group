@@ -9,6 +9,11 @@ var Login = React.createClass({
 
     mixins: [History],
 
+    componentDidMount: function() {
+      $("#rightLinks").find("li").removeClass("active");
+      $("#loginLink").addClass("active");
+    },
+
 
     // initial state
     getInitialState: function() {
@@ -41,6 +46,8 @@ var Login = React.createClass({
 
         this.history.pushState(null, '/poll');
     },
+
+
 
     // show the login form
     render: function() {

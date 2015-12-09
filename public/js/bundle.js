@@ -46123,6 +46123,12 @@
 	
 	    mixins: [ History ],
 	    // initial state
+	
+	    componentDidMount: function() {
+	      $("#rightLinks").find("li").removeClass("active");
+	      $("#registerLink").addClass("active");
+	    },
+	
 	    getInitialState: function() {
 	        return {
 	            // there was an error registering
@@ -46130,6 +46136,9 @@
 	            c_error: false
 	        };
 	    },
+	
+	
+	
 	
 	    // handle regiser button submit
 	    register: function(event) {
@@ -46347,6 +46356,11 @@
 	
 	    mixins: [History],
 	
+	    componentDidMount: function() {
+	      $("#rightLinks").find("li").removeClass("active");
+	      $("#loginLink").addClass("active");
+	    },
+	
 	
 	    // initial state
 	    getInitialState: function() {
@@ -46379,6 +46393,8 @@
 	
 	        this.history.pushState(null, '/poll');
 	    },
+	
+	
 	
 	    // show the login form
 	    render: function() {

@@ -11,6 +11,12 @@ var Register = React.createClass({
 
     mixins: [ History ],
     // initial state
+
+    componentDidMount: function() {
+      $("#rightLinks").find("li").removeClass("active");
+      $("#registerLink").addClass("active");
+    },
+
     getInitialState: function() {
         return {
             // there was an error registering
@@ -18,6 +24,9 @@ var Register = React.createClass({
             c_error: false
         };
     },
+
+
+
 
     // handle regiser button submit
     register: function(event) {
