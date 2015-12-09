@@ -46112,11 +46112,16 @@
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
+	var ReactRouter = __webpack_require__(160);
+	var History = ReactRouter.History;
 	
 	
 	// Register page, shows the registration form and redirects to the list if login is successful
 	var Register = React.createClass({displayName: "Register",
 	
+	
+	
+	    mixins: [ History ],
 	    // initial state
 	    getInitialState: function() {
 	        return {
@@ -46151,11 +46156,9 @@
 	                return this.setState({
 	                    error: true
 	                });
-	
 	        }.bind(this));
-	        
-	        $("#rightLinks").find("li").removeClass("active");
-	        $("#candidatesLink").addClass("active");
+	
+	        this.history.pushState(null, '/poll');
 	    },
 	
 	    // show the registration form
@@ -46170,12 +46173,12 @@
 	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
 	              ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
-	            React.createElement("p", null, "Please choose a username *"), 
+	            React.createElement("p", null, "Please choose a username"), 
 	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please choose a password *"), 
+	            React.createElement("p", null, "Please choose a password"), 
 	            React.createElement("input", {type: "password", placeholder: "dem4life", ref: "password"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
@@ -46335,8 +46338,15 @@
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
+	var ReactRouter = __webpack_require__(160);
+	var History = ReactRouter.History;
 	
 	var Login = React.createClass({displayName: "Login",
+	
+	
+	
+	    mixins: [History],
+	
 	
 	    // initial state
 	    getInitialState: function() {
@@ -46367,8 +46377,7 @@
 	
 	        }.bind(this));
 	
-	        $("#rightLinks").find("li").removeClass("active");
-	        $("#candidatesLink").addClass("active");
+	        this.history.pushState(null, '/poll');
 	    },
 	
 	    // show the login form

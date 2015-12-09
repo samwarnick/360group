@@ -1,10 +1,15 @@
 var React  = require('react');
 var Link = require('react-router').Link;
+var ReactRouter = require("react-router");
+var History = ReactRouter.History;
 
 
 // Register page, shows the registration form and redirects to the list if login is successful
 var Register = React.createClass({
 
+
+
+    mixins: [ History ],
     // initial state
     getInitialState: function() {
         return {
@@ -39,11 +44,9 @@ var Register = React.createClass({
                 return this.setState({
                     error: true
                 });
-
         }.bind(this));
-        
-        $("#rightLinks").find("li").removeClass("active");
-        $("#candidatesLink").addClass("active");
+
+        this.history.pushState(null, '/poll');
     },
 
     // show the registration form
@@ -58,12 +61,12 @@ var Register = React.createClass({
                   <div className="alert">Invalid username or password</div>
               ) : null }
             <form className="form-vertical" onSubmit={this.register}>
-            <p>Please choose a username *</p>
+            <p>Please choose a username</p>
             <input type="text" placeholder="rodham@myserver.com" ref="username"/>
             <br/>
             <br/>
             <br/>
-            <p>Please choose a password *</p>
+            <p>Please choose a password</p>
             <input type="password" placeholder="dem4life" ref="password"/>
             <br/>
             <br/>

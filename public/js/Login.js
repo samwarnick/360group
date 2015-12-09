@@ -1,7 +1,14 @@
 var React  = require('react');
 var Link = require('react-router').Link;
+var ReactRouter = require("react-router");
+var History = ReactRouter.History;
 
 var Login = React.createClass({
+
+
+
+    mixins: [History],
+
 
     // initial state
     getInitialState: function() {
@@ -32,8 +39,7 @@ var Login = React.createClass({
 
         }.bind(this));
 
-        $("#rightLinks").find("li").removeClass("active");
-        $("#candidatesLink").addClass("active");
+        this.history.pushState(null, '/poll');
     },
 
     // show the login form
