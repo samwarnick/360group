@@ -6,17 +6,10 @@ var Login = require('./Login');
 var Result = React.createClass({
     getInitialState: function() {
 	return {
-	    id: '5661c3a2aee7bcb5ff5809e2',
 	    candidate: {}
 	};
     },
 
-    componentDidMount: function() {
-	var c_id = this.state.id;
-	$.get('/api/candidates/id/' + c_id, function(result) {
-	    this.setState({candidate: result});
-	}.bind(this));
-    },
     closeModal: function() {
 	jQuery.noConflict();
 	$('#myModal').modal('hide');
@@ -52,7 +45,8 @@ var Register = React.createClass({
     getInitialState: function() {
         return {
             // there was an error registering
-            error: false
+            error: false,
+            result: {}
         };
     },
 
@@ -77,11 +71,13 @@ var Register = React.createClass({
             race: race,
             state: state
         };
-        console.log(request);
         for (key in this.props.answers) {
             request[key] = this.props.answers[key];
         }
         $.post('/api/pollresults',request);
+        console.log(request);
+
+        localStorage.setItem("userResults", JSON.stringify(request));
         // register via the API
         //auth.register(username, password, sex, age, race, state, function(loggedIn) {
             // register callback
@@ -177,66 +173,10 @@ var Register = React.createClass({
             <br/>
             <br/>            
             </form>
-		    <Link className="btn btn-primary" onClick={this.register} to={"/demographics"}>Submit</Link>
+		    <Link className="btn btn-primary" onClick={this.register} to={"/demographics"} params={{userResults: this.state.result}}>Submit</Link>
             </div>
             );
     }
 });
-
-// authentication object
-// var auth = {
-//     register: function(username, password, sex, race, age, state, cb) {
-//         // submit request to server, call the callback when complete
-//         var url = "/api/users/register";
-//         $.ajax({
-//             url: url,
-//             dataType: 'json',
-//             type: 'POST',
-//             data: {
-//                 username: username,
-//                 password: password,
-//                 sex: sex,
-//                 race: race,
-//                 age: age,
-//                 state: state
-//             },
-//             // on success, store a login token
-//             success: function(res) {
-//                 localStorage.token = res.token;
-//                 localStorage.name = res.name;
-//                 if (cb)
-//                     cb(true);
-//                 this.onChange(true);
-//             }.bind(this),
-//             error: function(xhr, status, err) {
-//                 // if there is an error, remove any login token
-//                 delete localStorage.token;
-//                 if (cb)
-//                     cb(false);
-//                 this.onChange(false);
-//             }.bind(this)
-//         });
-//     },
-//     // get the token from local storage
-//     getToken: function() {
-//         return localStorage.token;
-//     },
-//     // get the name from local storage
-//     getName: function() {
-//         return localStorage.name;
-//     },
-//     // logout the user, call the callback when complete
-//     logout: function(cb) {
-//         delete localStorage.token;
-//         if (cb) cb();
-//         this.onChange(false);
-//     },
-//     // check if user is logged in
-//     loggedIn: function() {
-//         return !!localStorage.token;
-//     },
-//     // default onChange function
-//     onChange: function() {},
-// };
 
 module.exports = Result;

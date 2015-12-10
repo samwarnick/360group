@@ -142,14 +142,11 @@ a:hover {
 	display: block;
 }
 
-@media screen and (min-width: 767px)
-{
+@media (min-width: 767px){
 	.chart {
 		display: inline-block;
 		vertical-align: middle;
 		content: " ";
-		height: 75%;
+		
 	}
 }
-
-
