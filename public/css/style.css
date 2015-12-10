@@ -29,8 +29,12 @@ body {
   /*background-color: #FCFDFF;*/
 }
 
-h1, h2 {
+h1, h2, p {
   font-family: 'Slabo 13px', sans-serif;
+}
+
+.alert {
+  color:#FF0000;
 }
 
 a:hover {
@@ -151,5 +155,3 @@ a:hover {
 		height: 75%;
 	}
 }
-
-

@@ -21,7 +21,7 @@ var userSchema = new Schema({
     race: String,
     age: Number,
     state: String,
-    candidate: {type:Objectid, ref: 'Candidate'}
+    candidate: String
 });
 
 // hash the password
@@ -31,6 +31,7 @@ userSchema.methods.set_password = function(password) {
 
 // check the password
 userSchema.methods.checkPassword = function(password) {
+    console.log(this.password_hash);
     return bcrypt.compareSync(password,this.password_hash);
 };
 
