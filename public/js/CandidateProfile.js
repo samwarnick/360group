@@ -13,7 +13,7 @@ var CandidateProfile = React.createClass({
   componentDidMount: function() {
     var c_id = this.props.params.id;
     $.get('/api/candidates/id/' + c_id, function(result) {
-      this.setState({candidate: result});
+      this.setState({candidate: result[0]});
     }.bind(this));
 
     $("#rightLinks").find("li").removeClass("active");

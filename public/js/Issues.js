@@ -101,7 +101,7 @@ var IssueContentPanel = React.createClass({
 var Quote = React.createClass({
   render: function() {
     return (
-      <Link className="list-group-item" to={"/candidates/"+ this.props.candidate}>
+      <Link className="list-group-item" to={"/candidates/"+ this.props.name}>
         <blockquote>
           <p><i className="fa fa-quote-left"></i> {this.props.quote}&rdquo;</p>
         </blockquote>

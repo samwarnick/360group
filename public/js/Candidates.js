@@ -66,7 +66,7 @@ var CandidateList = React.createClass({
 var Candidate = React.createClass({
   render: function() {
     return (
-      <Link className="candidate-link" to={"/candidates/"+ this.props.id}>
+      <Link className="candidate-link" to={"/candidates/"+ this.props.name}>
         <li>
           <h2>
             <img className="candidate-list-image" src={"img/candidates/" + this.props.image}></img>
