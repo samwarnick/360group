@@ -142,6 +142,25 @@ a:hover {
 	display: block;
 }
 
+.issues-tabs .nav {
+  margin-bottom: 12px;
+}
+
+.issues-tabs .nav li {
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.issues-tabs .nav li:not(.active) {
+  border: 1px solid #DADCE5;
+  border-radius: 4px;
+}
+
+.issues-tabs h3 {
+  font-family: 'Slabo 13px', sans-serif;
+  margin: 0;
+}
+
 @media screen and (min-width: 767px)
 {
 	.chart {
@@ -151,5 +170,3 @@ a:hover {
 		height: 75%;
 	}
 }
-
-

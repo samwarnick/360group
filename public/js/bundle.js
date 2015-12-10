@@ -71,9 +71,7 @@
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement(NavBar, null), 
-	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	          this.props.children || React.createElement(Home, null)
-	        )
 	      )
 	    );
 	  }
@@ -86,7 +84,41 @@
 	
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Home")
+	    React.createElement("div", null, 
+	      React.createElement("div", {className: "intro-header container-fluid"}, 
+	        React.createElement("div", {className: "background-image container-fluid"}), 
+	        React.createElement("div", {className: "col-lg-12"}, 
+	            React.createElement("div", {className: "intro-message"}, 
+	                React.createElement("h1", null, React.createElement("img", {src: "img/swyftvote_logo_light.png"}))
+	            ), 
+	            React.createElement("div", {className: "button-section"}, 
+	                React.createElement(Link, {className: "poll-link", to: "poll"}, 
+	                    React.createElement("button", {type: "button", className: "button-front text-center"}, "TAKE THE POLL")
+	                )
+	            )
+	        )
+	      ), 
+	        React.createElement("div", {className: "container"}, 
+	            React.createElement("div", {className: "row"}, 
+	                React.createElement("div", {className: "col-lg-12 text-center"}, 
+	                    React.createElement("h2", {className: "section-heading"}, "Got a Suggestion?"), 
+	                    React.createElement("hr", {className: "primary"}, 
+	                        React.createElement("p", null, "Give us a call or send us an email and we will get back to you as soon as possible!")
+	                    )
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/phone.png", className: "phone"}), 
+	                    React.createElement("p", null, "555-555-5555")
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/envelope.png", className: "envelope"}), 
+	                    React.createElement("p", null, 
+	                        React.createElement("a", {href: "mailto:feedback@Swyftvote.com"}, "feedback@Swyftvote.com")
+	                    )
+	                )
+	            )
+	        )
+	      )
 	    );
 	  }
 	});
@@ -24597,12 +24629,15 @@
 	    }.bind(this));
 	
 	    return (
+	
 	      React.createElement("div", null, 
+	      React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	        React.createElement("h1", {className: "text-center"}, "Candidates"), 
 	        React.createElement("div", {className: "row"}, 
 	          React.createElement(CandidateList, {list: democratList, party: "Democrats"}), 
 	          React.createElement(CandidateList, {list: republicanList, party: "Republicans"})
 	        )
+	      )
 	      )
 	    );
 	  }
@@ -24716,10 +24751,11 @@
 	
 	      return (
 	        React.createElement("div", null, 
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("div", {id: "section1"}, 
-	                React.createElement("div", {className: "container", id: "quiz"}, 
+	                React.createElement("div", {className: "container-fluid", id: "quiz"}, 
 	                    React.createElement("div", {className: "row"}, 
-	                        React.createElement("div", {className: "col-md-8"}, 
+	                        React.createElement("div", null, 
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	this.state.liststatements, 
 	
@@ -24730,6 +24766,7 @@
 	                        )
 	                    )
 	                )
+	            )
 	            )
 	        )
 	      );
@@ -24837,33 +24874,35 @@
 				}
 			};
 		},
-	    
+	
 	  componentDidMount: function() {
 			$.get('/api/statements', function(result) {
 		    this.setState({statements: result});
 			}.bind(this));
 	
-		
+	
 	  },
-	    
+	
 	  render: function() {
 			console.log('Demographics state: ');
 			console.log(this.state.statements);
-		
+	
 			return(
 				React.createElement("div", null, 
+				React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 					React.createElement("ul", {className: "nav nav-pills"}, 
 					  React.createElement("li", {role: "presentation", className: "active"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Matches");}.bind(this)}, "Matches")), 
 					  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Age");}.bind(this)}, "Age")), 
 			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
 			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
 			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
-					), 			
+					), 
 					React.createElement(ReactHighcharts, {className: "chart", config: this.state.config, ref: "chart"})
+					)
 				)
 			);
 		},
-		
+	
 		handleClick: function(x, type) {
 			console.log('clicked');
 			console.log(type);
@@ -44990,19 +45029,25 @@
 	    if (this.state.candidate.image) {
 	      return (
 	        React.createElement("div", null, 
-	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
-	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement("p", {className: "col-md-5 text-justify"}, this.state.candidate.bio), 
-	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
-	          ), 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
-	            React.createElement(IssuesGroups, {c_id: this.props.params.id})
+	          React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+	            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+	            React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("p", {className: "col-md-8 col-md-offset-2 text-justify"}, this.state.candidate.bio)
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	                React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
+	                React.createElement(IssuesGroups, {c_id: this.props.params.id})
+	              )
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-6 col-md-offset-3"}, 
+	                React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	              )
+	            )
 	          )
-	        )
 	        )
 	      );
 	    } else {
@@ -45016,13 +45061,11 @@
 	  render: function() {
 	    var url = "https://www.facebook.com/" + this.props.facebook;
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "panel panel-default"}, 
 	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-7"}, 
-	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
-	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
-	              React.createElement("a", {href: url}, this.props.name))
-	            )
+	        React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
+	          React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
+	            React.createElement("a", {href: url}, this.props.name))
 	          )
 	        )
 	      )
@@ -45058,7 +45101,7 @@
 	    }.bind(this));
 	
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "issues-tabs"}, 
 	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
 	          tabs
 	        ), 
@@ -45095,10 +45138,8 @@
 	
 	    return (
 	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
-	        React.createElement("div", {className: "panel panel-default"}, 
-	          React.createElement("ul", {className: "list-group"}, 
-	            React.createElement("li", {className: "list-group-item"}, this.props.quote)
-	          )
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
 	        )
 	      )
 	    );
@@ -46678,8 +46719,8 @@
 	
 	  render: function() {
 	    return (
-	      React.createElement("div", null, 
-	        React.createElement("h1", null, "Issues"), 
+	      React.createElement("div", {className: "col-md-6 col-md-offset-3", id: "issues-page"}, 
+	        React.createElement("h1", {className: "text-center"}, "Issues"), 
 	        React.createElement(IssuesGroups, null)
 	      )
 	    );
@@ -46714,7 +46755,7 @@
 	    }.bind(this));
 	
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "issues-tabs"}, 
 	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
 	          tabs
 	        ), 
@@ -46770,8 +46811,10 @@
 	  render: function() {
 	    return (
 	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.candidate}, 
-	        this.props.quote, 
-	        React.createElement("h2", null, this.props.name)
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
+	        ), 
+	        React.createElement("h3", {className: "text-right"}, this.props.name)
 	      )
 	    );
 	  }
@@ -46834,7 +46877,9 @@
 	    // show the registration form
 	    render: function() {
 	        return (
+	
 	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("h2", null, "Register"), 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
 	            React.createElement("p", null, "Please choose a username *"), 
@@ -46937,6 +46982,7 @@
 	            this.state.error ? (
 	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
 	                ) : null
+	            )
 	            )
 	            )
 	            );
@@ -47049,6 +47095,7 @@
 	    render: function() {
 	        return (
 	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("h2", null, "Login"), 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
 	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
@@ -47061,6 +47108,7 @@
 	            this.state.error ? (
 	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
 	                ) : null
+	            )
 	            )
 	            )
 	            );
