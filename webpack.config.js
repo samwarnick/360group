@@ -27,10 +27,10 @@ module.exports = {
 	child_process: "empty",
 	fs: "empty"
     },
-    
+
 	resolve: {
 	    alias: {
-		'is-array': require.resolve('webpack/node_modules/node-libs-browser/node_modules/buffer/node_modules/is-array'),
+		'is-array': require.resolve('webpack/node_modules/node-libs-browser/node_modules/buffer/node_modules/isarray'),
 		'ieee754': require.resolve('webpack/node_modules/node-libs-browser/node_modules/buffer/node_modules/ieee754'),
 		'base64-js': require.resolve('webpack/node_modules/node-libs-browser/node_modules/buffer/node_modules/base64-js'),
 		'inherits': require.resolve('webpack/node_modules/node-libs-browser/node_modules/stream-browserify')
