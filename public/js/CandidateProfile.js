@@ -48,20 +48,25 @@ var CandidateProfile = React.createClass({
     if (this.state.candidate.image) {
       return (
         <div>
-        <div className="col-md-8 col-md-offset-2">
-          <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
-          <h1 className="text-center">{this.state.candidate.name}</h1>
-          <h3 className="text-center">{this.state.candidate.position}</h3>
-          <div className="row">
-            <p className="col-md-5 text-justify">{this.state.candidate.bio}</p>
-            <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
+          <div className="col-md-8 col-md-offset-2">
+            <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
+            <h1 className="text-center">{this.state.candidate.name}</h1>
+            <h3 className="text-center">{this.state.candidate.position}</h3>
+            <div className="row">
+              <p className="col-md-8 col-md-offset-2 text-justify">{this.state.candidate.bio}</p>
+            </div>
+            <div className="row">
+              <div className="col-md-8 col-md-offset-2">
+                <h2 className="text-center">Statements by {this.state.candidate.name}</h2>
+                <IssuesGroups c_id={this.props.params.id}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3">
+                <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
+              </div>
+            </div>
           </div>
-          <div className="row">
-            <h2 className="text-center">Statements by {this.state.candidate.name}</h2>
-            <IssuesGroups c_id={this.props.params.id}/>
-          </div>
-        </div>
-        </div>
         </div>
       );
     } else {
@@ -75,13 +80,11 @@ var Facebook = React.createClass({
   render: function() {
     var url = "https://www.facebook.com/" + this.props.facebook;
     return (
-      <div>
+      <div className="panel panel-default">
         <div id="fb-root"></div>
-        <div className="col-md-7">
-          <div className="fb-page" data-tabs="timeline,events,messages" data-href={url} data-small-header="false" data-adapt-container-width="true" data-width="500" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
-            <div className="fb-xfbml-parse-ignore"><blockquote cite={url}>
-              <a href={url}>{this.props.name}</a></blockquote>
-            </div>
+        <div className="fb-page" data-tabs="timeline,events,messages" data-href={url} data-small-header="false" data-adapt-container-width="true" data-width="500" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
+          <div className="fb-xfbml-parse-ignore"><blockquote cite={url}>
+            <a href={url}>{this.props.name}</a></blockquote>
           </div>
         </div>
       </div>
@@ -117,7 +120,7 @@ var IssuesGroups = React.createClass({
     }.bind(this));
 
     return (
-      <div>
+      <div className="issues-tabs">
         <ul className="nav nav-pills" role="tablist">
           {tabs}
         </ul>
@@ -154,11 +157,9 @@ var IssueContentPanel = React.createClass({
 
     return (
       <div role="tabpanel" className={"tab-pane" + active} id={this.props.index}>
-        <div className="panel panel-default">
-          <ul className="list-group">
-            <li className="list-group-item">{this.props.quote}</li>
-          </ul>
-        </div>
+        <blockquote>
+          <p><i className="fa fa-quote-left"></i> {this.props.quote}&rdquo;</p>
+        </blockquote>
       </div>
     );
   }

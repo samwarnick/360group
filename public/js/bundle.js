@@ -57,23 +57,21 @@
 	var Router = __webpack_require__(160).Router;
 	var Link = __webpack_require__(160).Link;
 	var Route = __webpack_require__(160).Route;
-	var NavBar = __webpack_require__(209);
-	var Candidates = __webpack_require__(210);
-	var Poll = __webpack_require__(211);
-	var Demographics = __webpack_require__(212);
-	var CandidateProfile = __webpack_require__(253);
-	var Issues = __webpack_require__(255);
-	var Register = __webpack_require__(256);
-	var Login = __webpack_require__(257);
+	var NavBar = __webpack_require__(211);
+	var Candidates = __webpack_require__(212);
+	var Poll = __webpack_require__(213);
+	var Demographics = __webpack_require__(214);
+	var CandidateProfile = __webpack_require__(256);
+	var Issues = __webpack_require__(258);
+	var Register = __webpack_require__(259);
+	var Login = __webpack_require__(260);
 	
 	var App = React.createClass({displayName: "App",
 	  render: function() {
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement(NavBar, null), 
-	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	          this.props.children || React.createElement(Home, null)
-	        )
 	      )
 	    );
 	  }
@@ -86,12 +84,44 @@
 	
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Home")
+	    React.createElement("div", null, 
+	      React.createElement("div", {className: "intro-header container-fluid"}, 
+	        React.createElement("div", {className: "background-image container-fluid"}), 
+	        React.createElement("div", {className: "col-lg-12"}, 
+	            React.createElement("div", {className: "intro-message"}, 
+	                React.createElement("h1", null, React.createElement("img", {src: "img/swyftvote_logo_light.png"}))
+	            ), 
+	            React.createElement("div", {className: "button-section"}, 
+	                React.createElement(Link, {className: "poll-link", to: "poll"}, 
+	                    React.createElement("button", {type: "button", className: "button-front text-center"}, "TAKE THE POLL")
+	                )
+	            )
+	        )
+	      ), 
+	        React.createElement("div", {className: "container"}, 
+	            React.createElement("div", {className: "row"}, 
+	                React.createElement("div", {className: "col-lg-12 text-center"}, 
+	                    React.createElement("h2", {className: "section-heading"}, "Got a Suggestion?"), 
+	                    React.createElement("hr", {className: "primary"}, 
+	                        React.createElement("p", null, "Give us a call or send us an email and we will get back to you as soon as possible!")
+	                    )
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/phone.png", className: "phone"}), 
+	                    React.createElement("p", null, "555-555-5555")
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/envelope.png", className: "envelope"}), 
+	                    React.createElement("p", null, 
+	                        React.createElement("a", {href: "mailto:feedback@Swyftvote.com"}, "feedback@Swyftvote.com")
+	                    )
+	                )
+	            )
+	        )
+	      )
 	    );
 	  }
 	});
-	
-	
 	
 	var Error = React.createClass({displayName: "Error",
 	  render: function() {
@@ -100,10 +130,6 @@
 	    );
 	  }
 	});
-	
-	
-	
-	
 	
 	var routes = (
 	  React.createElement(Router, null, 
@@ -19727,13 +19753,13 @@
 	
 	exports.Router = _Router3['default'];
 	
-	var _Link2 = __webpack_require__(197);
+	var _Link2 = __webpack_require__(199);
 	
 	var _Link3 = _interopRequireDefault(_Link2);
 	
 	exports.Link = _Link3['default'];
 	
-	var _IndexLink2 = __webpack_require__(198);
+	var _IndexLink2 = __webpack_require__(200);
 	
 	var _IndexLink3 = _interopRequireDefault(_IndexLink2);
 	
@@ -19741,25 +19767,25 @@
 	
 	/* components (configuration) */
 	
-	var _IndexRedirect2 = __webpack_require__(199);
+	var _IndexRedirect2 = __webpack_require__(201);
 	
 	var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
 	
 	exports.IndexRedirect = _IndexRedirect3['default'];
 	
-	var _IndexRoute2 = __webpack_require__(201);
+	var _IndexRoute2 = __webpack_require__(203);
 	
 	var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
 	
 	exports.IndexRoute = _IndexRoute3['default'];
 	
-	var _Redirect2 = __webpack_require__(200);
+	var _Redirect2 = __webpack_require__(202);
 	
 	var _Redirect3 = _interopRequireDefault(_Redirect2);
 	
 	exports.Redirect = _Redirect3['default'];
 	
-	var _Route2 = __webpack_require__(202);
+	var _Route2 = __webpack_require__(204);
 	
 	var _Route3 = _interopRequireDefault(_Route2);
 	
@@ -19767,19 +19793,19 @@
 	
 	/* mixins */
 	
-	var _History2 = __webpack_require__(203);
+	var _History2 = __webpack_require__(205);
 	
 	var _History3 = _interopRequireDefault(_History2);
 	
 	exports.History = _History3['default'];
 	
-	var _Lifecycle2 = __webpack_require__(204);
+	var _Lifecycle2 = __webpack_require__(206);
 	
 	var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
 	
 	exports.Lifecycle = _Lifecycle3['default'];
 	
-	var _RouteContext2 = __webpack_require__(205);
+	var _RouteContext2 = __webpack_require__(207);
 	
 	var _RouteContext3 = _interopRequireDefault(_RouteContext2);
 	
@@ -19803,13 +19829,13 @@
 	
 	exports.RoutingContext = _RoutingContext3['default'];
 	
-	var _PropTypes2 = __webpack_require__(196);
+	var _PropTypes2 = __webpack_require__(198);
 	
 	var _PropTypes3 = _interopRequireDefault(_PropTypes2);
 	
 	exports.PropTypes = _PropTypes3['default'];
 	
-	var _match2 = __webpack_require__(206);
+	var _match2 = __webpack_require__(208);
 	
 	var _match3 = _interopRequireDefault(_match2);
 	
@@ -19828,6 +19854,8 @@
 	exports.__esModule = true;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -19859,7 +19887,7 @@
 	
 	var _useRoutes2 = _interopRequireDefault(_useRoutes);
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var func = _React$PropTypes.func;
@@ -19873,6 +19901,28 @@
 	
 	var Router = (function (_Component) {
 	  _inherits(Router, _Component);
+	
+	  _createClass(Router, null, [{
+	    key: 'propTypes',
+	    value: {
+	      history: object,
+	      children: _PropTypes.routes,
+	      routes: _PropTypes.routes, // alias for children
+	      RoutingContext: func.isRequired,
+	      createElement: func,
+	      onError: func,
+	      onUpdate: func,
+	      parseQueryString: func,
+	      stringifyQuery: func
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'defaultProps',
+	    value: {
+	      RoutingContext: _RoutingContext2['default']
+	    },
+	    enumerable: true
+	  }]);
 	
 	  function Router(props, context) {
 	    _classCallCheck(this, Router);
@@ -19929,8 +19979,6 @@
 	
 	  Router.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	    process.env.NODE_ENV !== 'production' ? _warning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
-	
-	    process.env.NODE_ENV !== 'production' ? _warning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
 	  };
 	
 	  Router.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -19969,22 +20017,6 @@
 	
 	  return Router;
 	})(_react.Component);
-	
-	Router.propTypes = {
-	  history: object,
-	  children: _PropTypes.routes,
-	  routes: _PropTypes.routes, // alias for children
-	  RoutingContext: func.isRequired,
-	  createElement: func,
-	  onError: func,
-	  onUpdate: func,
-	  parseQueryString: func,
-	  stringifyQuery: func
-	};
-	
-	Router.defaultProps = {
-	  RoutingContext: _RoutingContext2['default']
-	};
 	
 	exports['default'] = Router;
 	module.exports = exports['default'];
@@ -20234,16 +20266,16 @@
 	    };
 	  }
 	
-	  function push(location) {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+	  function pushState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
 	
-	    history.push(location);
+	    history.pushState(state, path);
 	  }
 	
-	  function replace(location) {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+	  function replaceState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
 	
-	    history.replace(location);
+	    history.replaceState(state, path);
 	  }
 	
 	  var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
@@ -20272,32 +20304,15 @@
 	    if (--listenerCount === 0) stopHashChangeListener();
 	  }
 	
-	  // deprecated
-	  function pushState(state, path) {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-	
-	    history.pushState(state, path);
-	  }
-	
-	  // deprecated
-	  function replaceState(state, path) {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-	
-	    history.replaceState(state, path);
-	  }
-	
 	  return _extends({}, history, {
 	    listenBefore: listenBefore,
 	    listen: listen,
-	    push: push,
-	    replace: replace,
+	    pushState: pushState,
+	    replaceState: replaceState,
 	    go: go,
 	    createHref: createHref,
-	
-	    registerTransitionHook: registerTransitionHook, // deprecated - warning is in createHistory
-	    unregisterTransitionHook: unregisterTransitionHook, // deprecated - warning is in createHistory
-	    pushState: pushState, // deprecated - warning is in createHistory
-	    replaceState: replaceState // deprecated - warning is in createHistory
+	    registerTransitionHook: registerTransitionHook,
+	    unregisterTransitionHook: unregisterTransitionHook
 	  });
 	}
 	
@@ -20532,7 +20547,7 @@
 	}
 	
 	/**
-	 * Returns true if the HTML5 history API is supported. Taken from Modernizr.
+	 * Returns true if the HTML5 history API is supported. Taken from modernizr.
 	 *
 	 * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
 	 * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
@@ -20542,11 +20557,6 @@
 	function supportsHistory() {
 	  var ua = navigator.userAgent;
 	  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
-	    return false;
-	  }
-	  // FIXME: Work around our browser history not working correctly on Chrome
-	  // iOS: https://github.com/rackt/react-router/issues/2565
-	  if (ua.indexOf('CriOS') !== -1) {
 	    return false;
 	  }
 	  return window.history && 'pushState' in window.history;
@@ -20705,10 +20715,6 @@
 	
 	var _createLocation3 = _interopRequireDefault(_createLocation2);
 	
-	var _parsePath = __webpack_require__(177);
-	
-	var _parsePath2 = _interopRequireDefault(_parsePath);
-	
 	var _runTransitionHook = __webpack_require__(179);
 	
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
@@ -20833,10 +20839,15 @@
 	      if (ok) {
 	        // treat PUSH to current path like REPLACE to be consistent with browsers
 	        if (nextLocation.action === _Actions.PUSH) {
-	          var prevPath = createPath(location);
-	          var nextPath = createPath(nextLocation);
+	          var _getCurrentLocation = getCurrentLocation();
 	
-	          if (nextPath === prevPath) nextLocation.action = _Actions.REPLACE;
+	          var pathname = _getCurrentLocation.pathname;
+	          var search = _getCurrentLocation.search;
+	
+	          var currentPath = pathname + search;
+	          var path = nextLocation.pathname + nextLocation.search;
+	
+	          if (currentPath === path) nextLocation.action = _Actions.REPLACE;
 	        }
 	
 	        if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
@@ -20849,12 +20860,20 @@
 	    });
 	  }
 	
-	  function push(location) {
-	    transitionTo(createLocation(location, null, _Actions.PUSH, createKey()));
+	  function pushState(state, path) {
+	    transitionTo(createLocation(path, state, _Actions.PUSH, createKey()));
 	  }
 	
-	  function replace(location) {
-	    transitionTo(createLocation(location, null, _Actions.REPLACE, createKey()));
+	  function push(path) {
+	    pushState(null, path);
+	  }
+	
+	  function replaceState(state, path) {
+	    transitionTo(createLocation(path, state, _Actions.REPLACE, createKey()));
+	  }
+	
+	  function replace(path) {
+	    replaceState(null, path);
 	  }
 	
 	  function goBack() {
@@ -20869,12 +20888,12 @@
 	    return createRandomKey(keyLength);
 	  }
 	
-	  function createPath(location) {
-	    if (location == null || typeof location === 'string') return location;
+	  function createPath(path) {
+	    if (path == null || typeof path === 'string') return path;
 	
-	    var pathname = location.pathname;
-	    var search = location.search;
-	    var hash = location.hash;
+	    var pathname = path.pathname;
+	    var search = path.search;
+	    var hash = path.hash;
 	
 	    var result = pathname;
 	
@@ -20885,8 +20904,8 @@
 	    return result;
 	  }
 	
-	  function createHref(location) {
-	    return createPath(location);
+	  function createHref(path) {
+	    return createPath(path);
 	  }
 	
 	  function createLocation(path, state, action) {
@@ -20922,24 +20941,12 @@
 	    });
 	  }
 	
-	  // deprecated
-	  function pushState(state, path) {
-	    if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	    push(_extends({ state: state }, path));
-	  }
-	
-	  // deprecated
-	  function replaceState(state, path) {
-	    if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	    replace(_extends({ state: state }, path));
-	  }
-	
 	  return {
 	    listenBefore: listenBefore,
 	    listen: listen,
 	    transitionTo: transitionTo,
+	    pushState: pushState,
+	    replaceState: replaceState,
 	    push: push,
 	    replace: replace,
 	    go: go,
@@ -20952,9 +20959,7 @@
 	
 	    setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
 	    registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
-	    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
-	    pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-	    replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead')
 	  };
 	}
 	
@@ -21150,19 +21155,16 @@
 	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
 	function createLocation() {
-	  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+	  var path = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
 	  var state = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 	  var action = arguments.length <= 2 || arguments[2] === undefined ? _Actions.POP : arguments[2];
 	  var key = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 	
-	  if (typeof location === 'string') location = _parsePath2['default'](location);
+	  if (typeof path === 'string') path = _parsePath2['default'](path);
 	
-	  var pathname = location.pathname || '/';
-	  var search = location.search || '';
-	  var hash = location.hash || '';
-	
-	  // TODO: Deprecate passing state directly into createLocation.
-	  state = location.state || state;
+	  var pathname = path.pathname || '/';
+	  var search = path.search || '';
+	  var hash = path.hash || '';
 	
 	  return {
 	    pathname: pathname,
@@ -21428,7 +21430,7 @@
 	
 	exports.__esModule = true;
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -21520,16 +21522,8 @@
 	          var elements = {};
 	
 	          for (var key in components) {
-	            if (components.hasOwnProperty(key)) {
-	              // Pass through the key as a prop to createElement to allow
-	              // custom createElement functions to know which named component
-	              // they're rendering, for e.g. matching up to fetched data.
-	              elements[key] = _this.createElement(components[key], _extends({
-	                key: key }, props));
-	            }
-	          }
-	
-	          return elements;
+	            if (components.hasOwnProperty(key)) elements[key] = _this.createElement(components[key], props);
+	          }return elements;
 	        }
 	
 	        return _this.createElement(components, props);
@@ -21541,26 +21535,34 @@
 	    return element;
 	  };
 	
+	  _createClass(RoutingContext, null, [{
+	    key: 'propTypes',
+	    value: {
+	      history: object.isRequired,
+	      createElement: func.isRequired,
+	      location: object.isRequired,
+	      routes: array.isRequired,
+	      params: object.isRequired,
+	      components: array.isRequired
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'defaultProps',
+	    value: {
+	      createElement: _react2['default'].createElement
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'childContextTypes',
+	    value: {
+	      history: object.isRequired,
+	      location: object.isRequired
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return RoutingContext;
 	})(_react.Component);
-	
-	RoutingContext.propTypes = {
-	  history: object.isRequired,
-	  createElement: func.isRequired,
-	  location: object.isRequired,
-	  routes: array.isRequired,
-	  params: object.isRequired,
-	  components: array.isRequired
-	};
-	
-	RoutingContext.defaultProps = {
-	  createElement: _react2['default'].createElement
-	};
-	
-	RoutingContext.childContextTypes = {
-	  history: object.isRequired,
-	  location: object.isRequired
-	};
 	
 	exports['default'] = RoutingContext;
 	module.exports = exports['default'];
@@ -21910,21 +21912,21 @@
 	
 	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
 	
-	var _computeChangedRoutes2 = __webpack_require__(190);
+	var _computeChangedRoutes2 = __webpack_require__(192);
 	
 	var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
 	
-	var _TransitionUtils = __webpack_require__(191);
+	var _TransitionUtils = __webpack_require__(193);
 	
-	var _isActive2 = __webpack_require__(193);
+	var _isActive2 = __webpack_require__(195);
 	
 	var _isActive3 = _interopRequireDefault(_isActive2);
 	
-	var _getComponents = __webpack_require__(194);
+	var _getComponents = __webpack_require__(196);
 	
 	var _getComponents2 = _interopRequireDefault(_getComponents);
 	
-	var _matchRoutes = __webpack_require__(195);
+	var _matchRoutes = __webpack_require__(197);
 	
 	var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
 	
@@ -22187,7 +22189,7 @@
 /* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
+	/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
 	
@@ -22197,11 +22199,9 @@
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
-	var _warning = __webpack_require__(164);
+	var _qs = __webpack_require__(188);
 	
-	var _warning2 = _interopRequireDefault(_warning);
-	
-	var _queryString = __webpack_require__(188);
+	var _qs2 = _interopRequireDefault(_qs);
 	
 	var _runTransitionHook = __webpack_require__(179);
 	
@@ -22211,22 +22211,12 @@
 	
 	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
-	var _deprecate = __webpack_require__(180);
-	
-	var _deprecate2 = _interopRequireDefault(_deprecate);
-	
-	var SEARCH_BASE_KEY = '$searchBase';
-	
 	function defaultStringifyQuery(query) {
-	  return _queryString.stringify(query).replace(/%20/g, '+');
+	  return _qs2['default'].stringify(query, { arrayFormat: 'brackets' }).replace(/%20/g, '+');
 	}
 	
-	var defaultParseQueryString = _queryString.parse;
-	
-	function isNestedObject(object) {
-	  for (var p in object) {
-	    if (object.hasOwnProperty(p) && typeof object[p] === 'object' && !Array.isArray(object[p]) && object[p] !== null) return true;
-	  }return false;
+	function defaultParseQueryString(queryString) {
+	  return _qs2['default'].parse(queryString.replace(/\+/g, '%20'));
 	}
 	
 	/**
@@ -22248,42 +22238,22 @@
 	    if (typeof parseQueryString !== 'function') parseQueryString = defaultParseQueryString;
 	
 	    function addQuery(location) {
-	      if (location.query == null) {
-	        var search = location.search;
-	
-	        location.query = parseQueryString(search.substring(1));
-	        location[SEARCH_BASE_KEY] = { search: search, searchBase: '' };
-	      }
-	
-	      // TODO: Instead of all the book-keeping here, this should just strip the
-	      // stringified query from the search.
+	      if (location.query == null) location.query = parseQueryString(location.search.substring(1));
 	
 	      return location;
 	    }
 	
-	    function appendQuery(location, query) {
-	      var _extends2;
-	
+	    function appendQuery(path, query) {
 	      var queryString = undefined;
-	      if (!query || (queryString = stringifyQuery(query)) === '') return location;
+	      if (!query || (queryString = stringifyQuery(query)) === '') return path;
 	
-	      process.env.NODE_ENV !== 'production' ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
 	
-	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	      var search = path.search + (path.search ? '&' : '?') + queryString;
 	
-	      var searchBaseSpec = location[SEARCH_BASE_KEY];
-	      var searchBase = undefined;
-	      if (searchBaseSpec && location.search === searchBaseSpec.search) {
-	        searchBase = searchBaseSpec.searchBase;
-	      } else {
-	        searchBase = location.search || '';
-	      }
-	
-	      var search = searchBase + (searchBase ? '&' : '?') + queryString;
-	
-	      return _extends({}, location, (_extends2 = {
+	      return _extends({}, path, {
 	        search: search
-	      }, _extends2[SEARCH_BASE_KEY] = { search: search, searchBase: searchBase }, _extends2));
+	      });
 	    }
 	
 	    // Override all read methods with query-aware versions.
@@ -22300,147 +22270,579 @@
 	    }
 	
 	    // Override all write methods with query-aware versions.
-	    function push(location) {
-	      history.push(appendQuery(location, location.query));
+	    function pushState(state, path, query) {
+	      return history.pushState(state, appendQuery(path, query));
 	    }
 	
-	    function replace(location) {
-	      history.replace(appendQuery(location, location.query));
+	    function replaceState(state, path, query) {
+	      return history.replaceState(state, appendQuery(path, query));
 	    }
 	
-	    function createPath(location, query) {
-	      process.env.NODE_ENV !== 'production' ? _warning2['default'](query, 'the query argument to createPath is deprecated; use a location descriptor instead') : undefined;
-	      return history.createPath(appendQuery(location, query || location.query));
+	    function createPath(path, query) {
+	      return history.createPath(appendQuery(path, query));
 	    }
 	
-	    function createHref(location, query) {
-	      process.env.NODE_ENV !== 'production' ? _warning2['default'](query, 'the query argument to createHref is deprecated; use a location descriptor instead') : undefined;
-	      return history.createHref(appendQuery(location, query || location.query));
+	    function createHref(path, query) {
+	      return history.createHref(appendQuery(path, query));
 	    }
 	
 	    function createLocation() {
 	      return addQuery(history.createLocation.apply(history, arguments));
 	    }
 	
-	    // deprecated
-	    function pushState(state, path, query) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	      push(_extends({ state: state }, path, { query: query }));
-	    }
-	
-	    // deprecated
-	    function replaceState(state, path, query) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	      replace(_extends({ state: state }, path, { query: query }));
-	    }
-	
 	    return _extends({}, history, {
 	      listenBefore: listenBefore,
 	      listen: listen,
-	      push: push,
-	      replace: replace,
+	      pushState: pushState,
+	      replaceState: replaceState,
 	      createPath: createPath,
 	      createHref: createHref,
-	      createLocation: createLocation,
-	
-	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	      createLocation: createLocation
 	    });
 	  };
 	}
 	
 	exports['default'] = useQueries;
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */'use strict';
-	var strictUriEncode = __webpack_require__(189);
+	/** @jsx React.DOM */// Load modules
 	
-	exports.extract = function (str) {
-		return str.split('?')[1] || '';
-	};
+	var Stringify = __webpack_require__(189);
+	var Parse = __webpack_require__(191);
 	
-	exports.parse = function (str) {
-		if (typeof str !== 'string') {
-			return {};
-		}
 	
-		str = str.trim().replace(/^(\?|#|&)/, '');
+	// Declare internals
 	
-		if (!str) {
-			return {};
-		}
+	var internals = {};
 	
-		return str.split('&').reduce(function (ret, param) {
-			var parts = param.replace(/\+/g, ' ').split('=');
-			// Firefox (pre 40) decodes `%3D` to `=`
-			// https://github.com/sindresorhus/query-string/pull/37
-			var key = parts.shift();
-			var val = parts.length > 0 ? parts.join('=') : undefined;
 	
-			key = decodeURIComponent(key);
-	
-			// missing `=` should be `null`:
-			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
-			val = val === undefined ? null : decodeURIComponent(val);
-	
-			if (!ret.hasOwnProperty(key)) {
-				ret[key] = val;
-			} else if (Array.isArray(ret[key])) {
-				ret[key].push(val);
-			} else {
-				ret[key] = [ret[key], val];
-			}
-	
-			return ret;
-		}, {});
-	};
-	
-	exports.stringify = function (obj) {
-		return obj ? Object.keys(obj).sort().map(function (key) {
-			var val = obj[key];
-	
-			if (val === undefined) {
-				return '';
-			}
-	
-			if (val === null) {
-				return key;
-			}
-	
-			if (Array.isArray(val)) {
-				return val.sort().map(function (val2) {
-					return strictUriEncode(key) + '=' + strictUriEncode(val2);
-				}).join('&');
-			}
-	
-			return strictUriEncode(key) + '=' + strictUriEncode(val);
-		}).filter(function (x) {
-			return x.length > 0;
-		}).join('&') : '';
+	module.exports = {
+	    stringify: Stringify,
+	    parse: Parse
 	};
 
 
 /***/ },
 /* 189 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */'use strict';
-	module.exports = function (str) {
-		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-			return '%' + c.charCodeAt(0).toString(16);
-		});
+	/** @jsx React.DOM */// Load modules
+	
+	var Utils = __webpack_require__(190);
+	
+	
+	// Declare internals
+	
+	var internals = {
+	    delimiter: '&',
+	    arrayPrefixGenerators: {
+	        brackets: function (prefix, key) {
+	
+	            return prefix + '[]';
+	        },
+	        indices: function (prefix, key) {
+	
+	            return prefix + '[' + key + ']';
+	        },
+	        repeat: function (prefix, key) {
+	
+	            return prefix;
+	        }
+	    },
+	    strictNullHandling: false
+	};
+	
+	
+	internals.stringify = function (obj, prefix, generateArrayPrefix, strictNullHandling, filter) {
+	
+	    if (typeof filter === 'function') {
+	        obj = filter(prefix, obj);
+	    }
+	    else if (Utils.isBuffer(obj)) {
+	        obj = obj.toString();
+	    }
+	    else if (obj instanceof Date) {
+	        obj = obj.toISOString();
+	    }
+	    else if (obj === null) {
+	        if (strictNullHandling) {
+	            return Utils.encode(prefix);
+	        }
+	
+	        obj = '';
+	    }
+	
+	    if (typeof obj === 'string' ||
+	        typeof obj === 'number' ||
+	        typeof obj === 'boolean') {
+	
+	        return [Utils.encode(prefix) + '=' + Utils.encode(obj)];
+	    }
+	
+	    var values = [];
+	
+	    if (typeof obj === 'undefined') {
+	        return values;
+	    }
+	
+	    var objKeys = Array.isArray(filter) ? filter : Object.keys(obj);
+	    for (var i = 0, il = objKeys.length; i < il; ++i) {
+	        var key = objKeys[i];
+	
+	        if (Array.isArray(obj)) {
+	            values = values.concat(internals.stringify(obj[key], generateArrayPrefix(prefix, key), generateArrayPrefix, strictNullHandling, filter));
+	        }
+	        else {
+	            values = values.concat(internals.stringify(obj[key], prefix + '[' + key + ']', generateArrayPrefix, strictNullHandling, filter));
+	        }
+	    }
+	
+	    return values;
+	};
+	
+	
+	module.exports = function (obj, options) {
+	
+	    options = options || {};
+	    var delimiter = typeof options.delimiter === 'undefined' ? internals.delimiter : options.delimiter;
+	    var strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
+	    var objKeys;
+	    var filter;
+	    if (typeof options.filter === 'function') {
+	        filter = options.filter;
+	        obj = filter('', obj);
+	    }
+	    else if (Array.isArray(options.filter)) {
+	        objKeys = filter = options.filter;
+	    }
+	
+	    var keys = [];
+	
+	    if (typeof obj !== 'object' ||
+	        obj === null) {
+	
+	        return '';
+	    }
+	
+	    var arrayFormat;
+	    if (options.arrayFormat in internals.arrayPrefixGenerators) {
+	        arrayFormat = options.arrayFormat;
+	    }
+	    else if ('indices' in options) {
+	        arrayFormat = options.indices ? 'indices' : 'repeat';
+	    }
+	    else {
+	        arrayFormat = 'indices';
+	    }
+	
+	    var generateArrayPrefix = internals.arrayPrefixGenerators[arrayFormat];
+	
+	    if (!objKeys) {
+	        objKeys = Object.keys(obj);
+	    }
+	    for (var i = 0, il = objKeys.length; i < il; ++i) {
+	        var key = objKeys[i];
+	        keys = keys.concat(internals.stringify(obj[key], key, generateArrayPrefix, strictNullHandling, filter));
+	    }
+	
+	    return keys.join(delimiter);
 	};
 
 
 /***/ },
 /* 190 */
+/***/ function(module, exports) {
+
+	/** @jsx React.DOM */// Load modules
+	
+	
+	// Declare internals
+	
+	var internals = {};
+	internals.hexTable = new Array(256);
+	for (var h = 0; h < 256; ++h) {
+	    internals.hexTable[h] = '%' + ((h < 16 ? '0' : '') + h.toString(16)).toUpperCase();
+	}
+	
+	
+	exports.arrayToObject = function (source, options) {
+	
+	    var obj = options.plainObjects ? Object.create(null) : {};
+	    for (var i = 0, il = source.length; i < il; ++i) {
+	        if (typeof source[i] !== 'undefined') {
+	
+	            obj[i] = source[i];
+	        }
+	    }
+	
+	    return obj;
+	};
+	
+	
+	exports.merge = function (target, source, options) {
+	
+	    if (!source) {
+	        return target;
+	    }
+	
+	    if (typeof source !== 'object') {
+	        if (Array.isArray(target)) {
+	            target.push(source);
+	        }
+	        else if (typeof target === 'object') {
+	            target[source] = true;
+	        }
+	        else {
+	            target = [target, source];
+	        }
+	
+	        return target;
+	    }
+	
+	    if (typeof target !== 'object') {
+	        target = [target].concat(source);
+	        return target;
+	    }
+	
+	    if (Array.isArray(target) &&
+	        !Array.isArray(source)) {
+	
+	        target = exports.arrayToObject(target, options);
+	    }
+	
+	    var keys = Object.keys(source);
+	    for (var k = 0, kl = keys.length; k < kl; ++k) {
+	        var key = keys[k];
+	        var value = source[key];
+	
+	        if (!Object.prototype.hasOwnProperty.call(target, key)) {
+	            target[key] = value;
+	        }
+	        else {
+	            target[key] = exports.merge(target[key], value, options);
+	        }
+	    }
+	
+	    return target;
+	};
+	
+	
+	exports.decode = function (str) {
+	
+	    try {
+	        return decodeURIComponent(str.replace(/\+/g, ' '));
+	    } catch (e) {
+	        return str;
+	    }
+	};
+	
+	exports.encode = function (str) {
+	
+	    // This code was originally written by Brian White (mscdex) for the io.js core querystring library.
+	    // It has been adapted here for stricter adherence to RFC 3986
+	    if (str.length === 0) {
+	        return str;
+	    }
+	
+	    if (typeof str !== 'string') {
+	        str = '' + str;
+	    }
+	
+	    var out = '';
+	    for (var i = 0, il = str.length; i < il; ++i) {
+	        var c = str.charCodeAt(i);
+	
+	        if (c === 0x2D || // -
+	            c === 0x2E || // .
+	            c === 0x5F || // _
+	            c === 0x7E || // ~
+	            (c >= 0x30 && c <= 0x39) || // 0-9
+	            (c >= 0x41 && c <= 0x5A) || // a-z
+	            (c >= 0x61 && c <= 0x7A)) { // A-Z
+	
+	            out += str[i];
+	            continue;
+	        }
+	
+	        if (c < 0x80) {
+	            out += internals.hexTable[c];
+	            continue;
+	        }
+	
+	        if (c < 0x800) {
+	            out += internals.hexTable[0xC0 | (c >> 6)] + internals.hexTable[0x80 | (c & 0x3F)];
+	            continue;
+	        }
+	
+	        if (c < 0xD800 || c >= 0xE000) {
+	            out += internals.hexTable[0xE0 | (c >> 12)] + internals.hexTable[0x80 | ((c >> 6) & 0x3F)] + internals.hexTable[0x80 | (c & 0x3F)];
+	            continue;
+	        }
+	
+	        ++i;
+	        c = 0x10000 + (((c & 0x3FF) << 10) | (str.charCodeAt(i) & 0x3FF));
+	        out += internals.hexTable[0xF0 | (c >> 18)] + internals.hexTable[0x80 | ((c >> 12) & 0x3F)] + internals.hexTable[0x80 | ((c >> 6) & 0x3F)] + internals.hexTable[0x80 | (c & 0x3F)];
+	    }
+	
+	    return out;
+	};
+	
+	exports.compact = function (obj, refs) {
+	
+	    if (typeof obj !== 'object' ||
+	        obj === null) {
+	
+	        return obj;
+	    }
+	
+	    refs = refs || [];
+	    var lookup = refs.indexOf(obj);
+	    if (lookup !== -1) {
+	        return refs[lookup];
+	    }
+	
+	    refs.push(obj);
+	
+	    if (Array.isArray(obj)) {
+	        var compacted = [];
+	
+	        for (var i = 0, il = obj.length; i < il; ++i) {
+	            if (typeof obj[i] !== 'undefined') {
+	                compacted.push(obj[i]);
+	            }
+	        }
+	
+	        return compacted;
+	    }
+	
+	    var keys = Object.keys(obj);
+	    for (i = 0, il = keys.length; i < il; ++i) {
+	        var key = keys[i];
+	        obj[key] = exports.compact(obj[key], refs);
+	    }
+	
+	    return obj;
+	};
+	
+	
+	exports.isRegExp = function (obj) {
+	
+	    return Object.prototype.toString.call(obj) === '[object RegExp]';
+	};
+	
+	
+	exports.isBuffer = function (obj) {
+	
+	    if (obj === null ||
+	        typeof obj === 'undefined') {
+	
+	        return false;
+	    }
+	
+	    return !!(obj.constructor &&
+	              obj.constructor.isBuffer &&
+	              obj.constructor.isBuffer(obj));
+	};
+
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */// Load modules
+	
+	var Utils = __webpack_require__(190);
+	
+	
+	// Declare internals
+	
+	var internals = {
+	    delimiter: '&',
+	    depth: 5,
+	    arrayLimit: 20,
+	    parameterLimit: 1000,
+	    strictNullHandling: false,
+	    plainObjects: false,
+	    allowPrototypes: false
+	};
+	
+	
+	internals.parseValues = function (str, options) {
+	
+	    var obj = {};
+	    var parts = str.split(options.delimiter, options.parameterLimit === Infinity ? undefined : options.parameterLimit);
+	
+	    for (var i = 0, il = parts.length; i < il; ++i) {
+	        var part = parts[i];
+	        var pos = part.indexOf(']=') === -1 ? part.indexOf('=') : part.indexOf(']=') + 1;
+	
+	        if (pos === -1) {
+	            obj[Utils.decode(part)] = '';
+	
+	            if (options.strictNullHandling) {
+	                obj[Utils.decode(part)] = null;
+	            }
+	        }
+	        else {
+	            var key = Utils.decode(part.slice(0, pos));
+	            var val = Utils.decode(part.slice(pos + 1));
+	
+	            if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+	                obj[key] = val;
+	            }
+	            else {
+	                obj[key] = [].concat(obj[key]).concat(val);
+	            }
+	        }
+	    }
+	
+	    return obj;
+	};
+	
+	
+	internals.parseObject = function (chain, val, options) {
+	
+	    if (!chain.length) {
+	        return val;
+	    }
+	
+	    var root = chain.shift();
+	
+	    var obj;
+	    if (root === '[]') {
+	        obj = [];
+	        obj = obj.concat(internals.parseObject(chain, val, options));
+	    }
+	    else {
+	        obj = options.plainObjects ? Object.create(null) : {};
+	        var cleanRoot = root[0] === '[' && root[root.length - 1] === ']' ? root.slice(1, root.length - 1) : root;
+	        var index = parseInt(cleanRoot, 10);
+	        var indexString = '' + index;
+	        if (!isNaN(index) &&
+	            root !== cleanRoot &&
+	            indexString === cleanRoot &&
+	            index >= 0 &&
+	            (options.parseArrays &&
+	             index <= options.arrayLimit)) {
+	
+	            obj = [];
+	            obj[index] = internals.parseObject(chain, val, options);
+	        }
+	        else {
+	            obj[cleanRoot] = internals.parseObject(chain, val, options);
+	        }
+	    }
+	
+	    return obj;
+	};
+	
+	
+	internals.parseKeys = function (key, val, options) {
+	
+	    if (!key) {
+	        return;
+	    }
+	
+	    // Transform dot notation to bracket notation
+	
+	    if (options.allowDots) {
+	        key = key.replace(/\.([^\.\[]+)/g, '[$1]');
+	    }
+	
+	    // The regex chunks
+	
+	    var parent = /^([^\[\]]*)/;
+	    var child = /(\[[^\[\]]*\])/g;
+	
+	    // Get the parent
+	
+	    var segment = parent.exec(key);
+	
+	    // Stash the parent if it exists
+	
+	    var keys = [];
+	    if (segment[1]) {
+	        // If we aren't using plain objects, optionally prefix keys
+	        // that would overwrite object prototype properties
+	        if (!options.plainObjects &&
+	            Object.prototype.hasOwnProperty(segment[1])) {
+	
+	            if (!options.allowPrototypes) {
+	                return;
+	            }
+	        }
+	
+	        keys.push(segment[1]);
+	    }
+	
+	    // Loop through children appending to the array until we hit depth
+	
+	    var i = 0;
+	    while ((segment = child.exec(key)) !== null && i < options.depth) {
+	
+	        ++i;
+	        if (!options.plainObjects &&
+	            Object.prototype.hasOwnProperty(segment[1].replace(/\[|\]/g, ''))) {
+	
+	            if (!options.allowPrototypes) {
+	                continue;
+	            }
+	        }
+	        keys.push(segment[1]);
+	    }
+	
+	    // If there's a remainder, just add whatever is left
+	
+	    if (segment) {
+	        keys.push('[' + key.slice(segment.index) + ']');
+	    }
+	
+	    return internals.parseObject(keys, val, options);
+	};
+	
+	
+	module.exports = function (str, options) {
+	
+	    options = options || {};
+	    options.delimiter = typeof options.delimiter === 'string' || Utils.isRegExp(options.delimiter) ? options.delimiter : internals.delimiter;
+	    options.depth = typeof options.depth === 'number' ? options.depth : internals.depth;
+	    options.arrayLimit = typeof options.arrayLimit === 'number' ? options.arrayLimit : internals.arrayLimit;
+	    options.parseArrays = options.parseArrays !== false;
+	    options.allowDots = options.allowDots !== false;
+	    options.plainObjects = typeof options.plainObjects === 'boolean' ? options.plainObjects : internals.plainObjects;
+	    options.allowPrototypes = typeof options.allowPrototypes === 'boolean' ? options.allowPrototypes : internals.allowPrototypes;
+	    options.parameterLimit = typeof options.parameterLimit === 'number' ? options.parameterLimit : internals.parameterLimit;
+	    options.strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
+	
+	    if (str === '' ||
+	        str === null ||
+	        typeof str === 'undefined') {
+	
+	        return options.plainObjects ? Object.create(null) : {};
+	    }
+	
+	    var tempObj = typeof str === 'string' ? internals.parseValues(str, options) : str;
+	    var obj = options.plainObjects ? Object.create(null) : {};
+	
+	    // Iterate over the keys and setup the new object
+	
+	    var keys = Object.keys(tempObj);
+	    for (var i = 0, il = keys.length; i < il; ++i) {
+	        var key = keys[i];
+	        var newObj = internals.parseKeys(key, tempObj[key], options);
+	        obj = Utils.merge(obj, newObj, options);
+	    }
+	
+	    return Utils.compact(obj);
+	};
+
+
+/***/ },
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -22501,7 +22903,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 191 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -22510,7 +22912,7 @@
 	exports.runEnterHooks = runEnterHooks;
 	exports.runLeaveHooks = runLeaveHooks;
 	
-	var _AsyncUtils = __webpack_require__(192);
+	var _AsyncUtils = __webpack_require__(194);
 	
 	function createEnterHook(hook, route) {
 	  return function (a, b, callback) {
@@ -22578,7 +22980,7 @@
 	}
 
 /***/ },
-/* 192 */
+/* 194 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */"use strict";
@@ -22641,7 +23043,7 @@
 	}
 
 /***/ },
-/* 193 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -22769,14 +23171,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 194 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
 	
-	var _AsyncUtils = __webpack_require__(192);
+	var _AsyncUtils = __webpack_require__(194);
 	
 	function getComponentsForRoute(location, route, callback) {
 	  if (route.component || route.components) {
@@ -22807,7 +23209,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 195 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
@@ -22820,7 +23222,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _AsyncUtils = __webpack_require__(192);
+	var _AsyncUtils = __webpack_require__(194);
 	
 	var _PatternUtils = __webpack_require__(185);
 	
@@ -23001,7 +23403,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 196 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -23059,7 +23461,7 @@
 	};
 
 /***/ },
-/* 197 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -23067,6 +23469,8 @@
 	exports.__esModule = true;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23199,35 +23603,43 @@
 	    return _react2['default'].createElement('a', props);
 	  };
 	
+	  _createClass(Link, null, [{
+	    key: 'contextTypes',
+	    value: {
+	      history: object
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'propTypes',
+	    value: {
+	      to: string.isRequired,
+	      query: object,
+	      hash: string,
+	      state: object,
+	      activeStyle: object,
+	      activeClassName: string,
+	      onlyActiveOnIndex: bool.isRequired,
+	      onClick: func
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'defaultProps',
+	    value: {
+	      onlyActiveOnIndex: false,
+	      className: '',
+	      style: {}
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return Link;
 	})(_react.Component);
-	
-	Link.contextTypes = {
-	  history: object
-	};
-	
-	Link.propTypes = {
-	  to: string.isRequired,
-	  query: object,
-	  hash: string,
-	  state: object,
-	  activeStyle: object,
-	  activeClassName: string,
-	  onlyActiveOnIndex: bool.isRequired,
-	  onClick: func
-	};
-	
-	Link.defaultProps = {
-	  onlyActiveOnIndex: false,
-	  className: '',
-	  style: {}
-	};
 	
 	exports['default'] = Link;
 	module.exports = exports['default'];
 
 /***/ },
-/* 198 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -23246,7 +23658,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Link = __webpack_require__(197);
+	var _Link = __webpack_require__(199);
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
@@ -23274,12 +23686,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 199 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23299,11 +23713,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Redirect = __webpack_require__(200);
+	var _Redirect = __webpack_require__(202);
 	
 	var _Redirect2 = _interopRequireDefault(_Redirect);
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -23322,43 +23736,49 @@
 	    _Component.apply(this, arguments);
 	  }
 	
+	  IndexRedirect.createRouteFromReactElement = function createRouteFromReactElement(element, parentRoute) {
+	    /* istanbul ignore else: sanity check */
+	    if (parentRoute) {
+	      parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
+	    } else {
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
+	    }
+	  };
+	
 	  /* istanbul ignore next: sanity check */
 	
 	  IndexRedirect.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRedirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
+	  _createClass(IndexRedirect, null, [{
+	    key: 'propTypes',
+	    value: {
+	      to: string.isRequired,
+	      query: object,
+	      state: object,
+	      onEnter: _PropTypes.falsy,
+	      children: _PropTypes.falsy
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return IndexRedirect;
 	})(_react.Component);
-	
-	IndexRedirect.propTypes = {
-	  to: string.isRequired,
-	  query: object,
-	  state: object,
-	  onEnter: _PropTypes.falsy,
-	  children: _PropTypes.falsy
-	};
-	
-	IndexRedirect.createRouteFromReactElement = function (element, parentRoute) {
-	  /* istanbul ignore else: sanity check */
-	  if (parentRoute) {
-	    parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
-	  } else {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
-	  }
-	};
 	
 	exports['default'] = IndexRedirect;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 200 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23378,7 +23798,7 @@
 	
 	var _PatternUtils = __webpack_require__(185);
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -23401,77 +23821,83 @@
 	    _Component.apply(this, arguments);
 	  }
 	
+	  Redirect.createRouteFromReactElement = function createRouteFromReactElement(element) {
+	    var route = _RouteUtils.createRouteFromReactElement(element);
+	
+	    if (route.from) route.path = route.from;
+	
+	    route.onEnter = function (nextState, replaceState) {
+	      var location = nextState.location;
+	      var params = nextState.params;
+	
+	      var pathname = undefined;
+	      if (route.to.charAt(0) === '/') {
+	        pathname = _PatternUtils.formatPattern(route.to, params);
+	      } else if (!route.to) {
+	        pathname = location.pathname;
+	      } else {
+	        var routeIndex = nextState.routes.indexOf(route);
+	        var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
+	        var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
+	        pathname = _PatternUtils.formatPattern(pattern, params);
+	      }
+	
+	      replaceState(route.state || location.state, pathname, route.query || location.query);
+	    };
+	
+	    return route;
+	  };
+	
+	  Redirect.getRoutePattern = function getRoutePattern(routes, routeIndex) {
+	    var parentPattern = '';
+	
+	    for (var i = routeIndex; i >= 0; i--) {
+	      var route = routes[i];
+	      var pattern = route.path || '';
+	      parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
+	
+	      if (pattern.indexOf('/') === 0) break;
+	    }
+	
+	    return '/' + parentPattern;
+	  };
+	
 	  /* istanbul ignore next: sanity check */
 	
 	  Redirect.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Redirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
+	  _createClass(Redirect, null, [{
+	    key: 'propTypes',
+	    value: {
+	      path: string,
+	      from: string, // Alias for path
+	      to: string.isRequired,
+	      query: object,
+	      state: object,
+	      onEnter: _PropTypes.falsy,
+	      children: _PropTypes.falsy
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return Redirect;
 	})(_react.Component);
-	
-	Redirect.createRouteFromReactElement = function (element) {
-	  var route = _RouteUtils.createRouteFromReactElement(element);
-	
-	  if (route.from) route.path = route.from;
-	
-	  route.onEnter = function (nextState, replaceState) {
-	    var location = nextState.location;
-	    var params = nextState.params;
-	
-	    var pathname = undefined;
-	    if (route.to.charAt(0) === '/') {
-	      pathname = _PatternUtils.formatPattern(route.to, params);
-	    } else if (!route.to) {
-	      pathname = location.pathname;
-	    } else {
-	      var routeIndex = nextState.routes.indexOf(route);
-	      var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
-	      var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
-	      pathname = _PatternUtils.formatPattern(pattern, params);
-	    }
-	
-	    replaceState(route.state || location.state, pathname, route.query || location.query);
-	  };
-	
-	  return route;
-	};
-	
-	Redirect.getRoutePattern = function (routes, routeIndex) {
-	  var parentPattern = '';
-	
-	  for (var i = routeIndex; i >= 0; i--) {
-	    var route = routes[i];
-	    var pattern = route.path || '';
-	    parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
-	
-	    if (pattern.indexOf('/') === 0) break;
-	  }
-	
-	  return '/' + parentPattern;
-	};
-	
-	Redirect.propTypes = {
-	  path: string,
-	  from: string, // Alias for path
-	  to: string.isRequired,
-	  query: object,
-	  state: object,
-	  onEnter: _PropTypes.falsy,
-	  children: _PropTypes.falsy
-	};
 	
 	exports['default'] = Redirect;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 201 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23493,7 +23919,7 @@
 	
 	var _RouteUtils = __webpack_require__(181);
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	var func = _react2['default'].PropTypes.func;
 	
@@ -23511,43 +23937,49 @@
 	    _Component.apply(this, arguments);
 	  }
 	
+	  IndexRoute.createRouteFromReactElement = function createRouteFromReactElement(element, parentRoute) {
+	    /* istanbul ignore else: sanity check */
+	    if (parentRoute) {
+	      parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
+	    } else {
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
+	    }
+	  };
+	
 	  /* istanbul ignore next: sanity check */
 	
 	  IndexRoute.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRoute> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
+	  _createClass(IndexRoute, null, [{
+	    key: 'propTypes',
+	    value: {
+	      path: _PropTypes.falsy,
+	      component: _PropTypes.component,
+	      components: _PropTypes.components,
+	      getComponent: func,
+	      getComponents: func
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return IndexRoute;
 	})(_react.Component);
-	
-	IndexRoute.propTypes = {
-	  path: _PropTypes.falsy,
-	  component: _PropTypes.component,
-	  components: _PropTypes.components,
-	  getComponent: func,
-	  getComponents: func
-	};
-	
-	IndexRoute.createRouteFromReactElement = function (element, parentRoute) {
-	  /* istanbul ignore else: sanity check */
-	  if (parentRoute) {
-	    parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
-	  } else {
-	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
-	  }
-	};
 	
 	exports['default'] = IndexRoute;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 202 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23565,7 +23997,7 @@
 	
 	var _RouteUtils = __webpack_require__(181);
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -23597,32 +24029,38 @@
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Route> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
+	  _createClass(Route, null, [{
+	    key: 'createRouteFromReactElement',
+	    value: _RouteUtils.createRouteFromReactElement,
+	    enumerable: true
+	  }, {
+	    key: 'propTypes',
+	    value: {
+	      path: string,
+	      component: _PropTypes.component,
+	      components: _PropTypes.components,
+	      getComponent: func,
+	      getComponents: func
+	    },
+	    enumerable: true
+	  }]);
+	
 	  return Route;
 	})(_react.Component);
-	
-	Route.createRouteFromReactElement = _RouteUtils.createRouteFromReactElement;
-	
-	Route.propTypes = {
-	  path: string,
-	  component: _PropTypes.component,
-	  components: _PropTypes.components,
-	  getComponent: func,
-	  getComponents: func
-	};
 	
 	exports['default'] = Route;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 203 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
 	
 	exports.__esModule = true;
 	
-	var _PropTypes = __webpack_require__(196);
+	var _PropTypes = __webpack_require__(198);
 	
 	/**
 	 * A mixin that adds the "history" instance variable to components.
@@ -23643,7 +24081,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 204 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
@@ -23713,7 +24151,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 205 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -23756,7 +24194,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 206 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
@@ -23771,11 +24209,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _historyLibCreateMemoryHistory = __webpack_require__(207);
+	var _historyLibCreateMemoryHistory = __webpack_require__(209);
 	
 	var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
 	
-	var _historyLibUseBasename = __webpack_require__(208);
+	var _historyLibUseBasename = __webpack_require__(210);
 	
 	var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
 	
@@ -23825,7 +24263,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 207 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */'use strict';
@@ -23973,7 +24411,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 208 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
@@ -23999,10 +24437,6 @@
 	var _parsePath = __webpack_require__(177);
 	
 	var _parsePath2 = _interopRequireDefault(_parsePath);
-	
-	var _deprecate = __webpack_require__(180);
-	
-	var _deprecate2 = _interopRequireDefault(_deprecate);
 	
 	function useBasename(createHistory) {
 	  return function () {
@@ -24036,17 +24470,17 @@
 	      return location;
 	    }
 	
-	    function prependBasename(location) {
-	      if (!basename) return location;
+	    function prependBasename(path) {
+	      if (!basename) return path;
 	
-	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
 	
-	      var pname = location.pathname;
+	      var pname = path.pathname;
 	      var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
 	      var normalizedPathname = pname.charAt(0) === '/' ? pname.slice(1) : pname;
 	      var pathname = normalizedBasename + normalizedPathname;
 	
-	      return _extends({}, location, {
+	      return _extends({}, path, {
 	        pathname: pathname
 	      });
 	    }
@@ -24065,51 +24499,44 @@
 	    }
 	
 	    // Override all write methods with basename-aware versions.
-	    function push(location) {
-	      history.push(prependBasename(location));
+	    function pushState(state, path) {
+	      history.pushState(state, prependBasename(path));
 	    }
 	
-	    function replace(location) {
-	      history.replace(prependBasename(location));
+	    function push(path) {
+	      pushState(null, path);
 	    }
 	
-	    function createPath(location) {
-	      return history.createPath(prependBasename(location));
+	    function replaceState(state, path) {
+	      history.replaceState(state, prependBasename(path));
 	    }
 	
-	    function createHref(location) {
-	      return history.createHref(prependBasename(location));
+	    function replace(path) {
+	      replaceState(null, path);
+	    }
+	
+	    function createPath(path) {
+	      return history.createPath(prependBasename(path));
+	    }
+	
+	    function createHref(path) {
+	      return history.createHref(prependBasename(path));
 	    }
 	
 	    function createLocation() {
 	      return addBasename(history.createLocation.apply(history, arguments));
 	    }
 	
-	    // deprecated
-	    function pushState(state, path) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	      push(_extends({ state: state }, path));
-	    }
-	
-	    // deprecated
-	    function replaceState(state, path) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
-	
-	      replace(_extends({ state: state }, path));
-	    }
-	
 	    return _extends({}, history, {
 	      listenBefore: listenBefore,
 	      listen: listen,
+	      pushState: pushState,
 	      push: push,
+	      replaceState: replaceState,
 	      replace: replace,
 	      createPath: createPath,
 	      createHref: createHref,
-	      createLocation: createLocation,
-	
-	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	      createLocation: createLocation
 	    });
 	  };
 	}
@@ -24118,7 +24545,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 209 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -24162,7 +24589,7 @@
 
 
 /***/ },
-/* 210 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
@@ -24202,12 +24629,15 @@
 	    }.bind(this));
 	
 	    return (
+	
 	      React.createElement("div", null, 
+	      React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	        React.createElement("h1", {className: "text-center"}, "Candidates"), 
 	        React.createElement("div", {className: "row"}, 
 	          React.createElement(CandidateList, {list: democratList, party: "Democrats"}), 
 	          React.createElement(CandidateList, {list: republicanList, party: "Republicans"})
 	        )
+	      )
 	      )
 	    );
 	  }
@@ -24251,12 +24681,13 @@
 
 
 /***/ },
-/* 211 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var Demographics = __webpack_require__(212);
+	var Demographics = __webpack_require__(214);
+	var Result = __webpack_require__(255);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24272,7 +24703,21 @@
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
 	        console.log(this.state.stateansPairs);
-	    // $.post('/api/pollresults')
+	        var demographicslist = {
+	            age: 54,
+	            gender: "Male",
+	            race: "White",
+	            state: "UT",
+	        }
+	        var request = {age: 54,
+	        gender: "Male",
+	        race: "White",
+	        state: "UT",
+	        };
+	        for (key in this.state.stateansPairs) {
+	            request[key] = this.state.stateansPairs[key];
+	        }
+	        $.post('/api/pollresults',request);
 	    //send them off with an API call
 	  },
 	    answerSelected: function(statement, answer) {
@@ -24292,7 +24737,7 @@
 		this.setState({statements: result,
 	        liststatements: result.map(function(statement) {
 		    return (
-			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.statement})
+			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.quote})
 		    );
 	    	}.bind(this))
 	    });
@@ -24306,20 +24751,22 @@
 	
 	      return (
 	        React.createElement("div", null, 
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("div", {id: "section1"}, 
-	                React.createElement("div", {className: "container", id: "quiz"}, 
+	                React.createElement("div", {className: "container-fluid", id: "quiz"}, 
 	                    React.createElement("div", {className: "row"}, 
-	                        React.createElement("div", {className: "col-md-8"}, 
+	                        React.createElement("div", null, 
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	this.state.liststatements, 
 	
 	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
-		                React.createElement(Modal, null), 
+		                React.createElement(Result, null), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
 	                )
+	            )
 	            )
 	        )
 	      );
@@ -24360,123 +24807,144 @@
 	  }
 	});
 	
-	var Modal = React.createClass({displayName: "Modal",
-	    render: function() {
-		return (
-		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
-			React.createElement("div", {className: "modal-dialog"}, 
-			    React.createElement("div", {className: "modal-content"}, 
-		                React.createElement("div", {className: "modal-header"}, 
-	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                            React.createElement("h4", {className: "modal-title"}, "Your Result!")
-		                ), 
-		                React.createElement("div", {className: "modal-body"}, 
-	                            React.createElement(Demographics, null)
-		                ), 
-		                React.createElement("div", {className: "modal-footer"}, 
-	                            React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
-		                )
-		            )
-		        )
-			)
-		);
-	    }
-	});
-	
 	module.exports = Poll;
 
 
 /***/ },
-/* 212 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var Highcharts = __webpack_require__(213);
-	var ReactHighcharts = __webpack_require__(252);
+	var Highcharts = __webpack_require__(215);
+	var ReactHighcharts = __webpack_require__(254);
 	
 	var Demographics = React.createClass({displayName: "Demographics",
-	    render: function() {
-		var config = {
-		    chart: {
-	                plotBackgroundColor: null,
-	                plotBorderWidth: null,
-	                plotShadow: false,
-	                type: 'pie'
-	            },
-	            title: {
-	                text: 'Browser market shares January, 2015 to May, 2015'
-	            },
-	            tooltip: {
-	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	            },
-	            plotOptions: {
-	                pie: {
-	                    allowPointSelect: true,
-	                    cursor: 'pointer',
-	                    dataLabels: {
-	                        enabled: false
-	                    },
-	                    showInLegend: true
-	                }
-	            },
-	            series: [{
-	                name: 'Brands',
-	                colorByPoint: true,
-	                data: [{
-	                    name: 'Him',
-	                    y: 56.33
-	                }, {
-	                    name: 'Her',
-	                    y: 24.03,
-	                }, {
-	                    name: 'Me',
-	                    y: 10.38
-	                }, {
-	                    name: 'You',
-	                    y: 4.77
-	                }, {
-	                    name: 'It',
-	                    y: 0.91
-	                }, {
-	                    name: 'Trump',
-	                    y: 0.2
-	                }]
-	            }]
-		};
-		
-		return(
-			React.createElement("div", null, 
-			    React.createElement("p", null, "This will show the candidate that you match"), 
-			    React.createElement(ReactHighcharts, {config: config, ref: "chart"})
-		        )
-		);
-	    }
-	});
-	console.log("component mounted");
+		getInitialState: function() {
+			return {
+				statements: [],
+				config: {
+				  chart: {
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false,
+						type: 'pie'
+					},
+			    title: {
+			      text: 'Your matches'
+			    },
+			    tooltip: {
+			      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    plotOptions: {
+			      pie: {
+			        allowPointSelect: true,
+			        cursor: 'pointer',
+			        dataLabels: {
+			          enabled: false
+			        },
+			        showInLegend: true
+			      }
+			    },
+			    series: [{
+			      name: 'Percent Match',
+			    	colorByPoint: true,
+			    	data: [
+							{
+								name: 'Him',
+								y: 56.33
+							}, {
+								name: 'Her',
+								y: 24.03,
+							}, {
+								name: 'Me',
+								y: 10.38
+							}, {
+								name: 'You',
+								y: 4.77
+							}, {
+								name: 'It',
+								y: 0.91
+							}, {
+								name: 'Trump',
+								y: 0.2
+							}
+						]
+					}]
+				}
+			};
+		},
 	
-	//var Chart = React.createClass({
-	//});
+	  componentDidMount: function() {
+			$.get('/api/statements', function(result) {
+		    this.setState({statements: result});
+			}.bind(this));
+	
+	
+	  },
+	
+	  render: function() {
+			console.log('Demographics state: ');
+			console.log(this.state.statements);
+	
+			return(
+				React.createElement("div", null, 
+				React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+					React.createElement("ul", {className: "nav nav-pills"}, 
+					  React.createElement("li", {role: "presentation", className: "active"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Matches");}.bind(this)}, "Matches")), 
+					  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Age");}.bind(this)}, "Age")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
+					), 
+					React.createElement(ReactHighcharts, {className: "chart", config: this.state.config, ref: "chart"})
+					)
+				)
+			);
+		},
+	
+		handleClick: function(x, type) {
+			console.log('clicked');
+			console.log(type);
+			var conf = this.state.config;
+			if (type == "Matces") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Age") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Gender") {
+				conf["title"]["text"] = "Answers by gender";
+			}
+			else if (type == "Race") {
+				conf["title"]["text"] = "Answers by race";
+			}
+			else if (type == "State") {
+				conf["title"]["text"] = "Answers by state";
+			}
+			this.setState({config: conf});
+		}
+	});
 	
 	module.exports = Demographics;
 
 
 /***/ },
-/* 213 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname, Buffer) {/** @jsx React.DOM */(function() {
 	  var HighchartsServer, binPath, child_process, highchartsjs, http, path, phantomjs, _;
 	
-	  _ = __webpack_require__(218);
+	  _ = __webpack_require__(220);
 	
-	  child_process = __webpack_require__(220);
+	  child_process = __webpack_require__(222);
 	
-	  http = __webpack_require__(221);
+	  http = __webpack_require__(223);
 	
-	  path = __webpack_require__(248);
+	  path = __webpack_require__(250);
 	
-	  phantomjs = __webpack_require__(249);
+	  phantomjs = __webpack_require__(251);
 	
 	  binPath = phantomjs.path;
 	
@@ -24578,10 +25046,10 @@
 	
 	}).call(this);
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, "/", __webpack_require__(214).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, "/", __webpack_require__(216).Buffer))
 
 /***/ },
-/* 214 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/** @jsx React.DOM *//*!
@@ -24592,9 +25060,9 @@
 	 */
 	/* eslint-disable no-proto */
 	
-	var base64 = __webpack_require__(215)
-	var ieee754 = __webpack_require__(216)
-	var isArray = __webpack_require__(217)
+	var base64 = __webpack_require__(217)
+	var ieee754 = __webpack_require__(218)
+	var isArray = __webpack_require__(219)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -26129,10 +26597,10 @@
 	  return i
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(214).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(216).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 215 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -26262,7 +26730,7 @@
 
 
 /***/ },
-/* 216 */
+/* 218 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -26352,16 +26820,46 @@
 
 
 /***/ },
-/* 217 */
+/* 219 */
 /***/ function(module, exports) {
 
-	/** @jsx React.DOM */module.exports = Array.isArray || function (arr) {
-	  return Object.prototype.toString.call(arr) == '[object Array]';
+	/** @jsx React.DOM */
+	/**
+	 * isArray
+	 */
+	
+	var isArray = Array.isArray;
+	
+	/**
+	 * toString
+	 */
+	
+	var str = Object.prototype.toString;
+	
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+	
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
 	};
 
 
 /***/ },
-/* 218 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/** @jsx React.DOM *//**
@@ -38716,10 +39214,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(219)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)(module), (function() { return this; }())))
 
 /***/ },
-/* 219 */
+/* 221 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports = function(module) {
@@ -38735,19 +39233,19 @@
 
 
 /***/ },
-/* 220 */
+/* 222 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */
 
 /***/ },
-/* 221 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var http = module.exports;
-	var EventEmitter = __webpack_require__(222).EventEmitter;
-	var Request = __webpack_require__(223);
-	var url = __webpack_require__(243)
+	var EventEmitter = __webpack_require__(224).EventEmitter;
+	var Request = __webpack_require__(225);
+	var url = __webpack_require__(245)
 	
 	http.request = function (params, cb) {
 	    if (typeof params === 'string') {
@@ -38891,7 +39389,7 @@
 	};
 
 /***/ },
-/* 222 */
+/* 224 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -39195,13 +39693,13 @@
 
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */var Stream = __webpack_require__(224);
-	var Response = __webpack_require__(239);
-	var Base64 = __webpack_require__(242);
-	var inherits = __webpack_require__(224);
+	/** @jsx React.DOM */var Stream = __webpack_require__(226);
+	var Response = __webpack_require__(241);
+	var Base64 = __webpack_require__(244);
+	var inherits = __webpack_require__(226);
 	
 	var Request = module.exports = function (xhr, params) {
 	    var self = this;
@@ -39410,7 +39908,7 @@
 
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -39436,15 +39934,15 @@
 	
 	module.exports = Stream;
 	
-	var EE = __webpack_require__(222).EventEmitter;
-	var inherits = __webpack_require__(224);
+	var EE = __webpack_require__(224).EventEmitter;
+	var inherits = __webpack_require__(226);
 	
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(225);
-	Stream.Writable = __webpack_require__(235);
-	Stream.Duplex = __webpack_require__(236);
-	Stream.Transform = __webpack_require__(237);
-	Stream.PassThrough = __webpack_require__(238);
+	Stream.Readable = __webpack_require__(227);
+	Stream.Writable = __webpack_require__(237);
+	Stream.Duplex = __webpack_require__(238);
+	Stream.Transform = __webpack_require__(239);
+	Stream.PassThrough = __webpack_require__(240);
 	
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -39543,20 +40041,20 @@
 
 
 /***/ },
-/* 225 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */exports = module.exports = __webpack_require__(226);
-	exports.Stream = __webpack_require__(224);
+	/** @jsx React.DOM */exports = module.exports = __webpack_require__(228);
+	exports.Stream = __webpack_require__(226);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(231);
-	exports.Duplex = __webpack_require__(230);
-	exports.Transform = __webpack_require__(233);
-	exports.PassThrough = __webpack_require__(234);
+	exports.Writable = __webpack_require__(233);
+	exports.Duplex = __webpack_require__(232);
+	exports.Transform = __webpack_require__(235);
+	exports.PassThrough = __webpack_require__(236);
 
 
 /***/ },
-/* 226 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -39583,17 +40081,17 @@
 	module.exports = Readable;
 	
 	/*<replacement>*/
-	var isArray = __webpack_require__(227);
+	var isArray = __webpack_require__(229);
 	/*</replacement>*/
 	
 	
 	/*<replacement>*/
-	var Buffer = __webpack_require__(214).Buffer;
+	var Buffer = __webpack_require__(216).Buffer;
 	/*</replacement>*/
 	
 	Readable.ReadableState = ReadableState;
 	
-	var EE = __webpack_require__(222).EventEmitter;
+	var EE = __webpack_require__(224).EventEmitter;
 	
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -39601,18 +40099,18 @@
 	};
 	/*</replacement>*/
 	
-	var Stream = __webpack_require__(224);
+	var Stream = __webpack_require__(226);
 	
 	/*<replacement>*/
-	var util = __webpack_require__(228);
-	util.inherits = __webpack_require__(224);
+	var util = __webpack_require__(230);
+	util.inherits = __webpack_require__(226);
 	/*</replacement>*/
 	
 	var StringDecoder;
 	
 	
 	/*<replacement>*/
-	var debug = __webpack_require__(229);
+	var debug = __webpack_require__(231);
 	if (debug && debug.debuglog) {
 	  debug = debug.debuglog('stream');
 	} else {
@@ -39624,7 +40122,7 @@
 	util.inherits(Readable, Stream);
 	
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(230);
+	  var Duplex = __webpack_require__(232);
 	
 	  options = options || {};
 	
@@ -39685,14 +40183,14 @@
 	  this.encoding = null;
 	  if (options.encoding) {
 	    if (!StringDecoder)
-	      StringDecoder = __webpack_require__(232).StringDecoder;
+	      StringDecoder = __webpack_require__(234).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
 	}
 	
 	function Readable(options) {
-	  var Duplex = __webpack_require__(230);
+	  var Duplex = __webpack_require__(232);
 	
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -39795,7 +40293,7 @@
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function(enc) {
 	  if (!StringDecoder)
-	    StringDecoder = __webpack_require__(232).StringDecoder;
+	    StringDecoder = __webpack_require__(234).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -40514,7 +41012,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 227 */
+/* 229 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports = Array.isArray || function (arr) {
@@ -40523,7 +41021,7 @@
 
 
 /***/ },
-/* 228 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -40634,16 +41132,16 @@
 	  return Object.prototype.toString.call(o);
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(214).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(216).Buffer))
 
 /***/ },
-/* 229 */
+/* 231 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 230 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -40684,12 +41182,12 @@
 	
 	
 	/*<replacement>*/
-	var util = __webpack_require__(228);
-	util.inherits = __webpack_require__(224);
+	var util = __webpack_require__(230);
+	util.inherits = __webpack_require__(226);
 	/*</replacement>*/
 	
-	var Readable = __webpack_require__(226);
-	var Writable = __webpack_require__(231);
+	var Readable = __webpack_require__(228);
+	var Writable = __webpack_require__(233);
 	
 	util.inherits(Duplex, Readable);
 	
@@ -40739,7 +41237,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 231 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -40770,18 +41268,18 @@
 	module.exports = Writable;
 	
 	/*<replacement>*/
-	var Buffer = __webpack_require__(214).Buffer;
+	var Buffer = __webpack_require__(216).Buffer;
 	/*</replacement>*/
 	
 	Writable.WritableState = WritableState;
 	
 	
 	/*<replacement>*/
-	var util = __webpack_require__(228);
-	util.inherits = __webpack_require__(224);
+	var util = __webpack_require__(230);
+	util.inherits = __webpack_require__(226);
 	/*</replacement>*/
 	
-	var Stream = __webpack_require__(224);
+	var Stream = __webpack_require__(226);
 	
 	util.inherits(Writable, Stream);
 	
@@ -40792,7 +41290,7 @@
 	}
 	
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(230);
+	  var Duplex = __webpack_require__(232);
 	
 	  options = options || {};
 	
@@ -40880,7 +41378,7 @@
 	}
 	
 	function Writable(options) {
-	  var Duplex = __webpack_require__(230);
+	  var Duplex = __webpack_require__(232);
 	
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -41223,7 +41721,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 232 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -41247,7 +41745,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var Buffer = __webpack_require__(214).Buffer;
+	var Buffer = __webpack_require__(216).Buffer;
 	
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -41450,7 +41948,7 @@
 
 
 /***/ },
-/* 233 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -41519,11 +42017,11 @@
 	
 	module.exports = Transform;
 	
-	var Duplex = __webpack_require__(230);
+	var Duplex = __webpack_require__(232);
 	
 	/*<replacement>*/
-	var util = __webpack_require__(228);
-	util.inherits = __webpack_require__(224);
+	var util = __webpack_require__(230);
+	util.inherits = __webpack_require__(226);
 	/*</replacement>*/
 	
 	util.inherits(Transform, Duplex);
@@ -41665,7 +42163,7 @@
 
 
 /***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -41695,11 +42193,11 @@
 	
 	module.exports = PassThrough;
 	
-	var Transform = __webpack_require__(233);
+	var Transform = __webpack_require__(235);
 	
 	/*<replacement>*/
-	var util = __webpack_require__(228);
-	util.inherits = __webpack_require__(224);
+	var util = __webpack_require__(230);
+	util.inherits = __webpack_require__(226);
 	/*</replacement>*/
 	
 	util.inherits(PassThrough, Transform);
@@ -41717,20 +42215,6 @@
 
 
 /***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */module.exports = __webpack_require__(231)
-
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */module.exports = __webpack_require__(230)
-
-
-/***/ },
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -41741,15 +42225,29 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */module.exports = __webpack_require__(234)
+	/** @jsx React.DOM */module.exports = __webpack_require__(232)
 
 
 /***/ },
 /* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */var Stream = __webpack_require__(224);
-	var util = __webpack_require__(240);
+	/** @jsx React.DOM */module.exports = __webpack_require__(235)
+
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */module.exports = __webpack_require__(236)
+
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var Stream = __webpack_require__(226);
+	var util = __webpack_require__(242);
 	
 	var Response = module.exports = function (res) {
 	    this.offset = 0;
@@ -41871,7 +42369,7 @@
 
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -42399,7 +42897,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 	
-	exports.isBuffer = __webpack_require__(241);
+	exports.isBuffer = __webpack_require__(243);
 	
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -42443,7 +42941,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(224);
+	exports.inherits = __webpack_require__(226);
 	
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -42464,7 +42962,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(5)))
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports = function isBuffer(arg) {
@@ -42475,7 +42973,7 @@
 	}
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */;(function () {
@@ -42541,7 +43039,7 @@
 
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -42565,7 +43063,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(244);
+	var punycode = __webpack_require__(246);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -42637,7 +43135,7 @@
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(245);
+	    querystring = __webpack_require__(247);
 	
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -43254,7 +43752,7 @@
 
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/** @jsx React.DOM *//*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -43786,20 +44284,20 @@
 	
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(219)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)(module), (function() { return this; }())))
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(246);
-	exports.encode = exports.stringify = __webpack_require__(247);
+	exports.decode = exports.parse = __webpack_require__(248);
+	exports.encode = exports.stringify = __webpack_require__(249);
 
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -43889,7 +44387,7 @@
 
 
 /***/ },
-/* 247 */
+/* 249 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -43980,7 +44478,7 @@
 
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */// Copyright Joyent, Inc. and other Node contributors.
@@ -44211,7 +44709,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {/** @jsx React.DOM */// Copyright 2013 The Obvious Corporation.
@@ -44221,9 +44719,9 @@
 	 * installed.
 	 */
 	
-	var fs = __webpack_require__(220)
-	var path = __webpack_require__(248)
-	var which = __webpack_require__(250)
+	var fs = __webpack_require__(222)
+	var path = __webpack_require__(250)
+	var which = __webpack_require__(252)
 	
 	
 	/**
@@ -44231,7 +44729,7 @@
 	 * @type {string}
 	 */
 	try {
-	  exports.path = path.resolve(__dirname, __webpack_require__(251).location)
+	  exports.path = path.resolve(__dirname, __webpack_require__(253).location)
 	} catch(e) {
 	  // Must be running inside install script.
 	  exports.path = null
@@ -44279,17 +44777,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @jsx React.DOM */module.exports = which
 	which.sync = whichSync
 	
-	var path = __webpack_require__(248)
+	var path = __webpack_require__(250)
 	  , fs
 	  , COLON = process.platform === "win32" ? ";" : ":"
 	  , isExe
-	  , fs = __webpack_require__(220)
+	  , fs = __webpack_require__(222)
 	
 	if (process.platform == "win32") {
 	  // On windows, there is no good way to check that a file is executable
@@ -44387,7 +44885,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 251 */
+/* 253 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */module.exports.location = "phantom/bin/phantomjs"
@@ -44396,7 +44894,7 @@
 
 
 /***/ },
-/* 252 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */!function(t,e){ true?module.exports=e(__webpack_require__(2)):"function"==typeof define&&define.amd?define(["react"],e):"object"==typeof exports?exports.Highcharts=e(require("react")):t.Highcharts=e(t.react)}(this,function(t){return function(t){function e(n){if(i[n])return i[n].exports;var o=i[n]={exports:{},id:n,loaded:!1};return t[n].call(o.exports,o,o.exports,e),o.loaded=!0,o.exports}var i={};return e.m=t,e.c=i,e.p="",e(0)}([function(t,e,i){(function(e){"use strict";if(!n){e.HighchartsAdapter=i(4);var n=i(7)}t.exports=i(3)}).call(e,function(){return this}())},function(t,e,i){"use strict";var n=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var i=arguments[e];for(var n in i)Object.prototype.hasOwnProperty.call(i,n)&&(t[n]=i[n])}return t},o=i(2);if("undefined"==typeof Highcharts)throw Error('Starting with version 3 of react-highcharts, Highcharts is not bundled by default.  use "react-highcharts/dist/bundle/highcharts" instead, or include highcharts. ');t.exports=function(t,e){var i="Highcharts"+e,r=o.createClass({displayName:i,propTypes:{config:o.PropTypes.object.isRequired,isPureConfig:o.PropTypes.bool},renderChart:function(o){if(!o)throw new Error("Config must be specified for the "+i+" component");var r=o.chart;this.chart=new t[e](n({},o,{chart:n({},r,{renderTo:this.refs.chart})}))},shouldComponentUpdate:function(t){return this.props.isPureConfig&&this.props.config===t.config||this.renderChart(t.config),!0},getChart:function(){if(!this.chart)throw new Error("getChart() should not be called before the component is mounted");return this.chart},componentDidMount:function(){this.renderChart(this.props.config)},render:function(){var t=this.props;return t=n({},t,{ref:"chart"}),o.createElement("div",t)}});return r.Highcharts=t,r}},function(e,i){e.exports=t},function(t,e,i){"use strict";var n=i(1);t.exports=n(Highcharts,"Chart")},function(t,e){/**
@@ -44421,17 +44919,75 @@
 	t.hoverPoint=null)},importEvents:function(){if(!this.hasImportedEvents){var e,i=this,n=t(i.series.options.point,i.options),o=n.events;i.events=o;for(e in o)ge(i,e,o[e]);this.hasImportedEvents=!0}},setState:function(e,i){var n,o,r,s,a=this,l=ut(a.plotX),h=a.plotY,c=a.series,d=c.options.states,p=ke[c.type].marker&&c.options.marker,u=p&&!p.enabled,f=p&&p.states[e],g=f&&f.enabled===!1,m=c.stateMarkerGraphic,y=a.marker||{},x=c.chart,v=c.halo;e=e||$t,s=a.pointAttr[e]||c.pointAttr[e],e===a.state&&!i||a.selected&&e!==Qt||d[e]&&d[e].enabled===!1||e&&(g||u&&f.enabled===!1)||e&&y.states&&y.states[e]&&y.states[e].enabled===!1||(a.graphic?(n=p&&a.graphic.symbolName&&s.r,a.graphic.attr(t(s,n?{x:l-n,y:h-n,width:2*n,height:2*n}:{})),m&&m.hide()):(e&&f&&(n=f.radius,r=y.symbol||c.symbol,m&&m.currentSymbol!==r&&(m=m.destroy()),m?m[i?"animate":"attr"]({x:l-n,y:h-n}):r&&(c.stateMarkerGraphic=m=x.renderer.symbol(r,l-n,h-n,2*n,2*n).attr(s).add(c.markerGroup),m.currentSymbol=r)),m&&(m[e&&x.isInsidePlot(l,h,x.inverted)?"show":"hide"](),m.element.point=a)),o=d[e]&&d[e].halo,o&&o.size?(v||(c.halo=v=x.renderer.path().add(x.seriesGroup)),v.attr(ne({fill:Ce(a.color||c.color).setOpacity(o.opacity).get()},o.attributes))[i?"animate":"attr"]({d:a.haloPath(o.size)})):v&&v.attr({d:[]}),a.state=e)},haloPath:function(t){var e=this.series,i=e.chart,n=e.getPlotBox(),o=i.inverted;return i.renderer.symbols.circle(n.translateX+(o?e.yAxis.len-this.plotY:this.plotX)-t,n.translateY+(o?e.xAxis.len-this.plotX:this.plotY)-t,2*t,2*t)}}),ne(je.prototype,{onMouseOver:function(){var t=this,e=t.chart,i=e.hoverSeries;i&&i!==t&&i.onMouseOut(),t.options.events.mouseOver&&ye(t,"mouseOver"),t.setState(Jt),e.hoverSeries=t},onMouseOut:function(){var t=this,e=t.options,i=t.chart,n=i.tooltip,o=i.hoverPoint;i.hoverSeries=null,o&&o.onMouseOut(),t&&e.events.mouseOut&&ye(t,"mouseOut"),!n||e.stickyTracking||n.shared&&!t.noSharedTooltip||n.hide(),t.setState()},setState:function(t){var e,i=this,n=i.options,o=i.graph,r=n.states,s=n.lineWidth,a=0;if(t=t||$t,i.state!==t){if(i.state=t,r[t]&&r[t].enabled===!1)return;if(t&&(s=r[t].lineWidth||s+(r[t].lineWidthPlus||0)),o&&!o.dashstyle)for(e={"stroke-width":s},o.attr(e);i["zoneGraph"+a];)i["zoneGraph"+a].attr(e),a+=1}},setVisible:function(t,e){var i,n=this,o=n.chart,r=n.legendItem,s=o.options.chart.ignoreHiddenSeries,a=n.visible;n.visible=t=n.userOptions.visible=t===B?!a:t,i=t?"show":"hide",de(["group","dataLabelsGroup","markerGroup","tracker"],function(t){n[t]&&n[t][i]()}),(o.hoverSeries===n||(o.hoverPoint&&o.hoverPoint.series)===n)&&n.onMouseOut(),r&&o.legend.colorizeItem(n,t),n.isDirty=!0,n.options.stacking&&de(o.series,function(t){t.options.stacking&&t.visible&&(t.isDirty=!0)}),de(n.linkedSeries,function(e){e.setVisible(t,!1)}),s&&(o.isDirtyBox=!0),e!==!1&&o.redraw(),ye(n,i)},show:function(){this.setVisible(!0)},hide:function(){this.setVisible(!1)},select:function(t){var e=this;e.selected=t=t===B?!e.selected:t,e.checkbox&&(e.checkbox.checked=t),ye(e,t?"select":"unselect")},drawTracker:ni.drawTrackerGraph}),ne(lt,{Color:Ce,Point:Ve,Tick:E,Renderer:H,SVGElement:z,SVGRenderer:Pe,arrayMin:A,arrayMax:S,charts:Bt,dateFormat:Y,error:P,format:v,pathAnim:F,getOptions:I,hasBidiBug:Ot,isTouchDevice:Mt,setOptions:O,addEvent:ge,removeEvent:me,createElement:u,discardElement:C,css:p,each:de,map:fe,merge:t,splat:d,extendClass:f,pInt:e,svg:Dt,canvas:It,vml:!Dt&&!It,product:Xt,version:Wt})}()}])});
 
 /***/ },
-/* 253 */
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var Demographics = __webpack_require__(214);
+	
+	var Result = React.createClass({displayName: "Result",
+	    getInitialState: function() {
+		return {
+		    id: '5661c3a2aee7bcb5ff5809e2',
+		    candidate: {}
+		};
+	    },
+	
+	    componentDidMount: function() {
+		var c_id = this.state.id;
+		$.get('/api/candidates/id/' + c_id, function(result) {
+		    this.setState({candidate: result});
+		}.bind(this));
+	    },
+	    closeModal: function() {
+		jQuery.noConflict();
+		$('#myModal').modal('hide');
+	    },
+	    
+	    render: function() {
+		return (
+		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+			React.createElement("div", {className: "modal-dialog"}, 
+			    React.createElement("div", {className: "modal-content"}, 
+		                React.createElement("div", {className: "modal-header"}, 
+	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
+		                ), 
+		                React.createElement("div", {className: "modal-body"}, 
+	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
+		                ), 
+		                React.createElement("div", {className: "modal-footer"}, 
+			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
+			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
+			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
+			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
+		                )
+		            )
+		        )
+		    )
+		);
+	    }
+	});
+	
+	module.exports = Result;
+
+
+/***/ },
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var _ = __webpack_require__(254);
+	var _ = __webpack_require__(257);
 	
 	var CandidateProfile = React.createClass({displayName: "CandidateProfile",
 	  getInitialState: function() {
 	    return {
-	      candidate: {}
+	      candidate: {},
+	      issues: []
 	    };
 	  },
 	
@@ -44473,12 +45029,24 @@
 	    if (this.state.candidate.image) {
 	      return (
 	        React.createElement("div", null, 
-	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement("p", {className: "col-md-6 text-justify"}, this.state.candidate.bio), 
-	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	          React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+	            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+	            React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("p", {className: "col-md-8 col-md-offset-2 text-justify"}, this.state.candidate.bio)
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	                React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
+	                React.createElement(IssuesGroups, {c_id: this.props.params.id})
+	              )
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-6 col-md-offset-3"}, 
+	                React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	              )
+	            )
 	          )
 	        )
 	      );
@@ -44493,13 +45061,11 @@
 	  render: function() {
 	    var url = "https://www.facebook.com/" + this.props.facebook;
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "panel panel-default"}, 
 	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-6"}, 
-	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
-	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
-	              React.createElement("a", {href: url}, this.props.name))
-	            )
+	        React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
+	          React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
+	            React.createElement("a", {href: url}, this.props.name))
 	          )
 	        )
 	      )
@@ -44507,21 +45073,73 @@
 	  }
 	});
 	
-	var Twitter = React.createClass({displayName: "Twitter",
-	  componentDidMount: function() {
-	    eval("!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");");
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      quotes: []
+	    };
 	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues/' + this.props.c_id, function(result) {
+	      this.setState({quotes: result});
+	    }.bind(this));
+	  },
+	
 	  render: function() {
-	    var name = "HillaryClinton";
-	    var url = "https://twitter.com/HillaryClinton";
-	    var widgetid = "667779323294691328";
+	
+	    var tabs = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: quote._id, issue: quote.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: quote._id, issue: quote.topic, quote: quote.quote, index: index})
+	      );
+	    }.bind(this));
+	
 	    return (
-	      React.createElement("div", null, 
-	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-4"}, 
-	          React.createElement("a", {className: "twitter-timeline", href: url, "data-widget-id": widgetid}, 
-	            "Tweets by @", name
-	          )
+	      React.createElement("div", {className: "issues-tabs"}, 
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
 	        )
 	      )
 	    );
@@ -44532,7 +45150,7 @@
 
 
 /***/ },
-/* 254 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/** @jsx React.DOM *///     Underscore.js 1.8.3
@@ -46086,19 +46704,118 @@
 
 
 /***/ },
-/* 255 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
 	
 	var Issues = React.createClass({displayName: "Issues",
+	
 	  componentDidMount: function() {
 	    $("#rightLinks").find("li").removeClass("active");
 	    $("#issuesLink").addClass("active");
 	  },
+	
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Issues")
+	      React.createElement("div", {className: "col-md-6 col-md-offset-3", id: "issues-page"}, 
+	        React.createElement("h1", {className: "text-center"}, "Issues"), 
+	        React.createElement(IssuesGroups, null)
+	      )
+	    );
+	  }
+	});
+	
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      issues: []
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues', function(result) {
+	      this.setState({issues: result});
+	    }.bind(this));
+	  },
+	
+	  render: function() {
+	
+	    var tabs = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: issue._id.topic, issue: issue._id.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: issue._id.topic, issue: issue._id.topic, quotes: issue.quotes, index: index})
+	      );
+	    }.bind(this));
+	
+	    return (
+	      React.createElement("div", {className: "issues-tabs"}, 
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	    var quotes = this.props.quotes.map(function(quote) {
+	      return (
+	        React.createElement(Quote, {key: quote.quote, quote: quote.quote, candidate: quote.candidate_id, name: quote.name})
+	      );
+	    }.bind(this));
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("div", {className: "panel panel-default"}, 
+	          React.createElement("ul", {className: "list-group"}, 
+	            quotes
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var Quote = React.createClass({displayName: "Quote",
+	  render: function() {
+	    return (
+	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.candidate}, 
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
+	        ), 
+	        React.createElement("h3", {className: "text-right"}, this.props.name)
+	      )
 	    );
 	  }
 	});
@@ -46107,112 +46824,94 @@
 
 
 /***/ },
-/* 256 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var ReactRouter = __webpack_require__(160);
-	var History = ReactRouter.History;
-	
 	
 	// Register page, shows the registration form and redirects to the list if login is successful
 	var Register = React.createClass({displayName: "Register",
-	
-	
-	
-	    mixins: [ History ],
-	    // initial state
-	
-	    componentDidMount: function() {
-	      $("#rightLinks").find("li").removeClass("active");
-	      $("#registerLink").addClass("active");
+	    // context so the component can access the router
+	    contextTypes: {
+	        router: React.PropTypes.func
 	    },
 	
+	    // initial state
 	    getInitialState: function() {
 	        return {
 	            // there was an error registering
-	            error: false,
-	            c_error: false
+	            error: false
 	        };
 	    },
-	
-	
-	
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#registerLink").addClass("active");
+	    },
 	
 	    // handle regiser button submit
 	    register: function(event) {
 	        // prevent default browser submit
 	        event.preventDefault();
 	        // get data from form
-	        var username = this.refs.username.value;
-	        var password = this.refs.password.value;
-	        var sex = this.refs.sex.value;
-	        var age = this.refs.age.value;
-	        var race = this.refs.race.value;
-	        var state = this.refs.state.value;
-	        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
-	            console.log("field empty");
-	            return this.setState({
-	                c_error: true
-	            });
+	        var username = this.refs.username.getDOMNode().value;
+	        var password = this.refs.password.getDOMNode().value;
+	        var sex = this.refs.sex.getDOMNode().value;
+	        var age = this.refs.age.getDOMNode().value;
+	        var race = this.refs.race.getDOMNode().value;
+	        var state = this.refs.state.getDOMNode().value;
+	        if (!username || !password) {
+	            return;
 	        }
-	        this.setState({c_error: false});
 	        // register via the API
-	        if(localStorage){
-	          auth.logout();
-	        };
 	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
 	            // register callback
 	            if (!loggedIn)
 	                return this.setState({
 	                    error: true
 	                });
-	            this.history.pushState(null, '/poll');
+	            this.context.router.replaceWith('/list');
 	        }.bind(this));
-	
 	    },
 	
 	    // show the registration form
 	    render: function() {
 	        return (
+	
 	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("h2", null, "Register"), 
-	            this.state.c_error ? (
-	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
-	              ) : null, 
-	              this.state.error ? (
-	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
-	              ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
-	            React.createElement("p", null, "Please choose a username"), 
+	            React.createElement("p", null, "Please choose a username *"), 
 	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please choose a password"), 
+	            React.createElement("p", null, "Please choose a password *"), 
 	            React.createElement("input", {type: "password", placeholder: "dem4life", ref: "password"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("p", null, "Please select your sex"), 
-	                React.createElement("select", {name: "sex", ref: "sex"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "Male"}, "Male"), 
-	                    React.createElement("option", {value: "Female"}, "Female")
-	                ), 
+	            React.createElement("input", {list: "sexes", name: "sex"}, 
+	                React.createElement("datalist", {id: "sexes"}, 
+	                    React.createElement("option", {value: "Male"}), 
+	                    React.createElement("option", {value: "Female"})
+	                )
+	            ), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("p", null, "Please select your race"), 
-	                React.createElement("select", {name: "race", ref: "race"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "Caucasion"}, "Caucasion"), 
-	                    React.createElement("option", {value: "Black"}, "Black"), 
-	                    React.createElement("option", {value: "Latino"}, "Latino"), 
-	                    React.createElement("option", {value: "Asian"}, "Asian"), 
-	                    React.createElement("option", {value: "Other"}, "Other")
-	                ), 
+	            React.createElement("input", {list: "races", name: "race"}, 
+	                React.createElement("datalist", {id: "races"}, 
+	                    React.createElement("option", {value: "Caucasion"}), 
+	                    React.createElement("option", {value: "Black"}), 
+	                    React.createElement("option", {value: "Latino"}), 
+	                    React.createElement("option", {value: "Asian"}), 
+	                    React.createElement("option", {value: "Other"})
+	                )
+	            ), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
@@ -46222,63 +46921,68 @@
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("p", null, "Please select your state"), 
-	                React.createElement("select", {name: "state", ref: "state"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "AL"}, "AL"), 
-	                    React.createElement("option", {value: "AK"}, "AK"), 
-	                    React.createElement("option", {value: "AZ"}, "AZ"), 
-	                    React.createElement("option", {value: "AR"}, "AR"), 
-	                    React.createElement("option", {value: "CA"}, "CA"), 
-	                    React.createElement("option", {value: "CO"}, "CO"), 
-	                    React.createElement("option", {value: "CT"}, "CT"), 
-	                    React.createElement("option", {value: "DE"}, "DE"), 
-	                    React.createElement("option", {value: "FL"}, "FL"), 
-	                    React.createElement("option", {value: "GA"}, "GA"), 
-	                    React.createElement("option", {value: "HI"}, "HI"), 
-	                    React.createElement("option", {value: "ID"}, "ID"), 
-	                    React.createElement("option", {value: "IL"}, "IL"), 
-	                    React.createElement("option", {value: "IN"}, "IN"), 
-	                    React.createElement("option", {value: "IA"}, "IA"), 
-	                    React.createElement("option", {value: "KS"}, "KS"), 
-	                    React.createElement("option", {value: "KY"}, "KY"), 
-	                    React.createElement("option", {value: "LA"}, "LA"), 
-	                    React.createElement("option", {value: "ME"}, "ME"), 
-	                    React.createElement("option", {value: "MD"}, "MD"), 
-	                    React.createElement("option", {value: "MA"}, "MA"), 
-	                    React.createElement("option", {value: "MI"}, "MI"), 
-	                    React.createElement("option", {value: "MN"}, "MN"), 
-	                    React.createElement("option", {value: "MS"}, "MS"), 
-	                    React.createElement("option", {value: "MO"}, "MO"), 
-	                    React.createElement("option", {value: "MT"}, "MT"), 
-	                    React.createElement("option", {value: "NE"}, "NE"), 
-	                    React.createElement("option", {value: "NV"}, "NV"), 
-	                    React.createElement("option", {value: "NH"}, "NH"), 
-	                    React.createElement("option", {value: "NJ"}, "NJ"), 
-	                    React.createElement("option", {value: "NM"}, "NM"), 
-	                    React.createElement("option", {value: "NY"}, "NY"), 
-	                    React.createElement("option", {value: "NC"}, "NC"), 
-	                    React.createElement("option", {value: "ND"}, "ND"), 
-	                    React.createElement("option", {value: "OH"}, "OH"), 
-	                    React.createElement("option", {value: "OK"}, "OK"), 
-	                    React.createElement("option", {value: "OR"}, "OR"), 
-	                    React.createElement("option", {value: "PA"}, "PA"), 
-	                    React.createElement("option", {value: "RI"}, "RI"), 
-	                    React.createElement("option", {value: "SC"}, "SC"), 
-	                    React.createElement("option", {value: "SD"}, "SD"), 
-	                    React.createElement("option", {value: "TN"}, "TN"), 
-	                    React.createElement("option", {value: "TX"}, "TX"), 
-	                    React.createElement("option", {value: "UT"}, "UT"), 
-	                    React.createElement("option", {value: "VT"}, "VT"), 
-	                    React.createElement("option", {value: "VA"}, "VA"), 
-	                    React.createElement("option", {value: "WA"}, "WA"), 
-	                    React.createElement("option", {value: "WV"}, "WV"), 
-	                    React.createElement("option", {value: "WI"}, "WI"), 
-	                    React.createElement("option", {value: "WY"}, "WY")
-	                ), 
+	            React.createElement("input", {list: "states", name: "state"}, 
+	                React.createElement("datalist", {id: "states"}, 
+	                    React.createElement("option", {value: "AL"}), 
+	                    React.createElement("option", {value: "AK"}), 
+	                    React.createElement("option", {value: "AZ"}), 
+	                    React.createElement("option", {value: "AR"}), 
+	                    React.createElement("option", {value: "CA"}), 
+	                    React.createElement("option", {value: "CO"}), 
+	                    React.createElement("option", {value: "CT"}), 
+	                    React.createElement("option", {value: "DE"}), 
+	                    React.createElement("option", {value: "FL"}), 
+	                    React.createElement("option", {value: "GA"}), 
+	                    React.createElement("option", {value: "HI"}), 
+	                    React.createElement("option", {value: "ID"}), 
+	                    React.createElement("option", {value: "IL"}), 
+	                    React.createElement("option", {value: "IN"}), 
+	                    React.createElement("option", {value: "IA"}), 
+	                    React.createElement("option", {value: "KS"}), 
+	                    React.createElement("option", {value: "KY"}), 
+	                    React.createElement("option", {value: "LA"}), 
+	                    React.createElement("option", {value: "ME"}), 
+	                    React.createElement("option", {value: "MD"}), 
+	                    React.createElement("option", {value: "MA"}), 
+	                    React.createElement("option", {value: "MI"}), 
+	                    React.createElement("option", {value: "MN"}), 
+	                    React.createElement("option", {value: "MS"}), 
+	                    React.createElement("option", {value: "MO"}), 
+	                    React.createElement("option", {value: "MT"}), 
+	                    React.createElement("option", {value: "NE"}), 
+	                    React.createElement("option", {value: "NV"}), 
+	                    React.createElement("option", {value: "NH"}), 
+	                    React.createElement("option", {value: "NJ"}), 
+	                    React.createElement("option", {value: "NM"}), 
+	                    React.createElement("option", {value: "NY"}), 
+	                    React.createElement("option", {value: "NC"}), 
+	                    React.createElement("option", {value: "ND"}), 
+	                    React.createElement("option", {value: "OH"}), 
+	                    React.createElement("option", {value: "OK"}), 
+	                    React.createElement("option", {value: "OR"}), 
+	                    React.createElement("option", {value: "PA"}), 
+	                    React.createElement("option", {value: "RI"}), 
+	                    React.createElement("option", {value: "SC"}), 
+	                    React.createElement("option", {value: "SD"}), 
+	                    React.createElement("option", {value: "TN"}), 
+	                    React.createElement("option", {value: "TX"}), 
+	                    React.createElement("option", {value: "UT"}), 
+	                    React.createElement("option", {value: "VT"}), 
+	                    React.createElement("option", {value: "VA"}), 
+	                    React.createElement("option", {value: "WA"}), 
+	                    React.createElement("option", {value: "WV"}), 
+	                    React.createElement("option", {value: "WI"}), 
+	                    React.createElement("option", {value: "WY"})
+	                )
+	            ), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn", type: "submit", value: "Register"})
+	            React.createElement("input", {className: "btn", type: "submit", value: "Register"}), 
+	            this.state.error ? (
+	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
+	                ) : null
+	            )
 	            )
 	            )
 	            );
@@ -46287,7 +46991,7 @@
 	
 	// authentication object
 	var auth = {
-	    register: function(username, password, sex, age, race, state, cb) {
+	    register: function(username, password, sex, race, age, state, cb) {
 	        // submit request to server, call the callback when complete
 	        var url = "/api/users/register";
 	        $.ajax({
@@ -46345,32 +47049,19 @@
 
 
 /***/ },
-/* 257 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var ReactRouter = __webpack_require__(160);
-	var History = ReactRouter.History;
 	
 	var Login = React.createClass({displayName: "Login",
-	
-	
-	
-	    mixins: [History],
-	
-	    componentDidMount: function() {
-	      $("#rightLinks").find("li").removeClass("active");
-	      $("#loginLink").addClass("active");
-	    },
-	
 	
 	    // initial state
 	    getInitialState: function() {
 	        return {
 	            // there was an error on logging in
-	            error: false,
-	            c_error: false
+	            error: false
 	        };
 	
 	    },
@@ -46380,41 +47071,32 @@
 	        // prevent default browser submit
 	        event.preventDefault();
 	        // get data from form
-	        var username = this.refs.username.value;
-	        var password = this.refs.password.value;
+	        var username = this.refs.username.getDOMNode().value;
+	        var password = this.refs.password.getDOMNode().value;
 	        if (!username || !password) {
-	            return this.setState({
-	                c_error: true
-	            });
+	            return;
 	        }
 	        // login via API
-	        if(localStorage){
-	          auth.logout();
-	        };
 	        auth.login(username, password, function(loggedIn) {
 	            // login callback
 	            if (!loggedIn)
 	                return this.setState({
 	                    error: true
 	                });
-	            this.history.pushState(null, '/poll');
+	            this.context.router.transitionTo('/list');
 	        }.bind(this));
-	
 	    },
-	
-	
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#loginLink").addClass("active");
+	    },
 	
 	    // show the login form
 	    render: function() {
 	        return (
 	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("h2", null, "Login"), 
-	            this.state.c_error ? (
-	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
-	              ) : null, 
-	              this.state.error ? (
-	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
-	              ) : null, 
 	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
 	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
 	            React.createElement("br", null), 
@@ -46422,7 +47104,11 @@
 	            React.createElement("input", {type: "password", placeholder: "Password", ref: "password"}), 
 	            React.createElement("br", null), 
 	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"})
+	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"}), 
+	            this.state.error ? (
+	                React.createElement("div", {className: "alert"}, "Invalid username or password.")
+	                ) : null
+	            )
 	            )
 	            )
 	            );
