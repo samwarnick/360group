@@ -24,6 +24,10 @@ var Register = React.createClass({
             c_error: false
         };
     },
+    componentDidMount: function() {
+        $("#rightLinks").find("li").removeClass("active");
+        $("#registerLink").addClass("active");
+    },
 
 
 
@@ -64,7 +68,9 @@ var Register = React.createClass({
     // show the registration form
     render: function() {
         return (
+
             <div>
+            <div className="col-md-8 col-md-offset-2">
             <h2>Register</h2>
             {this.state.c_error ? (
                 <div className="alert"><p>All fields are required</p></div>
@@ -168,6 +174,7 @@ var Register = React.createClass({
             <br/>
             <input className="btn" type="submit" value="Register" />
             </form>
+            </div>
             </div>
             );
     }

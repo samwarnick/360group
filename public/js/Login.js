@@ -51,6 +51,10 @@ var Login = React.createClass({
         }.bind(this));
 
     },
+    componentDidMount: function() {
+        $("#rightLinks").find("li").removeClass("active");
+        $("#loginLink").addClass("active");
+    },
 
 
 
@@ -58,6 +62,7 @@ var Login = React.createClass({
     render: function() {
         return (
             <div>
+            <div className="col-md-8 col-md-offset-2">
             <h2>Login</h2>
             {this.state.c_error ? (
                 <div className="alert"><p>All fields are required</p></div>
@@ -74,6 +79,7 @@ var Login = React.createClass({
             <br/>
             <input className="btn btn-warning" type="submit" value="Login" />
             </form>
+            </div>
             </div>
             );
     }

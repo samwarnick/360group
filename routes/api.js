@@ -62,28 +62,6 @@ router.post('/users/login', function (req, res) {
     });
 });
 
-//update statement
-router.post('/items/:statment_id', function (req,res) {
-  // validate the supplied token
-      // if the token is valid, then find the requested item
-      Statement.findById(req.params.statement_id, function(err,item) {
-    if (err) {
-      res.sendStatus(403);
-      return;
-    }
-        item.title = req.body.item.title;
-        item.completed = req.body.item.completed;
-        item.save(function(err) {
-      if (err) {
-        res.sendStatus(403);
-        return;
-      }
-          // return value is the item as JSON
-          res.json({item:item});
-        });
-      });
-  });
-
 router.get('/candidates/party/:party', function(req, res) {
   Candidate.find({party: req.params.party},
     {name: 1, party: 1, image: 1, poll: 1},
@@ -107,11 +85,6 @@ router.get('/candidates/id/:id', function(req, res) {
   });
 });
 
-router.get('/candidates/:id', function(req, res) {
-
-});
-
-
 router.get('/statements', function(req, res) {
   Statement.find({}, function(err, statements) {
     if (err) {
@@ -123,18 +96,70 @@ router.get('/statements', function(req, res) {
   });
 });
 
-// router.post('/pollresults', function(req, res) {
-//     for (statement in req) {
-//         Statement.find({statement.statement}, function(err, statementFromDB) {
-//             if (err) {
-//               console.log(statements);
-//               res.sendStatus('403');
-//               return;
-//             }
-//             //update the database with the stuff
-//
-//         })
-//     }
-// })
+router.post('/pollresults', function(req, res) {
+    console.log(req);
+    var age = req.body.age;
+    var gender = req.body.gender;
+    var race = req.body.race;
+    var state = req.body.state;
+    var statementansPairs = {};
+    for (key in req.body) {
+        if (key != 'age' && key != 'gender' && key != 'race' && key != 'state') {
+            console.log(statementansPairs);
+            statementansPairs[key] = req.body[key];
+        }
+    }
+    console.log(statementansPairs);
+    for (key in statementansPairs) {
+        (function(statekey) {
+            Statement.find({"quote": statekey}, function(err, statementFromDB) {
+                if (err) {
+                  console.log(statements);
+                  res.sendStatus('403');
+                  return;
+                }
+                console.log(statekey);
+                var firststatement = statementFromDB[0];
+                var answer = statementansPairs[statekey];
+                var userDemo = {
+                    "age": age,
+                    "gender": gender,
+                    "race": race,
+                    "state": state
+                };
+                userDemo["answer"] = answer;
+                firststatement.raw.push(userDemo);
+                Statement.update({"quote": statekey}, {$set: {"raw": firststatement.raw}}, function(err, newstatement) {
+                    if (err) {
+                      console.log(statements);
+                      res.sendStatus('403');
+                      return;
+                    }
+                });
+            });
+        })(key);
+    }
+    res.sendStatus('200');
+});
+
+router.get('/issues', function(req, res) {
+  Statement.aggregate([{$group: { _id: { topic: "$topic" }, quotes: { $push: { quote: "$quote", candidate_id: "$candidate_id", name: "$name"}} } }], function(err, issues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    res.send(issues);
+  });
+});
+
+router.get('/issues/:candidate_id', function(req, res) {
+  Statement.find({candidate_id: req.params.candidate_id}, function(err, candidateIssues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    res.send(candidateIssues);
+  });
+});
 
 module.exports = router;

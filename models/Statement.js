@@ -8,8 +8,9 @@ var User = require('./user.js');
 
 // Item schema
 var statementSchema = new Schema({
-    candidate: {type: ObjectId, ref: 'Candidate'},
+    candidate: String,
     quote: String,
+    topic: String,
     raw: []
 });
 
