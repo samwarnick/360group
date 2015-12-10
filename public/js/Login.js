@@ -38,7 +38,7 @@ var Login = React.createClass({
             });
         }
         // login via API
-        if(localStorage){
+        if(auth.loggedIn()){
           auth.logout();
         };
         auth.login(username, password, function(loggedIn) {
@@ -112,7 +112,7 @@ var auth = {
             success: function(res) {
                 // on success, store a login token
                 localStorage.token = res.token;
-                localStorage.name = res.name;
+                localStorage.username = res.username;
                 if (cb)
                     cb(true);
                 this.onChange(true);
@@ -129,10 +129,6 @@ var auth = {
     // get the token from local storage
     getToken: function() {
         return localStorage.token;
-    },
-    // get the name from local storage
-    getName: function() {
-        return localStorage.name;
     },
     // logout the user, call the callback when complete
     logout: function(cb) {

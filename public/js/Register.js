@@ -43,6 +43,10 @@ var Register = React.createClass({
         var age = this.refs.age.value;
         var race = this.refs.race.value;
         var state = this.refs.state.value;
+        var candidate = "none";
+        if(localStorage.candidate){
+          candidate = localStorage.candidate;
+        }
         if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
             console.log("field empty");
             return this.setState({
@@ -51,10 +55,10 @@ var Register = React.createClass({
         }
         this.setState({c_error: false});
         // register via the API
-        if(localStorage){
+        if(auth.loggedIn()){
           auth.logout();
         };
-        auth.register(username, password, sex, age, race, state, function(loggedIn) {
+        auth.register(username, password, sex, age, race, state, candidate, function(loggedIn) {
             // register callback
             if (!loggedIn)
                 return this.setState({
@@ -182,7 +186,7 @@ var Register = React.createClass({
 
 // authentication object
 var auth = {
-    register: function(username, password, sex, age, race, state, cb) {
+    register: function(username, password, sex, age, race, state, candidate, cb) {
         // submit request to server, call the callback when complete
         var url = "/api/users/register";
         $.ajax({
@@ -195,12 +199,13 @@ var auth = {
                 sex: sex,
                 race: race,
                 age: age,
-                state: state
+                state: state,
+                candidate: candidate
             },
             // on success, store a login token
             success: function(res) {
                 localStorage.token = res.token;
-                localStorage.name = res.name;
+                localStorage.username = res.username;
                 if (cb)
                     cb(true);
                 this.onChange(true);

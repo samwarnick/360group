@@ -44513,7 +44513,7 @@
 		jQuery.noConflict();
 		$('#myModal').modal('hide');
 	    },
-	    
+	
 	    render: function() {
 		return (
 		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
@@ -44883,6 +44883,10 @@
 	        var age = this.refs.age.value;
 	        var race = this.refs.race.value;
 	        var state = this.refs.state.value;
+	        var candidate = "none";
+	        if(localStorage.candidate){
+	          candidate = localStorage.candidate;
+	        }
 	        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
 	            console.log("field empty");
 	            return this.setState({
@@ -44891,10 +44895,10 @@
 	        }
 	        this.setState({c_error: false});
 	        // register via the API
-	        if(localStorage){
+	        if(auth.loggedIn()){
 	          auth.logout();
 	        };
-	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
+	        auth.register(username, password, sex, age, race, state, candidate, function(loggedIn) {
 	            // register callback
 	            if (!loggedIn)
 	                return this.setState({
@@ -45022,7 +45026,7 @@
 	
 	// authentication object
 	var auth = {
-	    register: function(username, password, sex, age, race, state, cb) {
+	    register: function(username, password, sex, age, race, state, candidate, cb) {
 	        // submit request to server, call the callback when complete
 	        var url = "/api/users/register";
 	        $.ajax({
@@ -45035,12 +45039,13 @@
 	                sex: sex,
 	                race: race,
 	                age: age,
-	                state: state
+	                state: state,
+	                candidate: candidate
 	            },
 	            // on success, store a login token
 	            success: function(res) {
 	                localStorage.token = res.token;
-	                localStorage.name = res.name;
+	                localStorage.username = res.username;
 	                if (cb)
 	                    cb(true);
 	                this.onChange(true);
@@ -45123,7 +45128,7 @@
 	            });
 	        }
 	        // login via API
-	        if(localStorage){
+	        if(auth.loggedIn()){
 	          auth.logout();
 	        };
 	        auth.login(username, password, function(loggedIn) {
@@ -45197,7 +45202,7 @@
 	            success: function(res) {
 	                // on success, store a login token
 	                localStorage.token = res.token;
-	                localStorage.name = res.name;
+	                localStorage.username = res.username;
 	                if (cb)
 	                    cb(true);
 	                this.onChange(true);
@@ -45214,10 +45219,6 @@
 	    // get the token from local storage
 	    getToken: function() {
 	        return localStorage.token;
-	    },
-	    // get the name from local storage
-	    getName: function() {
-	        return localStorage.name;
 	    },
 	    // logout the user, call the callback when complete
 	    logout: function(cb) {
