@@ -62,6 +62,7 @@ var CandidateProfile = React.createClass({
           </div>
         </div>
         </div>
+        </div>
       );
     } else {
       return false;

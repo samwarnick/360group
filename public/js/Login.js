@@ -41,6 +41,7 @@ var Login = React.createClass({
     render: function() {
         return (
             <div>
+            <div className="col-md-8 col-md-offset-2">
             <h2>Login</h2>
             <form className="form-vertical" onSubmit={this.login}>
             <input type="text" placeholder="Username" ref="username" autoFocus={true} />
@@ -54,6 +55,7 @@ var Login = React.createClass({
                 <div className="alert">Invalid username or password.</div>
                 ) : null}
             </form>
+            </div>
             </div>
             );
     }

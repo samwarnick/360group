@@ -8,7 +8,7 @@ var Profile = React.createClass({
       sex: "",
       age: "",
       state: "",
-      candidate: 
+      candidate:
     };
   },
 
@@ -30,10 +30,12 @@ var Profile = React.createClass({
 
     return (
       <div>
+      <div className="col-md-8 col-md-offset-2">
         <h1>Candidates</h1>
         <ul>
           {candidatesList}
         </ul>
+      </div>
       </div>
     );
   }
@@ -48,4 +50,3 @@ var Candidate = React.createClass({
 });
 
 module.exports = Profile;
-

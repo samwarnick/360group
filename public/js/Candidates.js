@@ -35,12 +35,15 @@ var Candidates = React.createClass({
     }.bind(this));
 
     return (
+
       <div>
+      <div className="col-md-8 col-md-offset-2">
         <h1 className="text-center">Candidates</h1>
         <div className="row">
           <CandidateList list={democratList} party={"Democrats"} />
           <CandidateList list={republicanList} party={"Republicans"} />
         </div>
+      </div>
       </div>
     );
   }
