@@ -172,7 +172,7 @@ var Register = React.createClass({
             <br/>
             <br/>
             <br/>
-            <input className="btn" type="submit" value="Register" />
+            <input className="btn btn-primary" type="submit" value="Register" />
             </form>
             </div>
             </div>

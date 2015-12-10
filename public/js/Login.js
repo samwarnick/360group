@@ -77,7 +77,7 @@ var Login = React.createClass({
             <input type="password" placeholder="Password" ref="password"/>
             <br/>
             <br/>
-            <input className="btn btn-warning" type="submit" value="Login" />
+            <input className="btn btn-primary" type="submit" value="Login" />
             </form>
             </div>
             </div>

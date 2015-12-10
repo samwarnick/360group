@@ -61,7 +61,7 @@
 	var Candidates = __webpack_require__(210);
 	var Poll = __webpack_require__(211);
 	var Demographics = __webpack_require__(212);
-	var CandidateProfile = __webpack_require__(253);
+	var CandidateProfile = __webpack_require__(254);
 	var Issues = __webpack_require__(255);
 	var Register = __webpack_require__(256);
 	var Login = __webpack_require__(257);
@@ -71,9 +71,7 @@
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement(NavBar, null), 
-	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	          this.props.children || React.createElement(Home, null)
-	        )
 	      )
 	    );
 	  }
@@ -86,12 +84,44 @@
 	
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Home")
+	    React.createElement("div", null, 
+	      React.createElement("div", {className: "intro-header container-fluid"}, 
+	        React.createElement("div", {className: "background-image container-fluid"}), 
+	        React.createElement("div", {className: "col-lg-12"}, 
+	            React.createElement("div", {className: "intro-message"}, 
+	                React.createElement("h1", null, React.createElement("img", {src: "img/swyftvote_logo_light.png"}))
+	            ), 
+	            React.createElement("div", {className: "button-section"}, 
+	                React.createElement(Link, {className: "poll-link", to: "poll"}, 
+	                    React.createElement("button", {type: "button", className: "button-front text-center"}, "TAKE THE POLL")
+	                )
+	            )
+	        )
+	      ), 
+	        React.createElement("div", {className: "container"}, 
+	            React.createElement("div", {className: "row"}, 
+	                React.createElement("div", {className: "col-lg-12 text-center"}, 
+	                    React.createElement("h2", {className: "section-heading"}, "Got a Suggestion?"), 
+	                    React.createElement("hr", {className: "primary"}, 
+	                        React.createElement("p", null, "Give us a call or send us an email and we will get back to you as soon as possible!")
+	                    )
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/phone.png", className: "phone"}), 
+	                    React.createElement("p", null, "555-555-5555")
+	                ), 
+	                React.createElement("div", {className: "col-md-6 text-center"}, 
+	                    React.createElement("img", {src: "/img/envelope.png", className: "envelope"}), 
+	                    React.createElement("p", null, 
+	                        React.createElement("a", {href: "mailto:feedback@Swyftvote.com"}, "feedback@Swyftvote.com")
+	                    )
+	                )
+	            )
+	        )
+	      )
 	    );
 	  }
 	});
-	
-	
 	
 	var Error = React.createClass({displayName: "Error",
 	  render: function() {
@@ -100,10 +130,6 @@
 	    );
 	  }
 	});
-	
-	
-	
-	
 	
 	var routes = (
 	  React.createElement(Router, null, 
@@ -24202,12 +24228,15 @@
 	    }.bind(this));
 	
 	    return (
+	
 	      React.createElement("div", null, 
+	      React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	        React.createElement("h1", {className: "text-center"}, "Candidates"), 
 	        React.createElement("div", {className: "row"}, 
 	          React.createElement(CandidateList, {list: democratList, party: "Democrats"}), 
 	          React.createElement(CandidateList, {list: republicanList, party: "Republicans"})
 	        )
+	      )
 	      )
 	    );
 	  }
@@ -24257,6 +24286,7 @@
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
 	var Demographics = __webpack_require__(212);
+	var Result = __webpack_require__(253);
 	
 	var Poll = React.createClass({displayName: "Poll",
 	  render: function() {
@@ -24272,7 +24302,21 @@
 	var Quiz = React.createClass({displayName: "Quiz",
 	    handleClick: function(event) {
 	        console.log(this.state.stateansPairs);
-	    // $.post('/api/pollresults')
+	        var demographicslist = {
+	            age: 54,
+	            gender: "Male",
+	            race: "White",
+	            state: "UT",
+	        }
+	        var request = {age: 54,
+	        gender: "Male",
+	        race: "White",
+	        state: "UT",
+	        };
+	        for (key in this.state.stateansPairs) {
+	            request[key] = this.state.stateansPairs[key];
+	        }
+	        $.post('/api/pollresults',request);
 	    //send them off with an API call
 	  },
 	    answerSelected: function(statement, answer) {
@@ -24292,7 +24336,7 @@
 		this.setState({statements: result,
 	        liststatements: result.map(function(statement) {
 		    return (
-			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.statement})
+			    React.createElement(Statement, {onAnswer: this.answerSelected, key: statement._id, statement: statement.quote})
 		    );
 	    	}.bind(this))
 	    });
@@ -24306,20 +24350,22 @@
 	
 	      return (
 	        React.createElement("div", null, 
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	            React.createElement("div", {id: "section1"}, 
-	                React.createElement("div", {className: "container", id: "quiz"}, 
+	                React.createElement("div", {className: "container-fluid", id: "quiz"}, 
 	                    React.createElement("div", {className: "row"}, 
-	                        React.createElement("div", {className: "col-md-8"}, 
+	                        React.createElement("div", null, 
 	                        React.createElement("div", {id: "question"}, React.createElement("h1", null, "How much do you agree with the following statments?")), 
 	                            	this.state.liststatements, 
 	
 	                                React.createElement("button", {type: "button", className: "btn btn-primary", onClick: this.handleClick, "data-toggle": "modal", "data-target": "#myModal"}, "SUBMIT")
 	                        ), 
-		                React.createElement(Modal, null), 
+		                React.createElement(Result, null), 
 	                        React.createElement("div", {className: "col-md-6"}
 	                        )
 	                    )
 	                )
+	            )
 	            )
 	        )
 	      );
@@ -24360,29 +24406,6 @@
 	  }
 	});
 	
-	var Modal = React.createClass({displayName: "Modal",
-	    render: function() {
-		return (
-		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
-			React.createElement("div", {className: "modal-dialog"}, 
-			    React.createElement("div", {className: "modal-content"}, 
-		                React.createElement("div", {className: "modal-header"}, 
-	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
-	                            React.createElement("h4", {className: "modal-title"}, "Your Result!")
-		                ), 
-		                React.createElement("div", {className: "modal-body"}, 
-	                            React.createElement(Demographics, null)
-		                ), 
-		                React.createElement("div", {className: "modal-footer"}, 
-	                            React.createElement("button", {type: "button", className: "btn btn-default", "data-dismiss": "modal"}, "Close")
-		                )
-		            )
-		        )
-			)
-		);
-	    }
-	});
-	
 	module.exports = Poll;
 
 
@@ -24396,67 +24419,111 @@
 	var ReactHighcharts = __webpack_require__(252);
 	
 	var Demographics = React.createClass({displayName: "Demographics",
-	    render: function() {
-		var config = {
-		    chart: {
-	                plotBackgroundColor: null,
-	                plotBorderWidth: null,
-	                plotShadow: false,
-	                type: 'pie'
-	            },
-	            title: {
-	                text: 'Browser market shares January, 2015 to May, 2015'
-	            },
-	            tooltip: {
-	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	            },
-	            plotOptions: {
-	                pie: {
-	                    allowPointSelect: true,
-	                    cursor: 'pointer',
-	                    dataLabels: {
-	                        enabled: false
-	                    },
-	                    showInLegend: true
-	                }
-	            },
-	            series: [{
-	                name: 'Brands',
-	                colorByPoint: true,
-	                data: [{
-	                    name: 'Him',
-	                    y: 56.33
-	                }, {
-	                    name: 'Her',
-	                    y: 24.03,
-	                }, {
-	                    name: 'Me',
-	                    y: 10.38
-	                }, {
-	                    name: 'You',
-	                    y: 4.77
-	                }, {
-	                    name: 'It',
-	                    y: 0.91
-	                }, {
-	                    name: 'Trump',
-	                    y: 0.2
-	                }]
-	            }]
-		};
-		
-		return(
-			React.createElement("div", null, 
-			    React.createElement("p", null, "This will show the candidate that you match"), 
-			    React.createElement(ReactHighcharts, {config: config, ref: "chart"})
-		        )
-		);
-	    }
-	});
-	console.log("component mounted");
+		getInitialState: function() {
+			return {
+				statements: [],
+				config: {
+				  chart: {
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false,
+						type: 'pie'
+					},
+			    title: {
+			      text: 'Your matches'
+			    },
+			    tooltip: {
+			      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    plotOptions: {
+			      pie: {
+			        allowPointSelect: true,
+			        cursor: 'pointer',
+			        dataLabels: {
+			          enabled: false
+			        },
+			        showInLegend: true
+			      }
+			    },
+			    series: [{
+			      name: 'Percent Match',
+			    	colorByPoint: true,
+			    	data: [
+							{
+								name: 'Him',
+								y: 56.33
+							}, {
+								name: 'Her',
+								y: 24.03,
+							}, {
+								name: 'Me',
+								y: 10.38
+							}, {
+								name: 'You',
+								y: 4.77
+							}, {
+								name: 'It',
+								y: 0.91
+							}, {
+								name: 'Trump',
+								y: 0.2
+							}
+						]
+					}]
+				}
+			};
+		},
 	
-	//var Chart = React.createClass({
-	//});
+	  componentDidMount: function() {
+			$.get('/api/statements', function(result) {
+		    this.setState({statements: result});
+			}.bind(this));
+	
+	
+	  },
+	
+	  render: function() {
+			console.log('Demographics state: ');
+			console.log(this.state.statements);
+	
+			return(
+				React.createElement("div", null, 
+				React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+					React.createElement("ul", {className: "nav nav-pills"}, 
+					  React.createElement("li", {role: "presentation", className: "active"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Matches");}.bind(this)}, "Matches")), 
+					  React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Age");}.bind(this)}, "Age")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Gender");}.bind(this)}, "Gender")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"Race");}.bind(this)}, "Race")), 
+			  		React.createElement("li", {role: "presentation"}, React.createElement("a", {"data-toggle": "tab", onClick: function()  {return this.handleClick(this,"State");}.bind(this)}, "State"))
+					), 
+					React.createElement(ReactHighcharts, {className: "chart", config: this.state.config, ref: "chart"})
+					)
+				)
+			);
+		},
+	
+		handleClick: function(x, type) {
+			console.log('clicked');
+			console.log(type);
+			var conf = this.state.config;
+			if (type == "Matces") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Age") {
+				conf["title"]["text"] = "Answers by age";
+			}
+			else if (type == "Gender") {
+				conf["title"]["text"] = "Answers by gender";
+			}
+			else if (type == "Race") {
+				conf["title"]["text"] = "Answers by race";
+			}
+			else if (type == "State") {
+				conf["title"]["text"] = "Answers by state";
+			}
+			this.setState({config: conf});
+		}
+	});
 	
 	module.exports = Demographics;
 
@@ -44424,14 +44491,72 @@
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/** @jsx React.DOM */var React = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var Demographics = __webpack_require__(212);
+	
+	var Result = React.createClass({displayName: "Result",
+	    getInitialState: function() {
+		return {
+		    id: '5661c3a2aee7bcb5ff5809e2',
+		    candidate: {}
+		};
+	    },
+	
+	    componentDidMount: function() {
+		var c_id = this.state.id;
+		$.get('/api/candidates/id/' + c_id, function(result) {
+		    this.setState({candidate: result});
+		}.bind(this));
+	    },
+	    closeModal: function() {
+		jQuery.noConflict();
+		$('#myModal').modal('hide');
+	    },
+	    
+	    render: function() {
+		return (
+		    React.createElement("div", {id: "myModal", className: "modal fade", role: "dialog"}, 
+			React.createElement("div", {className: "modal-dialog"}, 
+			    React.createElement("div", {className: "modal-content"}, 
+		                React.createElement("div", {className: "modal-header"}, 
+	                            React.createElement("button", {type: "button", className: "close", "data-dismiss": "modal"}, "×"), 
+	                            React.createElement("h4", {className: "text-center"}, "Your Best Match!")
+		                ), 
+		                React.createElement("div", {className: "modal-body"}, 
+	                            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+			            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+			            React.createElement("h3", {className: "text-center"}, this.state.candidate.position)
+		                ), 
+		                React.createElement("div", {className: "modal-footer"}, 
+			React.createElement("p", {style: {"text-align": "left"}}, "You are not currently logged in. Please log in or create an account to continue."), 
+			            React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/register"}, "Create Account"), 
+			React.createElement(Link, {className: "btn btn-primary", onClick: this.closeModal, to: "/login"}, "Log In"), 
+			React.createElement(Link, {className: "skip-log-in", onClick: this.closeModal, to: "/demographics"}, "Or continue as guest")
+		                )
+		            )
+		        )
+		    )
+		);
+	    }
+	});
+	
+	module.exports = Result;
+
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
 	var Link = __webpack_require__(160).Link;
-	var _ = __webpack_require__(254);
+	var _ = __webpack_require__(258);
 	
 	var CandidateProfile = React.createClass({displayName: "CandidateProfile",
 	  getInitialState: function() {
 	    return {
-	      candidate: {}
+	      candidate: {},
+	      issues: []
 	    };
 	  },
 	
@@ -44473,13 +44598,19 @@
 	    if (this.state.candidate.image) {
 	      return (
 	        React.createElement("div", null, 
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
 	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
 	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
 	          React.createElement("div", {className: "row"}, 
-	            React.createElement("p", {className: "col-md-6 text-justify"}, this.state.candidate.bio), 
+	            React.createElement("p", {className: "col-md-5 text-justify"}, this.state.candidate.bio), 
 	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	          ), 
+	          React.createElement("div", {className: "row"}, 
+	            React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
+	            React.createElement(IssuesGroups, {c_id: this.props.params.id})
 	          )
+	        )
 	        )
 	      );
 	    } else {
@@ -44495,7 +44626,7 @@
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-6"}, 
+	        React.createElement("div", {className: "col-md-7"}, 
 	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
 	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
 	              React.createElement("a", {href: url}, this.props.name))
@@ -44507,20 +44638,74 @@
 	  }
 	});
 	
-	var Twitter = React.createClass({displayName: "Twitter",
-	  componentDidMount: function() {
-	    eval("!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");");
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      quotes: []
+	    };
 	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues/' + this.props.c_id, function(result) {
+	      this.setState({quotes: result});
+	    }.bind(this));
+	  },
+	
 	  render: function() {
-	    var name = "HillaryClinton";
-	    var url = "https://twitter.com/HillaryClinton";
-	    var widgetid = "667779323294691328";
+	
+	    var tabs = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: quote._id, issue: quote.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: quote._id, issue: quote.topic, quote: quote.quote, index: index})
+	      );
+	    }.bind(this));
+	
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-4"}, 
-	          React.createElement("a", {className: "twitter-timeline", href: url, "data-widget-id": widgetid}, 
-	            "Tweets by @", name
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("div", {className: "panel panel-default"}, 
+	          React.createElement("ul", {className: "list-group"}, 
+	            React.createElement("li", {className: "list-group-item"}, this.props.quote)
 	          )
 	        )
 	      )
@@ -44532,7 +44717,527 @@
 
 
 /***/ },
-/* 254 */
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	
+	var Issues = React.createClass({displayName: "Issues",
+	
+	  componentDidMount: function() {
+	    $("#rightLinks").find("li").removeClass("active");
+	    $("#issuesLink").addClass("active");
+	  },
+	
+	  render: function() {
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("h1", null, "Issues"), 
+	        React.createElement(IssuesGroups, null)
+	      )
+	    );
+	  }
+	});
+	
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      issues: []
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues', function(result) {
+	      this.setState({issues: result});
+	    }.bind(this));
+	  },
+	
+	  render: function() {
+	
+	    var tabs = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: issue._id.topic, issue: issue._id.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: issue._id.topic, issue: issue._id.topic, quotes: issue.quotes, index: index})
+	      );
+	    }.bind(this));
+	
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	    var quotes = this.props.quotes.map(function(quote) {
+	      return (
+	        React.createElement(Quote, {key: quote.quote, quote: quote.quote, candidate: quote.candidate_id, name: quote.name})
+	      );
+	    }.bind(this));
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("div", {className: "panel panel-default"}, 
+	          React.createElement("ul", {className: "list-group"}, 
+	            quotes
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var Quote = React.createClass({displayName: "Quote",
+	  render: function() {
+	    return (
+	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.candidate}, 
+	        this.props.quote, 
+	        React.createElement("h2", null, this.props.name)
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Issues;
+
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var ReactRouter = __webpack_require__(160);
+	var History = ReactRouter.History;
+	
+	
+	// Register page, shows the registration form and redirects to the list if login is successful
+	var Register = React.createClass({displayName: "Register",
+	
+	
+	
+	    mixins: [ History ],
+	    // initial state
+	
+	    componentDidMount: function() {
+	      $("#rightLinks").find("li").removeClass("active");
+	      $("#registerLink").addClass("active");
+	    },
+	
+	    getInitialState: function() {
+	        return {
+	            // there was an error registering
+	            error: false,
+	            c_error: false
+	        };
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#registerLink").addClass("active");
+	    },
+	
+	
+	
+	
+	    // handle regiser button submit
+	    register: function(event) {
+	        // prevent default browser submit
+	        event.preventDefault();
+	        // get data from form
+	        var username = this.refs.username.value;
+	        var password = this.refs.password.value;
+	        var sex = this.refs.sex.value;
+	        var age = this.refs.age.value;
+	        var race = this.refs.race.value;
+	        var state = this.refs.state.value;
+	        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
+	            console.log("field empty");
+	            return this.setState({
+	                c_error: true
+	            });
+	        }
+	        this.setState({c_error: false});
+	        // register via the API
+	        if(localStorage){
+	          auth.logout();
+	        };
+	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
+	            // register callback
+	            if (!loggedIn)
+	                return this.setState({
+	                    error: true
+	                });
+	            this.history.pushState(null, '/poll');
+	        }.bind(this));
+	
+	    },
+	
+	    // show the registration form
+	    render: function() {
+	        return (
+	
+	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	            React.createElement("h2", null, "Register"), 
+	            this.state.c_error ? (
+	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
+	              ) : null, 
+	              this.state.error ? (
+	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
+	              ) : null, 
+	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
+	            React.createElement("p", null, "Please choose a username"), 
+	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please choose a password"), 
+	            React.createElement("input", {type: "password", placeholder: "dem4life", ref: "password"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your sex"), 
+	                React.createElement("select", {name: "sex", ref: "sex"}, 
+	                    React.createElement("option", {value: ""}), 
+	                    React.createElement("option", {value: "Male"}, "Male"), 
+	                    React.createElement("option", {value: "Female"}, "Female")
+	                ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your race"), 
+	                React.createElement("select", {name: "race", ref: "race"}, 
+	                    React.createElement("option", {value: ""}), 
+	                    React.createElement("option", {value: "Caucasion"}, "Caucasion"), 
+	                    React.createElement("option", {value: "Black"}, "Black"), 
+	                    React.createElement("option", {value: "Latino"}, "Latino"), 
+	                    React.createElement("option", {value: "Asian"}, "Asian"), 
+	                    React.createElement("option", {value: "Other"}, "Other")
+	                ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please enter your age"), 
+	            React.createElement("input", {type: "age", placeholder: "68", ref: "age"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("p", null, "Please select your state"), 
+	                React.createElement("select", {name: "state", ref: "state"}, 
+	                    React.createElement("option", {value: ""}), 
+	                    React.createElement("option", {value: "AL"}, "AL"), 
+	                    React.createElement("option", {value: "AK"}, "AK"), 
+	                    React.createElement("option", {value: "AZ"}, "AZ"), 
+	                    React.createElement("option", {value: "AR"}, "AR"), 
+	                    React.createElement("option", {value: "CA"}, "CA"), 
+	                    React.createElement("option", {value: "CO"}, "CO"), 
+	                    React.createElement("option", {value: "CT"}, "CT"), 
+	                    React.createElement("option", {value: "DE"}, "DE"), 
+	                    React.createElement("option", {value: "FL"}, "FL"), 
+	                    React.createElement("option", {value: "GA"}, "GA"), 
+	                    React.createElement("option", {value: "HI"}, "HI"), 
+	                    React.createElement("option", {value: "ID"}, "ID"), 
+	                    React.createElement("option", {value: "IL"}, "IL"), 
+	                    React.createElement("option", {value: "IN"}, "IN"), 
+	                    React.createElement("option", {value: "IA"}, "IA"), 
+	                    React.createElement("option", {value: "KS"}, "KS"), 
+	                    React.createElement("option", {value: "KY"}, "KY"), 
+	                    React.createElement("option", {value: "LA"}, "LA"), 
+	                    React.createElement("option", {value: "ME"}, "ME"), 
+	                    React.createElement("option", {value: "MD"}, "MD"), 
+	                    React.createElement("option", {value: "MA"}, "MA"), 
+	                    React.createElement("option", {value: "MI"}, "MI"), 
+	                    React.createElement("option", {value: "MN"}, "MN"), 
+	                    React.createElement("option", {value: "MS"}, "MS"), 
+	                    React.createElement("option", {value: "MO"}, "MO"), 
+	                    React.createElement("option", {value: "MT"}, "MT"), 
+	                    React.createElement("option", {value: "NE"}, "NE"), 
+	                    React.createElement("option", {value: "NV"}, "NV"), 
+	                    React.createElement("option", {value: "NH"}, "NH"), 
+	                    React.createElement("option", {value: "NJ"}, "NJ"), 
+	                    React.createElement("option", {value: "NM"}, "NM"), 
+	                    React.createElement("option", {value: "NY"}, "NY"), 
+	                    React.createElement("option", {value: "NC"}, "NC"), 
+	                    React.createElement("option", {value: "ND"}, "ND"), 
+	                    React.createElement("option", {value: "OH"}, "OH"), 
+	                    React.createElement("option", {value: "OK"}, "OK"), 
+	                    React.createElement("option", {value: "OR"}, "OR"), 
+	                    React.createElement("option", {value: "PA"}, "PA"), 
+	                    React.createElement("option", {value: "RI"}, "RI"), 
+	                    React.createElement("option", {value: "SC"}, "SC"), 
+	                    React.createElement("option", {value: "SD"}, "SD"), 
+	                    React.createElement("option", {value: "TN"}, "TN"), 
+	                    React.createElement("option", {value: "TX"}, "TX"), 
+	                    React.createElement("option", {value: "UT"}, "UT"), 
+	                    React.createElement("option", {value: "VT"}, "VT"), 
+	                    React.createElement("option", {value: "VA"}, "VA"), 
+	                    React.createElement("option", {value: "WA"}, "WA"), 
+	                    React.createElement("option", {value: "WV"}, "WV"), 
+	                    React.createElement("option", {value: "WI"}, "WI"), 
+	                    React.createElement("option", {value: "WY"}, "WY")
+	                ), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {className: "btn btn-primary", type: "submit", value: "Register"})
+	            )
+	            )
+	            )
+	            );
+	    }
+	});
+	
+	// authentication object
+	var auth = {
+	    register: function(username, password, sex, age, race, state, cb) {
+	        // submit request to server, call the callback when complete
+	        var url = "/api/users/register";
+	        $.ajax({
+	            url: url,
+	            dataType: 'json',
+	            type: 'POST',
+	            data: {
+	                username: username,
+	                password: password,
+	                sex: sex,
+	                race: race,
+	                age: age,
+	                state: state
+	            },
+	            // on success, store a login token
+	            success: function(res) {
+	                localStorage.token = res.token;
+	                localStorage.name = res.name;
+	                if (cb)
+	                    cb(true);
+	                this.onChange(true);
+	            }.bind(this),
+	            error: function(xhr, status, err) {
+	                // if there is an error, remove any login token
+	                delete localStorage.token;
+	                if (cb)
+	                    cb(false);
+	                this.onChange(false);
+	            }.bind(this)
+	        });
+	    },
+	    // get the token from local storage
+	    getToken: function() {
+	        return localStorage.token;
+	    },
+	    // get the name from local storage
+	    getName: function() {
+	        return localStorage.name;
+	    },
+	    // logout the user, call the callback when complete
+	    logout: function(cb) {
+	        delete localStorage.token;
+	        if (cb) cb();
+	        this.onChange(false);
+	    },
+	    // check if user is logged in
+	    loggedIn: function() {
+	        return !!localStorage.token;
+	    },
+	    // default onChange function
+	    onChange: function() {},
+	};
+	
+	module.exports = Register;
+
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
+	var ReactRouter = __webpack_require__(160);
+	var History = ReactRouter.History;
+	
+	var Login = React.createClass({displayName: "Login",
+	
+	
+	
+	    mixins: [History],
+	
+	    componentDidMount: function() {
+	      $("#rightLinks").find("li").removeClass("active");
+	      $("#loginLink").addClass("active");
+	    },
+	
+	
+	    // initial state
+	    getInitialState: function() {
+	        return {
+	            // there was an error on logging in
+	            error: false,
+	            c_error: false
+	        };
+	
+	    },
+	
+	    // handle login button submit
+	    login: function(event) {
+	        // prevent default browser submit
+	        event.preventDefault();
+	        // get data from form
+	        var username = this.refs.username.value;
+	        var password = this.refs.password.value;
+	        if (!username || !password) {
+	            return this.setState({
+	                c_error: true
+	            });
+	        }
+	        // login via API
+	        if(localStorage){
+	          auth.logout();
+	        };
+	        auth.login(username, password, function(loggedIn) {
+	            // login callback
+	            if (!loggedIn)
+	                return this.setState({
+	                    error: true
+	                });
+	            this.history.pushState(null, '/poll');
+	        }.bind(this));
+	
+	    },
+	    componentDidMount: function() {
+	        $("#rightLinks").find("li").removeClass("active");
+	        $("#loginLink").addClass("active");
+	    },
+	
+	
+	
+	    // show the login form
+	    render: function() {
+	        return (
+	            React.createElement("div", null, 
+	            React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	            React.createElement("h2", null, "Login"), 
+	            this.state.c_error ? (
+	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
+	              ) : null, 
+	              this.state.error ? (
+	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
+	              ) : null, 
+	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
+	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {type: "password", placeholder: "Password", ref: "password"}), 
+	            React.createElement("br", null), 
+	            React.createElement("br", null), 
+	            React.createElement("input", {className: "btn btn-primary", type: "submit", value: "Login"})
+	            )
+	            )
+	            )
+	            );
+	    }
+	});
+	
+	// authentication object
+	var auth = {
+	    // login the user
+	    login: function(username, password, cb) {
+	        // submit login request to server, call callback when complete
+	        cb = arguments[arguments.length - 1];
+	        // check if token in local storage
+	        if (localStorage.token) {
+	            if (cb)
+	                cb(true);
+	            this.onChange(true);
+	            return;
+	        }
+	
+	        // submit request to server
+	        var url = "/api/users/login";
+	        $.ajax({
+	            url: url,
+	            dataType: 'json',
+	            type: 'POST',
+	            data: {
+	                username: username,
+	                password: password
+	            },
+	            success: function(res) {
+	                // on success, store a login token
+	                localStorage.token = res.token;
+	                localStorage.name = res.name;
+	                if (cb)
+	                    cb(true);
+	                this.onChange(true);
+	            }.bind(this),
+	            error: function(xhr, status, err) {
+	                // if there is an error, remove any login token
+	                delete localStorage.token;
+	                if (cb)
+	                    cb(false);
+	                this.onChange(false);
+	            }.bind(this)
+	        });
+	    },
+	    // get the token from local storage
+	    getToken: function() {
+	        return localStorage.token;
+	    },
+	    // get the name from local storage
+	    getName: function() {
+	        return localStorage.name;
+	    },
+	    // logout the user, call the callback when complete
+	    logout: function(cb) {
+	        delete localStorage.token;
+	        if (cb) cb();
+	        this.onChange(false);
+	    },
+	    // check if user is logged in
+	    loggedIn: function() {
+	        return !!localStorage.token;
+	    },
+	    // default onChange function
+	    onChange: function() {},
+	};
+	
+	module.exports = Login;
+
+
+/***/ },
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/** @jsx React.DOM *///     Underscore.js 1.8.3
@@ -46083,416 +46788,6 @@
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  }
 	}.call(this));
-
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	
-	var Issues = React.createClass({displayName: "Issues",
-	  componentDidMount: function() {
-	    $("#rightLinks").find("li").removeClass("active");
-	    $("#issuesLink").addClass("active");
-	  },
-	  render: function() {
-	    return (
-	      React.createElement("h1", null, "Issues")
-	    );
-	  }
-	});
-	
-	module.exports = Issues;
-
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	var Link = __webpack_require__(160).Link;
-	var ReactRouter = __webpack_require__(160);
-	var History = ReactRouter.History;
-	
-	
-	// Register page, shows the registration form and redirects to the list if login is successful
-	var Register = React.createClass({displayName: "Register",
-	
-	
-	
-	    mixins: [ History ],
-	    // initial state
-	
-	    componentDidMount: function() {
-	      $("#rightLinks").find("li").removeClass("active");
-	      $("#registerLink").addClass("active");
-	    },
-	
-	    getInitialState: function() {
-	        return {
-	            // there was an error registering
-	            error: false,
-	            c_error: false
-	        };
-	    },
-	
-	
-	
-	
-	    // handle regiser button submit
-	    register: function(event) {
-	        // prevent default browser submit
-	        event.preventDefault();
-	        // get data from form
-	        var username = this.refs.username.value;
-	        var password = this.refs.password.value;
-	        var sex = this.refs.sex.value;
-	        var age = this.refs.age.value;
-	        var race = this.refs.race.value;
-	        var state = this.refs.state.value;
-	        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
-	            console.log("field empty");
-	            return this.setState({
-	                c_error: true
-	            });
-	        }
-	        this.setState({c_error: false});
-	        // register via the API
-	        if(localStorage){
-	          auth.logout();
-	        };
-	        auth.register(username, password, sex, age, race, state, function(loggedIn) {
-	            // register callback
-	            if (!loggedIn)
-	                return this.setState({
-	                    error: true
-	                });
-	            this.history.pushState(null, '/poll');
-	        }.bind(this));
-	
-	    },
-	
-	    // show the registration form
-	    render: function() {
-	        return (
-	            React.createElement("div", null, 
-	            React.createElement("h2", null, "Register"), 
-	            this.state.c_error ? (
-	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
-	              ) : null, 
-	              this.state.error ? (
-	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
-	              ) : null, 
-	            React.createElement("form", {className: "form-vertical", onSubmit: this.register}, 
-	            React.createElement("p", null, "Please choose a username"), 
-	            React.createElement("input", {type: "text", placeholder: "rodham@myserver.com", ref: "username"}), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please choose a password"), 
-	            React.createElement("input", {type: "password", placeholder: "dem4life", ref: "password"}), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please select your sex"), 
-	                React.createElement("select", {name: "sex", ref: "sex"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "Male"}, "Male"), 
-	                    React.createElement("option", {value: "Female"}, "Female")
-	                ), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please select your race"), 
-	                React.createElement("select", {name: "race", ref: "race"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "Caucasion"}, "Caucasion"), 
-	                    React.createElement("option", {value: "Black"}, "Black"), 
-	                    React.createElement("option", {value: "Latino"}, "Latino"), 
-	                    React.createElement("option", {value: "Asian"}, "Asian"), 
-	                    React.createElement("option", {value: "Other"}, "Other")
-	                ), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please enter your age"), 
-	            React.createElement("input", {type: "age", placeholder: "68", ref: "age"}), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("p", null, "Please select your state"), 
-	                React.createElement("select", {name: "state", ref: "state"}, 
-	                    React.createElement("option", {value: ""}), 
-	                    React.createElement("option", {value: "AL"}, "AL"), 
-	                    React.createElement("option", {value: "AK"}, "AK"), 
-	                    React.createElement("option", {value: "AZ"}, "AZ"), 
-	                    React.createElement("option", {value: "AR"}, "AR"), 
-	                    React.createElement("option", {value: "CA"}, "CA"), 
-	                    React.createElement("option", {value: "CO"}, "CO"), 
-	                    React.createElement("option", {value: "CT"}, "CT"), 
-	                    React.createElement("option", {value: "DE"}, "DE"), 
-	                    React.createElement("option", {value: "FL"}, "FL"), 
-	                    React.createElement("option", {value: "GA"}, "GA"), 
-	                    React.createElement("option", {value: "HI"}, "HI"), 
-	                    React.createElement("option", {value: "ID"}, "ID"), 
-	                    React.createElement("option", {value: "IL"}, "IL"), 
-	                    React.createElement("option", {value: "IN"}, "IN"), 
-	                    React.createElement("option", {value: "IA"}, "IA"), 
-	                    React.createElement("option", {value: "KS"}, "KS"), 
-	                    React.createElement("option", {value: "KY"}, "KY"), 
-	                    React.createElement("option", {value: "LA"}, "LA"), 
-	                    React.createElement("option", {value: "ME"}, "ME"), 
-	                    React.createElement("option", {value: "MD"}, "MD"), 
-	                    React.createElement("option", {value: "MA"}, "MA"), 
-	                    React.createElement("option", {value: "MI"}, "MI"), 
-	                    React.createElement("option", {value: "MN"}, "MN"), 
-	                    React.createElement("option", {value: "MS"}, "MS"), 
-	                    React.createElement("option", {value: "MO"}, "MO"), 
-	                    React.createElement("option", {value: "MT"}, "MT"), 
-	                    React.createElement("option", {value: "NE"}, "NE"), 
-	                    React.createElement("option", {value: "NV"}, "NV"), 
-	                    React.createElement("option", {value: "NH"}, "NH"), 
-	                    React.createElement("option", {value: "NJ"}, "NJ"), 
-	                    React.createElement("option", {value: "NM"}, "NM"), 
-	                    React.createElement("option", {value: "NY"}, "NY"), 
-	                    React.createElement("option", {value: "NC"}, "NC"), 
-	                    React.createElement("option", {value: "ND"}, "ND"), 
-	                    React.createElement("option", {value: "OH"}, "OH"), 
-	                    React.createElement("option", {value: "OK"}, "OK"), 
-	                    React.createElement("option", {value: "OR"}, "OR"), 
-	                    React.createElement("option", {value: "PA"}, "PA"), 
-	                    React.createElement("option", {value: "RI"}, "RI"), 
-	                    React.createElement("option", {value: "SC"}, "SC"), 
-	                    React.createElement("option", {value: "SD"}, "SD"), 
-	                    React.createElement("option", {value: "TN"}, "TN"), 
-	                    React.createElement("option", {value: "TX"}, "TX"), 
-	                    React.createElement("option", {value: "UT"}, "UT"), 
-	                    React.createElement("option", {value: "VT"}, "VT"), 
-	                    React.createElement("option", {value: "VA"}, "VA"), 
-	                    React.createElement("option", {value: "WA"}, "WA"), 
-	                    React.createElement("option", {value: "WV"}, "WV"), 
-	                    React.createElement("option", {value: "WI"}, "WI"), 
-	                    React.createElement("option", {value: "WY"}, "WY")
-	                ), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn", type: "submit", value: "Register"})
-	            )
-	            )
-	            );
-	    }
-	});
-	
-	// authentication object
-	var auth = {
-	    register: function(username, password, sex, age, race, state, cb) {
-	        // submit request to server, call the callback when complete
-	        var url = "/api/users/register";
-	        $.ajax({
-	            url: url,
-	            dataType: 'json',
-	            type: 'POST',
-	            data: {
-	                username: username,
-	                password: password,
-	                sex: sex,
-	                race: race,
-	                age: age,
-	                state: state
-	            },
-	            // on success, store a login token
-	            success: function(res) {
-	                localStorage.token = res.token;
-	                localStorage.name = res.name;
-	                if (cb)
-	                    cb(true);
-	                this.onChange(true);
-	            }.bind(this),
-	            error: function(xhr, status, err) {
-	                // if there is an error, remove any login token
-	                delete localStorage.token;
-	                if (cb)
-	                    cb(false);
-	                this.onChange(false);
-	            }.bind(this)
-	        });
-	    },
-	    // get the token from local storage
-	    getToken: function() {
-	        return localStorage.token;
-	    },
-	    // get the name from local storage
-	    getName: function() {
-	        return localStorage.name;
-	    },
-	    // logout the user, call the callback when complete
-	    logout: function(cb) {
-	        delete localStorage.token;
-	        if (cb) cb();
-	        this.onChange(false);
-	    },
-	    // check if user is logged in
-	    loggedIn: function() {
-	        return !!localStorage.token;
-	    },
-	    // default onChange function
-	    onChange: function() {},
-	};
-	
-	module.exports = Register;
-
-
-/***/ },
-/* 257 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */var React  = __webpack_require__(2);
-	var Link = __webpack_require__(160).Link;
-	var ReactRouter = __webpack_require__(160);
-	var History = ReactRouter.History;
-	
-	var Login = React.createClass({displayName: "Login",
-	
-	
-	
-	    mixins: [History],
-	
-	    componentDidMount: function() {
-	      $("#rightLinks").find("li").removeClass("active");
-	      $("#loginLink").addClass("active");
-	    },
-	
-	
-	    // initial state
-	    getInitialState: function() {
-	        return {
-	            // there was an error on logging in
-	            error: false,
-	            c_error: false
-	        };
-	
-	    },
-	
-	    // handle login button submit
-	    login: function(event) {
-	        // prevent default browser submit
-	        event.preventDefault();
-	        // get data from form
-	        var username = this.refs.username.value;
-	        var password = this.refs.password.value;
-	        if (!username || !password) {
-	            return this.setState({
-	                c_error: true
-	            });
-	        }
-	        // login via API
-	        if(localStorage){
-	          auth.logout();
-	        };
-	        auth.login(username, password, function(loggedIn) {
-	            // login callback
-	            if (!loggedIn)
-	                return this.setState({
-	                    error: true
-	                });
-	            this.history.pushState(null, '/poll');
-	        }.bind(this));
-	
-	    },
-	
-	
-	
-	    // show the login form
-	    render: function() {
-	        return (
-	            React.createElement("div", null, 
-	            React.createElement("h2", null, "Login"), 
-	            this.state.c_error ? (
-	                React.createElement("div", {className: "alert"}, React.createElement("p", null, "All fields are required"))
-	              ) : null, 
-	              this.state.error ? (
-	                  React.createElement("div", {className: "alert"}, "Invalid username or password")
-	              ) : null, 
-	            React.createElement("form", {className: "form-vertical", onSubmit: this.login}, 
-	            React.createElement("input", {type: "text", placeholder: "Username", ref: "username", autoFocus: true}), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("input", {type: "password", placeholder: "Password", ref: "password"}), 
-	            React.createElement("br", null), 
-	            React.createElement("br", null), 
-	            React.createElement("input", {className: "btn btn-warning", type: "submit", value: "Login"})
-	            )
-	            )
-	            );
-	    }
-	});
-	
-	// authentication object
-	var auth = {
-	    // login the user
-	    login: function(username, password, cb) {
-	        // submit login request to server, call callback when complete
-	        cb = arguments[arguments.length - 1];
-	        // check if token in local storage
-	        if (localStorage.token) {
-	            if (cb)
-	                cb(true);
-	            this.onChange(true);
-	            return;
-	        }
-	
-	        // submit request to server
-	        var url = "/api/users/login";
-	        $.ajax({
-	            url: url,
-	            dataType: 'json',
-	            type: 'POST',
-	            data: {
-	                username: username,
-	                password: password
-	            },
-	            success: function(res) {
-	                // on success, store a login token
-	                localStorage.token = res.token;
-	                localStorage.name = res.name;
-	                if (cb)
-	                    cb(true);
-	                this.onChange(true);
-	            }.bind(this),
-	            error: function(xhr, status, err) {
-	                // if there is an error, remove any login token
-	                delete localStorage.token;
-	                if (cb)
-	                    cb(false);
-	                this.onChange(false);
-	            }.bind(this)
-	        });
-	    },
-	    // get the token from local storage
-	    getToken: function() {
-	        return localStorage.token;
-	    },
-	    // get the name from local storage
-	    getName: function() {
-	        return localStorage.name;
-	    },
-	    // logout the user, call the callback when complete
-	    logout: function(cb) {
-	        delete localStorage.token;
-	        if (cb) cb();
-	        this.onChange(false);
-	    },
-	    // check if user is logged in
-	    loggedIn: function() {
-	        return !!localStorage.token;
-	    },
-	    // default onChange function
-	    onChange: function() {},
-	};
-	
-	module.exports = Login;
 
 
 /***/ }
