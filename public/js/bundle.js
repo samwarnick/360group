@@ -44947,7 +44947,8 @@
 	var CandidateProfile = React.createClass({displayName: "CandidateProfile",
 	  getInitialState: function() {
 	    return {
-	      candidate: {}
+	      candidate: {},
+	      issues: []
 	    };
 	  },
 	
@@ -44989,13 +44990,19 @@
 	    if (this.state.candidate.image) {
 	      return (
 	        React.createElement("div", null, 
+	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
 	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
 	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
 	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
 	          React.createElement("div", {className: "row"}, 
-	            React.createElement("p", {className: "col-md-6 text-justify"}, this.state.candidate.bio), 
+	            React.createElement("p", {className: "col-md-5 text-justify"}, this.state.candidate.bio), 
 	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	          ), 
+	          React.createElement("div", {className: "row"}, 
+	            React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
+	            React.createElement(IssuesGroups, {c_id: this.props.params.id})
 	          )
+	        )
 	        )
 	      );
 	    } else {
@@ -45011,7 +45018,7 @@
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-6"}, 
+	        React.createElement("div", {className: "col-md-7"}, 
 	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
 	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
 	              React.createElement("a", {href: url}, this.props.name))
@@ -45023,20 +45030,74 @@
 	  }
 	});
 	
-	var Twitter = React.createClass({displayName: "Twitter",
-	  componentDidMount: function() {
-	    eval("!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");");
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      quotes: []
+	    };
 	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues/' + this.props.c_id, function(result) {
+	      this.setState({quotes: result});
+	    }.bind(this));
+	  },
+	
 	  render: function() {
-	    var name = "HillaryClinton";
-	    var url = "https://twitter.com/HillaryClinton";
-	    var widgetid = "667779323294691328";
+	
+	    var tabs = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: quote._id, issue: quote.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.quotes.map(function(quote, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: quote._id, issue: quote.topic, quote: quote.quote, index: index})
+	      );
+	    }.bind(this));
+	
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-4"}, 
-	          React.createElement("a", {className: "twitter-timeline", href: url, "data-widget-id": widgetid}, 
-	            "Tweets by @", name
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("div", {className: "panel panel-default"}, 
+	          React.createElement("ul", {className: "list-group"}, 
+	            React.createElement("li", {className: "list-group-item"}, this.props.quote)
 	          )
 	        )
 	      )
@@ -46606,15 +46667,112 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */var React  = __webpack_require__(2);
+	var Link = __webpack_require__(160).Link;
 	
 	var Issues = React.createClass({displayName: "Issues",
+	
 	  componentDidMount: function() {
 	    $("#rightLinks").find("li").removeClass("active");
 	    $("#issuesLink").addClass("active");
 	  },
+	
 	  render: function() {
 	    return (
-	      React.createElement("h1", null, "Issues")
+	      React.createElement("div", null, 
+	        React.createElement("h1", null, "Issues"), 
+	        React.createElement(IssuesGroups, null)
+	      )
+	    );
+	  }
+	});
+	
+	var IssuesGroups = React.createClass({displayName: "IssuesGroups",
+	  getInitialState: function() {
+	    return {
+	      issues: []
+	    };
+	  },
+	
+	  componentDidMount: function() {
+	    $.get('/api/issues', function(result) {
+	      this.setState({issues: result});
+	    }.bind(this));
+	  },
+	
+	  render: function() {
+	
+	    var tabs = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueNavTab, {key: issue._id.topic, issue: issue._id.topic, index: index})
+	      );
+	    }.bind(this));
+	
+	    var content = this.state.issues.map(function(issue, index) {
+	      return (
+	        React.createElement(IssueContentPanel, {key: issue._id.topic, issue: issue._id.topic, quotes: issue.quotes, index: index})
+	      );
+	    }.bind(this));
+	
+	    return (
+	      React.createElement("div", null, 
+	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
+	          tabs
+	        ), 
+	
+	        React.createElement("div", {className: "tab-content"}, 
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var IssueNavTab = React.createClass({displayName: "IssueNavTab",
+	  render: function() {
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("li", {role: "presentation", className: active}, React.createElement("a", {href: "#" + this.props.index, "aria-controls": this.props.index, role: "tab", "data-toggle": "tab"}, this.props.issue))
+	    );
+	  }
+	});
+	
+	var IssueContentPanel = React.createClass({displayName: "IssueContentPanel",
+	  render: function() {
+	    var quotes = this.props.quotes.map(function(quote) {
+	      return (
+	        React.createElement(Quote, {key: quote.quote, quote: quote.quote, candidate: quote.candidate_id, name: quote.name})
+	      );
+	    }.bind(this));
+	
+	    var active = "";
+	    if (this.props.index == 0) {
+	      active = " active";
+	    }
+	
+	    return (
+	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
+	        React.createElement("div", {className: "panel panel-default"}, 
+	          React.createElement("ul", {className: "list-group"}, 
+	            quotes
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var Quote = React.createClass({displayName: "Quote",
+	  render: function() {
+	    return (
+	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.candidate}, 
+	        this.props.quote, 
+	        React.createElement("h2", null, this.props.name)
+	      )
 	    );
 	  }
 	});
