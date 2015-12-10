@@ -77,7 +77,8 @@ router.get('/candidates/party/:party', function(req, res) {
 });
 
 router.get('/candidates/id/:id', function(req, res) {
-  Candidate.findById(req.params.id, function(err, candidate) {
+  var name = req.params.id.replace("%20", " ");
+  Candidate.find({name: name}, function(err, candidate) {
     if (err) {
       res.sendStatus('403');
       return;
@@ -111,7 +112,6 @@ router.put('/users/candidate', function (req,res) {
 router.get('/statements', function(req, res) {
   Statement.find({}, function(err, statements) {
     if (err) {
-      console.log(statements);
       res.sendStatus('403');
       return;
     }
@@ -120,7 +120,6 @@ router.get('/statements', function(req, res) {
 });
 
 router.post('/pollresults', function(req, res) {
-    console.log(req);
     var age = req.body.age;
     var gender = req.body.gender;
     var race = req.body.race;
@@ -128,7 +127,6 @@ router.post('/pollresults', function(req, res) {
     var statementansPairs = {};
     for (key in req.body) {
         if (key != 'age' && key != 'gender' && key != 'race' && key != 'state') {
-            console.log(statementansPairs);
             statementansPairs[key] = req.body[key];
         }
     }
@@ -137,11 +135,9 @@ router.post('/pollresults', function(req, res) {
         (function(statekey) {
             Statement.find({"quote": statekey}, function(err, statementFromDB) {
                 if (err) {
-                  console.log(statements);
                   res.sendStatus('403');
                   return;
                 }
-                console.log(statekey);
                 var firststatement = statementFromDB[0];
                 var answer = statementansPairs[statekey];
                 var userDemo = {
@@ -154,7 +150,6 @@ router.post('/pollresults', function(req, res) {
                 firststatement.raw.push(userDemo);
                 Statement.update({"quote": statekey}, {$set: {"raw": firststatement.raw}}, function(err, newstatement) {
                     if (err) {
-                      console.log(statements);
                       res.sendStatus('403');
                       return;
                     }
@@ -176,7 +171,7 @@ router.get('/issues', function(req, res) {
 });
 
 router.get('/issues/:candidate_id', function(req, res) {
-  Statement.find({candidate_id: req.params.candidate_id}, function(err, candidateIssues) {
+  Statement.find({name: req.params.candidate_id}, function(err, candidateIssues) {
     if (err) {
       res.sendStatus('403');
       return;

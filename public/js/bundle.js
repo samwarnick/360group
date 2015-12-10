@@ -24259,7 +24259,7 @@
 	var Candidate = React.createClass({displayName: "Candidate",
 	  render: function() {
 	    return (
-	      React.createElement(Link, {className: "candidate-link", to: "/candidates/"+ this.props.id}, 
+	      React.createElement(Link, {className: "candidate-link", to: "/candidates/"+ this.props.name}, 
 	        React.createElement("li", null, 
 	          React.createElement("h2", null, 
 	            React.createElement("img", {className: "candidate-list-image", src: "img/candidates/" + this.props.image}), 
@@ -44563,7 +44563,7 @@
 	  componentDidMount: function() {
 	    var c_id = this.props.params.id;
 	    $.get('/api/candidates/id/' + c_id, function(result) {
-	      this.setState({candidate: result});
+	      this.setState({candidate: result[0]});
 	    }.bind(this));
 	
 	    $("#rightLinks").find("li").removeClass("active");
@@ -44598,19 +44598,25 @@
 	    if (this.state.candidate.image) {
 	      return (
 	        React.createElement("div", null, 
-	        React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
-	          React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
-	          React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
-	          React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement("p", {className: "col-md-5 text-justify"}, this.state.candidate.bio), 
-	            React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
-	          ), 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
-	            React.createElement(IssuesGroups, {c_id: this.props.params.id})
+	          React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	            React.createElement("img", {className: "center-block img-circle", src: "img/candidates/" + this.state.candidate.image}), 
+	            React.createElement("h1", {className: "text-center"}, this.state.candidate.name), 
+	            React.createElement("h3", {className: "text-center"}, this.state.candidate.position), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("p", {className: "col-md-8 col-md-offset-2 text-justify"}, this.state.candidate.bio)
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-8 col-md-offset-2"}, 
+	                React.createElement("h2", {className: "text-center"}, "Statements by ", this.state.candidate.name), 
+	                React.createElement(IssuesGroups, {c_id: this.props.params.id})
+	              )
+	            ), 
+	            React.createElement("div", {className: "row"}, 
+	              React.createElement("div", {className: "col-md-6 col-md-offset-3"}, 
+	                React.createElement(Facebook, {facebook: this.state.candidate.facebook, name: this.state.candidate.name})
+	              )
+	            )
 	          )
-	        )
 	        )
 	      );
 	    } else {
@@ -44624,13 +44630,11 @@
 	  render: function() {
 	    var url = "https://www.facebook.com/" + this.props.facebook;
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "panel panel-default"}, 
 	        React.createElement("div", {id: "fb-root"}), 
-	        React.createElement("div", {className: "col-md-7"}, 
-	          React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
-	            React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
-	              React.createElement("a", {href: url}, this.props.name))
-	            )
+	        React.createElement("div", {className: "fb-page", "data-tabs": "timeline,events,messages", "data-href": url, "data-small-header": "false", "data-adapt-container-width": "true", "data-width": "500", "data-hide-cover": "false", "data-show-facepile": "false", "data-show-posts": "true"}, 
+	          React.createElement("div", {className: "fb-xfbml-parse-ignore"}, React.createElement("blockquote", {cite: url}, 
+	            React.createElement("a", {href: url}, this.props.name))
 	          )
 	        )
 	      )
@@ -44666,7 +44670,7 @@
 	    }.bind(this));
 	
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "issues-tabs"}, 
 	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
 	          tabs
 	        ), 
@@ -44703,10 +44707,8 @@
 	
 	    return (
 	      React.createElement("div", {role: "tabpanel", className: "tab-pane" + active, id: this.props.index}, 
-	        React.createElement("div", {className: "panel panel-default"}, 
-	          React.createElement("ul", {className: "list-group"}, 
-	            React.createElement("li", {className: "list-group-item"}, this.props.quote)
-	          )
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
 	        )
 	      )
 	    );
@@ -44732,8 +44734,8 @@
 	
 	  render: function() {
 	    return (
-	      React.createElement("div", null, 
-	        React.createElement("h1", null, "Issues"), 
+	      React.createElement("div", {className: "col-md-6 col-md-offset-3", id: "issues-page"}, 
+	        React.createElement("h1", {className: "text-center"}, "Issues"), 
 	        React.createElement(IssuesGroups, null)
 	      )
 	    );
@@ -44768,7 +44770,7 @@
 	    }.bind(this));
 	
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "issues-tabs"}, 
 	        React.createElement("ul", {className: "nav nav-pills", role: "tablist"}, 
 	          tabs
 	        ), 
@@ -44823,9 +44825,11 @@
 	var Quote = React.createClass({displayName: "Quote",
 	  render: function() {
 	    return (
-	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.candidate}, 
-	        this.props.quote, 
-	        React.createElement("h2", null, this.props.name)
+	      React.createElement(Link, {className: "list-group-item", to: "/candidates/"+ this.props.name}, 
+	        React.createElement("blockquote", null, 
+	          React.createElement("p", null, React.createElement("i", {className: "fa fa-quote-left"}), " ", this.props.quote, "”")
+	        ), 
+	        React.createElement("h3", {className: "text-right"}, this.props.name)
 	      )
 	    );
 	  }

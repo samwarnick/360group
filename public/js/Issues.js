@@ -10,8 +10,8 @@ var Issues = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <h1>Issues</h1>
+      <div className="col-md-6 col-md-offset-3" id="issues-page">
+        <h1 className="text-center">Issues</h1>
         <IssuesGroups />
       </div>
     );
@@ -46,7 +46,7 @@ var IssuesGroups = React.createClass({
     }.bind(this));
 
     return (
-      <div>
+      <div className="issues-tabs">
         <ul className="nav nav-pills" role="tablist">
           {tabs}
         </ul>
@@ -101,9 +101,11 @@ var IssueContentPanel = React.createClass({
 var Quote = React.createClass({
   render: function() {
     return (
-      <Link className="list-group-item" to={"/candidates/"+ this.props.candidate}>
-        {this.props.quote}
-        <h2>{this.props.name}</h2>
+      <Link className="list-group-item" to={"/candidates/"+ this.props.name}>
+        <blockquote>
+          <p><i className="fa fa-quote-left"></i> {this.props.quote}&rdquo;</p>
+        </blockquote>
+        <h3 className="text-right">{this.props.name}</h3>
       </Link>
     );
   }
