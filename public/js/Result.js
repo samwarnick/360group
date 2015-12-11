@@ -5,31 +5,31 @@ var Login = require('./Login');
 
 var Result = React.createClass({
     getInitialState: function() {
-	return {
-	    candidate: {}
-	};
+        return {
+            candidate: {}
+        };
     },
 
     closeModal: function() {
-	jQuery.noConflict();
-	$('#myModal').modal('hide');
+        jQuery.noConflict();
+        $('#myModal').modal('hide');
     },
-
+    
     render: function() {
-	return (
-	    <div id="myModal" className="modal fade" role="dialog">
-		<div className="modal-dialog">
-		    <div className="modal-content">
-	                <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal">&times;</button>
-                            <h4 className="text-center">Please Enter Your Demographic Information</h4>
-	                </div>
-	                <div className="modal-body">
-	                <Register answers={this.props.answers} />
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+        return (
+            <div id="myModal" className="modal fade" role="dialog">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                        <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                <h4 className="text-center">Please Enter Your Demographic Information</h4>
+                        </div>
+                        <div className="modal-body">
+                        <Register answers={this.props.answers} />
+                        </div>
+                    </div>
+                </div>
+            </div>
 	);
     }
 });
@@ -53,7 +53,7 @@ var Register = React.createClass({
     // handle regiser button submit
     register: function(event) {
         jQuery.noConflict();
-		$('#myModal').modal('hide');
+        $('#myModal').modal('hide');
         // prevent default browser submit
         //event.preventDefault();
 
@@ -66,7 +66,7 @@ var Register = React.createClass({
         var state = $('#states').val();//this.refs.state.getDOMNode().value;
 
         var request = {
-        	age: age,
+            age: age,
             gender: sex,
             race: race,
             state: state
@@ -80,7 +80,7 @@ var Register = React.createClass({
         localStorage.setItem("userResults", JSON.stringify(request));
         // register via the API
         //auth.register(username, password, sex, age, race, state, function(loggedIn) {
-            // register callback
+        // register callback
         //     if (!loggedIn)
         //         return this.setState({
         //             error: true
@@ -176,7 +176,7 @@ var Register = React.createClass({
 		    <Link className="btn btn-primary" onClick={this.register} to={"/demographics"} params={{userResults: this.state.result}}>Submit</Link>
             </div>
             );
-    }
+}
 });
 
 module.exports = Result;

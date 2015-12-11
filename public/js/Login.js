@@ -2,6 +2,7 @@ var React  = require('react');
 var Link = require('react-router').Link;
 var ReactRouter = require("react-router");
 var History = ReactRouter.History;
+var Demographics = require('./Demographics');
 
 var Login = React.createClass({
 
@@ -47,7 +48,14 @@ var Login = React.createClass({
                 return this.setState({
                     error: true
                 });
-            this.history.pushState(null, '/poll');
+                console.log(localStorage.took_quiz);
+                console.log(localStorage.took_quiz==1);
+                if(localStorage.took_quiz==1){
+                  this.history.pushState(null, '/demographics');
+                }
+                else{
+                this.history.pushState(null, '/poll');
+                }
         }.bind(this));
 
     },
@@ -56,7 +64,10 @@ var Login = React.createClass({
         $("#loginLink").addClass("active");
     },
 
-
+    onClick: function(){
+      auth.logout();
+      this.setState({error:false});
+   },
 
     // show the login form
     render: function() {
@@ -79,6 +90,10 @@ var Login = React.createClass({
             <br/>
             <input className="btn btn-primary" type="submit" value="Login" />
             </form>
+            <br/>
+            {auth.loggedIn()?(
+              <div><button type="button" className="btn btn-primary" onClick={this.onClick} >Logout</button>
+              </div>) : null}
             </div>
             </div>
             );
@@ -133,6 +148,7 @@ var auth = {
     // logout the user, call the callback when complete
     logout: function(cb) {
         delete localStorage.token;
+        localStorage.took_quiz = 0;
         if (cb) cb();
         this.onChange(false);
     },
