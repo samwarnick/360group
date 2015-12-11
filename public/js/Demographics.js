@@ -95,7 +95,7 @@ var Demographics = React.createClass({
                                 // find best match
                                 var lowScore = 1000;
                                 var cand = "";
-                                var c_id = "";
+                                var c_name = "";
                                 for (score in scores) {
                                     if (scores[score] < lowScore) {
                                         lowScore = scores[score];
@@ -104,11 +104,11 @@ var Demographics = React.createClass({
                                 }
                                 for (c in candList) {
                                     if (candList[c].name == cand) {
-                                        c_id = candList[c]._id;
+                                        c_name = candList[c].name;
                                     }
                                 }
 
-                                $.get('/api/candidates/id/' + c_id, function(result) {
+                                $.get('/api/candidates/id/' + c_name, function(result) {
                                     this.setState({candidate: result}, function() {
 		
 
