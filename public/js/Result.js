@@ -61,7 +61,7 @@ var Register = React.createClass({
         //var username = this.refs.username.getDOMNode().value;
         //var password = this.refs.password.getDOMNode().value;
         var sex = $('#sexes').val();//this.refs.sex.getDOMNode().value;
-        var age = $('#age').val();//this.refs.age.getDOMNode().value;
+        var age = parseInt($('#age').val());//this.refs.age.getDOMNode().value;
         var race = $('#races').val();//this.refs.race.getDOMNode().value;
         var state = $('#states').val();//this.refs.state.getDOMNode().value;
 
@@ -91,7 +91,7 @@ var Register = React.createClass({
     // show the registration form
     render: function() {
         return (
-            <div className="col-lg-1 col-centered">
+            <div>
             <form className="form-vertical" onSubmit={this.register}>
             <p>Please select your sex</p>
             <select id="sexes" ref="sexes">

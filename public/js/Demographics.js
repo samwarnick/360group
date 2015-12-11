@@ -65,31 +65,49 @@ var Demographics = React.createClass({
 		};
 	},
     
-  componentDidMount: function() {
-  	var results = JSON.parse(localStorage.userResults);
-	var candidates = [];
-	var scores = {};
-	
+  componentDidMount: function() {	
 	$.get('/api/statements', function(result) {
 		this.setState({statements: result}, function() {
 
 			$.get('/api/candidates/party/democrat', function(result) {
-			this.setState({candidates: result}, function() {
+			this.setState({candidateList: result}, function() {
 
 				$.get('/api/candidates/party/republican', function(result) {
 					this.setState({candidateList: this.state.candidateList.concat(result)}, function() {
-						console.log(this.state.candidateList);
-						console.log(this.state.statements);
-
-						for (key in this.state.statements) {
-							console.log(key);
-					        if (key != 'age' && key != 'gender' && key != 'race' && key != 'state') {
-					     		// calculations       
-					        }
+  						var results = JSON.parse(localStorage.userResults);
+						var candList = this.state.candidateList;
+						var scores = {};
+						for (cand in candList) {
+							scores[candList[cand].name] = 0;
+						}
+						var qcount = 0;
+						var stmts = this.state.statements;
+						for (question in stmts) {
+							var stmt = stmts[question];
+							if (stmt.quote in results && results[stmt.quote] != 0) {
+								qcount++;
+								for (i = 0; i < candList.length; i++) {
+									scores[stmt.raw[i].user] += Math.abs(stmt.raw[i].rating - results[stmt.quote]);
+								}
+							}
 					    }
 
-					    //
-						var c_id = this.state.id;
+					    // find best match
+					    var lowScore = 1000;
+					    var cand = "";
+						var c_id = "";
+					    for (score in scores) {
+					    	if (scores[score] < lowScore) {
+					    		lowScore = scores[score];
+					    		cand = score;
+					    	}
+					    }
+					    for (c in candList) {
+					    	if (candList[c].name == cand) {
+					    		c_id = candList[c]._id;
+					    	}
+					    }
+
 						$.get('/api/candidates/id/' + c_id, function(result) {
 						    this.setState({candidate: result}, function() {
 		
@@ -99,6 +117,49 @@ var Demographics = React.createClass({
 						    });
 						}.bind(this));
 
+						// calculate percent match
+						var data = [];
+						var total = qcount * 5;
+						var sum = 0;
+						var perScores = {};
+						for (c in scores) {
+							var per = (total - scores[c]) / total;
+							sum += per;
+							perScores[c] = per;
+					    }
+					    for (c in perScores) {
+					    	var per = perScores[c] / sum * 100;
+					    	data.push({
+					    		name: c,
+								y: per
+					    	});
+					    }
+
+					    var conf = this.state.config;
+						conf["series"][0]["data"] = data;
+						this.setState({config: conf}, function() {
+							console.log(this.state.config);
+						});
+						
+
+						// calculate average matches
+						// for (cand in candList) {
+						// 	scores[candList[cand].name] = 0;
+						// }
+						
+						// for (question in stmts) {
+						// 	var stmt = stmts[question];
+						// 	var sum = 0;
+						// 	for (i = candList.length; i < stmt.raw.length ; i++) {
+						// 		sum += stmt.raw[i].rating;
+						// 	}
+						// 	var avg = sum / (stmt.raw.length - candList.length);
+
+						// 	for (i = 0; i < candList.length; i++) {
+						// 		scores[stmt.raw[i].user] += Math.abs(avg - stmt.raw[i].rating);
+						// 	}
+							
+					 //    }
 
 					});
 			    }.bind(this));
@@ -106,13 +167,6 @@ var Demographics = React.createClass({
 		}.bind(this));		
 		});
 	}.bind(this));
-
-	
-	
-
-	console.log(this.state.candidates);
-
-	
   },
     
   render: function() {
@@ -132,7 +186,7 @@ var Demographics = React.createClass({
 		        </div>
 		        <br/>
 		        <br/>
-				<ReactHighcharts className="chart" config={this.state.config} ref="chart"></ReactHighcharts>
+				<ReactHighcharts className="chart" config={this.state.config} ref="chart" visibility="hidden"></ReactHighcharts>
 			</div>
 		);
 	},
