@@ -146,6 +146,8 @@ a:hover {
 	display: block;
 }
 
+@media (min-width: 767px){
+=======
 .issues-tabs .nav {
   margin-bottom: 12px;
 }
@@ -171,6 +173,7 @@ a:hover {
 		display: inline-block;
 		vertical-align: middle;
 		content: " ";
-		height: 75%;
+		
 	}
 }
+
