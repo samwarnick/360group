@@ -32,6 +32,7 @@ var Quiz = React.createClass({
             request[key] = this.state.stateansPairs[key];
         }
         $.post('/api/pollresults',request);
+        localStorage.took_quiz = 1;
     //send them off with an API call
   },
     answerSelected: function(statement, answer) {

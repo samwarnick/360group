@@ -2,6 +2,7 @@ var React  = require('react');
 var Link = require('react-router').Link;
 var ReactRouter = require("react-router");
 var History = ReactRouter.History;
+var Demographics = require('./Demographics');
 
 
 // Register page, shows the registration form and redirects to the list if login is successful
@@ -64,7 +65,12 @@ var Register = React.createClass({
                 return this.setState({
                     error: true
                 });
+            if(localStorage.took_quiz==1){
+              this.history.pushState(null, '/demographics');
+            }
+            else{
             this.history.pushState(null, '/poll');
+          }
         }.bind(this));
 
     },
@@ -230,6 +236,7 @@ var auth = {
     // logout the user, call the callback when complete
     logout: function(cb) {
         delete localStorage.token;
+        localStorage.took_quiz = 0;
         if (cb) cb();
         this.onChange(false);
     },

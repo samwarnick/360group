@@ -36,10 +36,14 @@ var Result = React.createClass({
 		            <h3 className="text-center">{this.state.candidate.position}</h3>
 	                </div>
 	                <div className="modal-footer">
+                  {!localStorage.token ?
+                    <span>
 		<p style={{"text-align": "left"}}>You are not currently logged in. Please log in or create an account to continue.</p>
 		            <Link className="btn btn-primary" onClick={this.closeModal} to={"/register"}>Create Account</Link>
 		<Link className="btn btn-primary" onClick={this.closeModal} to={"/login"}>Log In</Link>
 		<Link className="skip-log-in" onClick={this.closeModal} to={"/demographics"}>Or continue as guest</Link>
+    </span>
+    :<span> <Link className="btn btn-primary" onClick={this.closeModal} to={"/demographics"}>Demographics</Link></span>}
 	                </div>
 	            </div>
 	        </div>
