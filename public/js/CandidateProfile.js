@@ -5,14 +5,15 @@ var _ = require('underscore');
 var CandidateProfile = React.createClass({
   getInitialState: function() {
     return {
-      candidate: {}
+      candidate: {},
+      issues: []
     };
   },
 
   componentDidMount: function() {
     var c_id = this.props.params.id;
     $.get('/api/candidates/id/' + c_id, function(result) {
-      this.setState({candidate: result});
+      this.setState({candidate: result[0]});
     }.bind(this));
 
     $("#rightLinks").find("li").removeClass("active");
@@ -47,12 +48,24 @@ var CandidateProfile = React.createClass({
     if (this.state.candidate.image) {
       return (
         <div>
-          <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
-          <h1 className="text-center">{this.state.candidate.name}</h1>
-          <h3 className="text-center">{this.state.candidate.position}</h3>
-          <div className="row">
-            <p className="col-md-6 text-justify">{this.state.candidate.bio}</p>
-            <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
+          <div className="col-md-8 col-md-offset-2">
+            <img className="center-block img-circle" src={"img/candidates/" + this.state.candidate.image}></img>
+            <h1 className="text-center">{this.state.candidate.name}</h1>
+            <h3 className="text-center">{this.state.candidate.position}</h3>
+            <div className="row">
+              <p className="col-md-8 col-md-offset-2 text-justify">{this.state.candidate.bio}</p>
+            </div>
+            <div className="row">
+              <div className="col-md-8 col-md-offset-2">
+                <h2 className="text-center">Statements by {this.state.candidate.name}</h2>
+                <IssuesGroups c_id={this.props.params.id}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3">
+                <Facebook facebook={this.state.candidate.facebook} name={this.state.candidate.name} />
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -67,13 +80,11 @@ var Facebook = React.createClass({
   render: function() {
     var url = "https://www.facebook.com/" + this.props.facebook;
     return (
-      <div>
+      <div className="panel panel-default">
         <div id="fb-root"></div>
-        <div className="col-md-6">
-          <div className="fb-page" data-tabs="timeline,events,messages" data-href={url} data-small-header="false" data-adapt-container-width="true" data-width="500" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
-            <div className="fb-xfbml-parse-ignore"><blockquote cite={url}>
-              <a href={url}>{this.props.name}</a></blockquote>
-            </div>
+        <div className="fb-page" data-tabs="timeline,events,messages" data-href={url} data-small-header="false" data-adapt-container-width="true" data-width="500" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
+          <div className="fb-xfbml-parse-ignore"><blockquote cite={url}>
+            <a href={url}>{this.props.name}</a></blockquote>
           </div>
         </div>
       </div>
@@ -81,22 +92,74 @@ var Facebook = React.createClass({
   }
 });
 
-var Twitter = React.createClass({
-  componentDidMount: function() {
-    eval("!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");");
+var IssuesGroups = React.createClass({
+  getInitialState: function() {
+    return {
+      quotes: []
+    };
   },
+
+  componentDidMount: function() {
+    $.get('/api/issues/' + this.props.c_id, function(result) {
+      this.setState({quotes: result});
+    }.bind(this));
+  },
+
   render: function() {
-    var name = "HillaryClinton";
-    var url = "https://twitter.com/HillaryClinton";
-    var widgetid = "667779323294691328";
+
+    var tabs = this.state.quotes.map(function(quote, index) {
+      return (
+        <IssueNavTab key={quote._id} issue={quote.topic} index={index}/>
+      );
+    }.bind(this));
+
+    var content = this.state.quotes.map(function(quote, index) {
+      return (
+        <IssueContentPanel key={quote._id} issue={quote.topic} quote={quote.quote} index={index}/>
+      );
+    }.bind(this));
+
     return (
-      <div>
-        <div id="fb-root"></div>
-        <div className="col-md-4">
-          <a className="twitter-timeline" href={url} data-widget-id={widgetid}>
-            Tweets by @{name}
-          </a>
+      <div className="issues-tabs">
+        <ul className="nav nav-pills" role="tablist">
+          {tabs}
+        </ul>
+
+        <div className="tab-content">
+          {content}
         </div>
+      </div>
+    );
+  }
+});
+
+var IssueNavTab = React.createClass({
+  render: function() {
+
+    var active = "";
+    if (this.props.index == 0) {
+      active = " active";
+    }
+
+    return (
+      <li role="presentation" className={active}><a href={"#" + this.props.index} aria-controls={this.props.index} role="tab" data-toggle="tab">{this.props.issue}</a></li>
+    );
+  }
+});
+
+var IssueContentPanel = React.createClass({
+  render: function() {
+
+    var active = "";
+    if (this.props.index == 0) {
+      active = " active";
+    }
+
+    return (
+      <div role="tabpanel" className={"tab-pane" + active} id={this.props.index}>
+        <blockquote>
+          <p><i className="fa fa-quote-left"></i> {this.props.quote}&rdquo;</p>
+        </blockquote>
       </div>
     );
   }

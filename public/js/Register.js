@@ -1,18 +1,27 @@
 var React  = require('react');
 var Link = require('react-router').Link;
+var ReactRouter = require("react-router");
+var History = ReactRouter.History;
+
 
 // Register page, shows the registration form and redirects to the list if login is successful
 var Register = React.createClass({
-    // context so the component can access the router
-    contextTypes: {
-        router: React.PropTypes.func
+
+
+
+    mixins: [ History ],
+    // initial state
+
+    componentDidMount: function() {
+      $("#rightLinks").find("li").removeClass("active");
+      $("#registerLink").addClass("active");
     },
 
-    // initial state
     getInitialState: function() {
         return {
             // there was an error registering
-            error: false
+            error: false,
+            c_error: false
         };
     },
     componentDidMount: function() {
@@ -20,67 +29,88 @@ var Register = React.createClass({
         $("#registerLink").addClass("active");
     },
 
+
+
+
     // handle regiser button submit
     register: function(event) {
         // prevent default browser submit
         event.preventDefault();
         // get data from form
-        var username = this.refs.username.getDOMNode().value;
-        var password = this.refs.password.getDOMNode().value;
-        var sex = this.refs.sex.getDOMNode().value;
-        var age = this.refs.age.getDOMNode().value;
-        var race = this.refs.race.getDOMNode().value;
-        var state = this.refs.state.getDOMNode().value;
-        if (!username || !password) {
-            return;
+        var username = this.refs.username.value;
+        var password = this.refs.password.value;
+        var sex = this.refs.sex.value;
+        var age = this.refs.age.value;
+        var race = this.refs.race.value;
+        var state = this.refs.state.value;
+        var candidate = "none";
+        if(localStorage.candidate){
+          candidate = localStorage.candidate;
         }
+        if (!username || !password || sex=="" || age=="" || race=="" || state=="" ) {
+            console.log("field empty");
+            return this.setState({
+                c_error: true
+            });
+        }
+        this.setState({c_error: false});
         // register via the API
-        auth.register(username, password, sex, age, race, state, function(loggedIn) {
+        if(auth.loggedIn()){
+          auth.logout();
+        };
+        auth.register(username, password, sex, age, race, state, candidate, function(loggedIn) {
             // register callback
             if (!loggedIn)
                 return this.setState({
                     error: true
                 });
-            this.context.router.replaceWith('/list');
+            this.history.pushState(null, '/poll');
         }.bind(this));
+
     },
 
     // show the registration form
     render: function() {
         return (
+
             <div>
+            <div className="col-md-8 col-md-offset-2">
             <h2>Register</h2>
+            {this.state.c_error ? (
+                <div className="alert"><p>All fields are required</p></div>
+              ) : null }
+              {this.state.error ? (
+                  <div className="alert">Invalid username or password</div>
+              ) : null }
             <form className="form-vertical" onSubmit={this.register}>
-            <p>Please choose a username *</p>
+            <p>Please choose a username</p>
             <input type="text" placeholder="rodham@myserver.com" ref="username"/>
             <br/>
             <br/>
             <br/>
-            <p>Please choose a password *</p>
+            <p>Please choose a password</p>
             <input type="password" placeholder="dem4life" ref="password"/>
             <br/>
             <br/>
             <br/>
             <p>Please select your sex</p>
-            <input list="sexes" name="sex">
-                <datalist id="sexes">
-                    <option value="Male"/>
-                    <option value="Female"/>
-                </datalist>
-            </input>
+                <select name="sex" ref = "sex">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
             <br/>
             <br/>
             <br/>
             <p>Please select your race</p>
-            <input list="races" name="race">
-                <datalist id="races">
-                    <option value="Caucasion"/>
-                    <option value="Black"/>
-                    <option value="Latino"/>
-                    <option value="Asian"/>
-                    <option value="Other"/>
-                </datalist>
-            </input>
+                <select name="race" ref = "race">
+                    <option value=""></option>
+                    <option value="Caucasion">Caucasion</option>
+                    <option value="Black">Black</option>
+                    <option value="Latino">Latino</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Other">Other</option>
+                </select>
             <br/>
             <br/>
             <br/>
@@ -90,68 +120,65 @@ var Register = React.createClass({
             <br/>
             <br/>
             <p>Please select your state</p>
-            <input list="states" name="state">
-                <datalist id="states">
-                    <option value="AL"/>
-                    <option value="AK"/>
-                    <option value="AZ"/>
-                    <option value="AR"/>
-                    <option value="CA"/>
-                    <option value="CO"/>
-                    <option value="CT"/>
-                    <option value="DE"/>
-                    <option value="FL"/>
-                    <option value="GA"/>
-                    <option value="HI"/>
-                    <option value="ID"/>
-                    <option value="IL"/>
-                    <option value="IN"/>
-                    <option value="IA"/>
-                    <option value="KS"/>
-                    <option value="KY"/>
-                    <option value="LA"/>
-                    <option value="ME"/>
-                    <option value="MD"/>
-                    <option value="MA"/>
-                    <option value="MI"/>
-                    <option value="MN"/>
-                    <option value="MS"/>
-                    <option value="MO"/>
-                    <option value="MT"/>
-                    <option value="NE"/>
-                    <option value="NV"/>
-                    <option value="NH"/>
-                    <option value="NJ"/>
-                    <option value="NM"/>
-                    <option value="NY"/>
-                    <option value="NC"/>
-                    <option value="ND"/>
-                    <option value="OH"/>
-                    <option value="OK"/>
-                    <option value="OR"/>
-                    <option value="PA"/>
-                    <option value="RI"/>
-                    <option value="SC"/>
-                    <option value="SD"/>
-                    <option value="TN"/>
-                    <option value="TX"/>
-                    <option value="UT"/>
-                    <option value="VT"/>
-                    <option value="VA"/>
-                    <option value="WA"/>
-                    <option value="WV"/>
-                    <option value="WI"/>
-                    <option value="WY"/>
-                </datalist>
-            </input>
+                <select name="state" ref = "state">
+                    <option value=""></option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                </select>
             <br/>
             <br/>
             <br/>
-            <input className="btn" type="submit" value="Register" />
-            {this.state.error ? (
-                <div className="alert">Invalid username or password.</div>
-                ) : null }
+            <input className="btn btn-primary" type="submit" value="Register" />
             </form>
+            </div>
             </div>
             );
     }
@@ -159,7 +186,7 @@ var Register = React.createClass({
 
 // authentication object
 var auth = {
-    register: function(username, password, sex, race, age, state, cb) {
+    register: function(username, password, sex, age, race, state, candidate, cb) {
         // submit request to server, call the callback when complete
         var url = "/api/users/register";
         $.ajax({
@@ -172,12 +199,13 @@ var auth = {
                 sex: sex,
                 race: race,
                 age: age,
-                state: state
+                state: state,
+                candidate: candidate
             },
             // on success, store a login token
             success: function(res) {
                 localStorage.token = res.token;
-                localStorage.name = res.name;
+                localStorage.username = res.username;
                 if (cb)
                     cb(true);
                 this.onChange(true);

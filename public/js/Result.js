@@ -14,7 +14,7 @@ var Result = React.createClass({
 	jQuery.noConflict();
 	$('#myModal').modal('hide');
     },
-    
+
     render: function() {
 	return (
 	    <div id="myModal" className="modal fade" role="dialog">

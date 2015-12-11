@@ -1,5 +1,5 @@
 var express = require('express');
-var app = require('./express')
+var app = require('./express.js')
 var User = require('../models/user.js');
 var router = express.Router();
 var Candidate = require('../models/Candidates.js');
@@ -13,15 +13,18 @@ app.use(bodyParser.urlencoded({
 }));
 
 // register a user
-app.post('/api/users/register', function (req, res) {
+router.post('/users/register', function (req, res) {
+    console.log("register" + req.body.username);
     // find or create the user with the given username
     User.findOrCreate({username: req.body.username}, function(err, user, created) {
         if (created) {
             // if this username is not taken, then create a user record
+            console.log("created");
             user.race = req.body.race;
             user.state = req.body.state;
             user.sex = req.body.sex;
-            user.state = req.body.state;
+            user.age = req.body.age;
+            user.candidate = req.body.candidate;
             user.set_password(req.body.password);
             user.save(function(err) {
 		if (err) {
@@ -31,7 +34,7 @@ app.post('/api/users/register', function (req, res) {
                 // create a token
 		var token = User.generateToken(user.username);
                 // return value is JSON containing the user's name and token
-                res.json({name: user.name, token: token});
+                res.json({candidate: user.candidate, token: token});
             });
         } else {
             // return an error if the username is taken
@@ -41,7 +44,7 @@ app.post('/api/users/register', function (req, res) {
 });
 
 // login a user
-app.post('/api/users/login', function (req, res) {
+router.post('/users/login', function (req, res) {
     // find the user with the given username
     User.findOne({username: req.body.username}, function(err,user) {
 	if (err) {
@@ -53,34 +56,12 @@ app.post('/api/users/login', function (req, res) {
             // create a token
             var token = User.generateToken(user.username);
             // return value is JSON containing user's name and token
-            res.json({name: user.name, token: token});
+            res.json({candidate: user.candidate, token: token});
         } else {
             res.sendStatus(403);
         }
     });
 });
-
-//update statement
-app.put('/api/items/:statment_id', function (req,res) {
-  // validate the supplied token
-      // if the token is valid, then find the requested item
-      Statement.findById(req.params.statement_id, function(err,item) {
-    if (err) {
-      res.sendStatus(403);
-      return;
-    }
-        item.title = req.body.item.title;
-        item.completed = req.body.item.completed;
-        item.save(function(err) {
-      if (err) {
-        res.sendStatus(403);
-        return;
-      }
-          // return value is the item as JSON
-          res.json({item:item});
-        });
-      });
-  });
 
 router.get('/candidates/party/:party', function(req, res) {
   Candidate.find({party: req.params.party},
@@ -96,7 +77,8 @@ router.get('/candidates/party/:party', function(req, res) {
 });
 
 router.get('/candidates/id/:id', function(req, res) {
-  Candidate.findById(req.params.id, function(err, candidate) {
+  var name = req.params.id.replace("%20", " ");
+  Candidate.find({name: name}, function(err, candidate) {
     if (err) {
       res.sendStatus('403');
       return;
@@ -105,15 +87,31 @@ router.get('/candidates/id/:id', function(req, res) {
   });
 });
 
-router.get('/candidates/:id', function(req, res) {
+// update a user
+router.put('/users/candidate', function (req,res) {
+  // validate the supplied token
+  user = User.verifyToken(req.headers.authorization, function(user) {
+    if (user) {
+      // if the token is valid, then find the requested item
 
+        user.candidate = reg.body.candidate;
+        user.save(function(err) {
+    	  if (err) {
+    	    res.sendStatus(403);
+    	    return;
+    	  }
+          // return value is the item as JSON
+          res.json({item:item});
+        });
+    } else {
+      res.sendStatus(403);
+    }
+  });
 });
-
 
 router.get('/statements', function(req, res) {
   Statement.find({}, function(err, statements) {
     if (err) {
-      console.log(statements);
       res.sendStatus('403');
       return;
     }
@@ -122,7 +120,6 @@ router.get('/statements', function(req, res) {
 });
 
 router.post('/pollresults', function(req, res) {
-    console.log(req);
     var age = req.body.age;
     var gender = req.body.gender;
     var race = req.body.race;
@@ -130,7 +127,6 @@ router.post('/pollresults', function(req, res) {
     var statementansPairs = {};
     for (key in req.body) {
         if (key != 'age' && key != 'gender' && key != 'race' && key != 'state') {
-            console.log(statementansPairs);
             statementansPairs[key] = req.body[key];
         }
     }
@@ -139,11 +135,9 @@ router.post('/pollresults', function(req, res) {
         (function(statekey) {
             Statement.find({"quote": statekey}, function(err, statementFromDB) {
                 if (err) {
-                  console.log(statements);
                   res.sendStatus('403');
                   return;
                 }
-                console.log(statekey);
                 var firststatement = statementFromDB[0];
                 var answer = statementansPairs[statekey];
                 var userDemo = {
@@ -156,7 +150,6 @@ router.post('/pollresults', function(req, res) {
                 firststatement.raw.push(userDemo);
                 Statement.update({"quote": statekey}, {$set: {"raw": firststatement.raw}}, function(err, newstatement) {
                     if (err) {
-                      console.log(statements);
                       res.sendStatus('403');
                       return;
                     }
@@ -165,6 +158,26 @@ router.post('/pollresults', function(req, res) {
         })(key);
     }
     res.sendStatus('200');
+});
+
+router.get('/issues', function(req, res) {
+  Statement.aggregate([{$group: { _id: { topic: "$topic" }, quotes: { $push: { quote: "$quote", candidate_id: "$candidate_id", name: "$name"}} } }], function(err, issues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    res.send(issues);
+  });
+});
+
+router.get('/issues/:candidate_id', function(req, res) {
+  Statement.find({name: req.params.candidate_id}, function(err, candidateIssues) {
+    if (err) {
+      res.sendStatus('403');
+      return;
+    }
+    res.send(candidateIssues);
+  });
 });
 
 module.exports = router;
