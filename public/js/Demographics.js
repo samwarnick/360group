@@ -104,12 +104,12 @@ var Demographics = React.createClass({
                                 }
                                 for (c in candList) {
                                     if (candList[c].name == cand) {
-                                        c_name = candList[c].name;
+                                        this.setState({candidate: candList[c]});
                                     }
                                 }
 
-                                $.get('/api/candidates/id/' + c_name, function(result) {
-                                    this.setState({candidate: result}, function() {
+                               // $.get('/api/candidates/id/' + c_name, function(result) {
+                                 //   this.setState({candidate: result}, function() {
 		
 
                                         //PUT THE API CALL FOR THE USER HERE
