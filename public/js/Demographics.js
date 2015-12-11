@@ -114,8 +114,8 @@ var Demographics = React.createClass({
 
                                         //PUT THE API CALL FOR THE USER HERE
 
-                                    });
-                                }.bind(this));
+                                 //   });
+                                //}.bind(this));
 
                                 // calculate percent match
                                 var data = [];
