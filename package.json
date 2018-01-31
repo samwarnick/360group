@@ -16,7 +16,7 @@
     "facebook-node-sdk": "^0.2.0",
     "highcharts": "0.0.11",
     "history": "^1.13.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.0.0",
     "jsonwebtoken": "~5.0.1",
     "jsx-loader": "^0.13.2",
     "mongoose": "^4.2.5",
